@@ -12,7 +12,11 @@ import configuration from './modules/configuration'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
-
+/**
+ * data from mendelable.json is imported as elements
+ * from /mocules/elements
+ * and used in Vuex state manager
+ */
 export default new Vuex.Store({
   actions,
   getters,
