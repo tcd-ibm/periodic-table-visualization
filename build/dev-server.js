@@ -4,7 +4,7 @@ var config = require('../config')
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
-
+const {errorHandler} = require('./middleware/errorMiddleware')
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
@@ -13,7 +13,7 @@ var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
-
+const dotenv = require('dotenv').config()
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
@@ -40,7 +40,7 @@ compiler.plugin('compilation', function (compilation) {
     cb()
   })
 })
-
+//////////////////////////////////////////////////////////////
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
   var options = proxyTable[context]
@@ -50,8 +50,10 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 })
 
+///////////////////////////////////////////////
+
 // handle fallback for HTML5 history API
-app.use(require('connect-history-api-fallback')())
+// app.use(require('connect-history-api-fallback')())
 
 // serve webpack bundle output
 app.use(devMiddleware)
@@ -59,6 +61,10 @@ app.use(devMiddleware)
 // enable hot-reload and state-preserving
 // compilation error display
 app.use(hotMiddleware)
+
+//extra middleware so that we can read the data body of the request
+app.use(express.json())
+app.use(express.urlencoded({extended : false}))
 
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
@@ -81,7 +87,16 @@ devMiddleware.waitUntilValid(() => {
   _resolve()
 })
 
-var server = app.listen(port)
+
+// whenever the user request /api/element, direct the request to elementRoutes
+app.use('/api/element', require('./routes/elementRoutes'))
+
+
+// override default error handler of ExpressJS
+app.use(errorHandler)
+
+
+var server = app.listen(port, () => console.log(`Server started on port ${port}`))
 
 module.exports = {
   ready: readyPromise,
@@ -89,3 +104,5 @@ module.exports = {
     server.close()
   }
 }
+
+
