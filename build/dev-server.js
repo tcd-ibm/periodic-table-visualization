@@ -94,7 +94,7 @@ devMiddleware.waitUntilValid(() => {
 
 
 // whenever the user request /api/element, direct the request to elementRoutes
-app.use('/api/element', require('./routes/elementRoutes'))
+app.use('/api/elements', require('./routes/elementRoutes'))
 
 
 // override default error handler of ExpressJS
