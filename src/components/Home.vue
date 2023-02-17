@@ -61,14 +61,6 @@
 
           <!-- Sidebar -->
           <div class="col-md-4 col-lg-3 col-xl-2 bg-faded px-4 py-5">
-            <a
-              @click="trackClick(githubLink, 'outbound')"
-              :href="githubLink"
-              target="_blank"
-              rel="noopener"
-              class="btn btn-outline-info btn-block mb-5"
-            >Fork me on GitHub</a>
-
             <h4>{{ $t("sidebar.title") }}</h4>
 
             <p class="text-muted">{{ $t("language.label") }}</p>
