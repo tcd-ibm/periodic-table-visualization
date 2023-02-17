@@ -8,7 +8,8 @@ import ElementProfileOptions from '@/components/Sidebar/ElementProfileOptions'
 import About from '@/components/About'
 import GameMode from '@/components/GameMode'
 import GameModeOptions from '@/components/Sidebar/GameModeOptions'
-
+import MyProfile from '@/components/MyProfile'
+import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,14 @@ export default new Router({
           path: 'about',
           name: 'About',
           component: About
+        },
+        {
+          path: 'myProfile',
+          name: 'MyProfile',
+          components: {
+            default: MyProfile,
+            sidebar: MyProfileOptions
+          }
         }
       ]
     },

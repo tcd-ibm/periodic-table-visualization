@@ -26,6 +26,13 @@
                 <i @click="trackClick('help', 'inbound')" class="material-icons">help_outline</i>
               </router-link>
             </li>
+            <!-- Daniel Padmore-->
+            <!-- MyProfile-->
+            <li class="nav-item mt-5">
+              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')">
+                <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
+              </router-link>
+            </li>
           </div>
         </ul>
       </div>
