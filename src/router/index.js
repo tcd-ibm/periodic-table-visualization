@@ -10,6 +10,11 @@ import GameMode from '@/components/GameMode'
 import GameModeOptions from '@/components/Sidebar/GameModeOptions'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
+import Login from '@/components/Login'
+// import LoginRoute from '@/components/Sidebar/LoginRoute'
+import Signup from '@/components/Signup'
+import Reset from '@/components/Reset'
+import Verify from '@/components/Verify'
 Vue.use(Router)
 
 export default new Router({
@@ -56,6 +61,38 @@ export default new Router({
           components: {
             default: MyProfile,
             sidebar: MyProfileOptions
+          }
+        },
+        {
+          path: 'login',
+          name: 'Login',
+          components:
+          {
+            default: Login
+          }
+        },
+        {
+          path: 'Reset',
+          name: 'Reset',
+          components:
+          {
+            default: Reset
+          }
+        },
+        {
+          path: 'Signup',
+          name: 'Signup',
+          components:
+          {
+            default: Signup
+          }
+        },
+        {
+          path: 'Verify',
+          name: 'Verify',
+          components:
+          {
+            default: Verify
           }
         }
       ]

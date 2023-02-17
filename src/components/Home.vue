@@ -33,6 +33,13 @@
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
             </li>
+            <!-- Andrew Syomushkin-->
+            <!-- Sign in-->
+            <li class="nav-item mt-5">
+                <router-link to="./Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
+                  <i @click="trackClick('Login', 'inbound')" class="material-icons">login</i>
+                </router-link>
+              </li>
           </div>
         </ul>
       </div>
