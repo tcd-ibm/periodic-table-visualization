@@ -100,7 +100,7 @@ export default new Router({
     {
       path: '*',
       redirect: {
-        name: 'PeriodicTable'
+        name: 'MyProfile'
       }
     }
   ]

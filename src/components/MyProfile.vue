@@ -9,7 +9,7 @@
           :data-element-group='element.elementGroup' :data-group='element.group' :data-period='element.period'
           class='element' :class="element.symbol && element.symbol.toLowerCase()"
           :style="{ opacity: filteredElements.includes(element.atomicNumber) ? 1 : 0.25 }">
-        <router-link :to="'/element/' + element.atomicNumber" @mouseover.native="showElement(element)" @mouseout.native="hideElement()">
+        <router-link :to="'/element/'" @mousedown.native="showElement(element)" @mouseout.native="hideElement()">
           <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
         </router-link>
       </div>
