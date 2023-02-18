@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-evenly">
         <div>
           <button type="button" class="btn btn-primary btn-block">Add element</button>
-          <button type="button" class="btn btn-danger btn-block">Remove selected element</button>
+          <button type="button" class="btn btn-danger btn-block" @click="removed.push(element.symbol)">Remove selected element</button>
         </div>
         <pre>     </pre>
         <div>
@@ -43,17 +43,26 @@
   import FeaturedValue from './MyProfileFeaturedValue'
   import Highlight from '../shared/Highlight'
   import LineChart from '../shared/LineChart'
+  import * as types from '@/store/mutation-types'
 
   export default {
     name: 'MyProfile-general-properties',
-    props: ['element', 'preview'],
+    props: ['element', 'preview', 'removed'],
     components: {
       Highlight, FeaturedValue, BarChart, ElementBadge, LineChart
     },
     computed: {
       ...mapState({
         debug: state => state.configuration.debug
-      })
+      }),
+      search: {
+        get () {
+          return this.$store.state.filters.search
+        },
+        set (value) {
+          this.$store.commit(types.UPDATE_SEARCH, value)
+        }
+      }
     }
   }
 </script>

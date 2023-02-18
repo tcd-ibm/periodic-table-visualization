@@ -2,9 +2,10 @@
     <div class="home row">
       <h3>&ltusername&gt's profile</h3>
     <div class="c-periodic-table">
-      <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :preview="true"></myProfile-general-properties>
+      <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true"></myProfile-general-properties>
       <myProfile-general-properties v-else class="c-information" :element=this.elements[1] :preview="true"></myProfile-general-properties>
       <div v-for="element in elements"
+          v-if="!removed.includes(element.symbol)"
           :data-element-group='element.elementGroup' :data-group='element.group' :data-period='element.period'
           class='element' :class="element.symbol && element.symbol.toLowerCase()"
           :style="{ opacity: filteredElements.includes(element.atomicNumber) ? 1 : 0.25 }">
@@ -42,7 +43,8 @@
     data () {
       return {
         selectedElementId: '',
-        showInfo: false
+        showInfo: false,
+        removed: ['blank']
       }
     },
     methods: {
