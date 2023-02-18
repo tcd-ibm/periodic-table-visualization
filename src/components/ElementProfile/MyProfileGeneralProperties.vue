@@ -10,21 +10,22 @@
         <div>
           <h4>{{ element.name }}</h4>
           <h6>{{ $t("element.group." + element.elementGroup) }}</h6>
+          <div class="d-flex justify-content-evenly">
+            <featured-value :value="element.atomicNumber" title="element.atomicNumber" :element="element" :colored="true"></featured-value>
+              <pre>    </pre>
+            <featured-value :value="element.atomicMass" title="element.atomicMass" :element="element" :colored="true"></featured-value>
+        </div>
         </div>
       </div>
-      <p></p>
-      <div class="d-flex justify-content-start">
+      <div class="d-flex justify-content-evenly">
         <form >
           <div class="form-group">
+            <pre></pre>
             <input type="text" v-model="search" class="form-control" id="searchInput" :placeholder="$t('general.search')">
           </div>
         </form>
         <pre>     </pre>
-        <div class="d-flex justify-content-evenly">
-          <featured-value :value="element.atomicNumber" title="element.atomicNumber" :element="element" :colored="true"></featured-value>
-          <pre>    </pre>
-          <featured-value :value="element.atomicMass" title="element.atomicMass" :element="element" :colored="true"></featured-value>
-        </div>
+        <div><pre></pre><button type="button" class="btn btn-primary btn-block">View detailed information</button></div>
       </div>
       <div v-if="!preview">
         <highlight v-if="debug" :data="element"></highlight>
