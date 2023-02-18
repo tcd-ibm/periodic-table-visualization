@@ -25,7 +25,7 @@
           </div>
         </form>
         <pre>     </pre>
-        <div><pre></pre><button type="button" class="btn btn-primary btn-block">View detailed information</button></div>
+        <div><pre></pre><router-link :to="'/element/' + element.atomicNumber" tag="button" type="button" class="btn btn-primary btn-block">View detailed information</router-link></div>
       </div>
       <div v-if="!preview">
         <highlight v-if="debug" :data="element"></highlight>
