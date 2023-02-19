@@ -11,7 +11,7 @@
   <div>
     <form>
       <div class="form-group">
-        <label>Email</label>
+        <label>Email/Username</label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group">

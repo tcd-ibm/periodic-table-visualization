@@ -22,6 +22,10 @@
       <input type="text" class="form-control">
     </div>
     <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="form-group">
       <label>Password</label>
       <input type="password" class="form-control">
     </div>
@@ -32,7 +36,7 @@
 
     <div class="my-3">
       <router-link :to="{ path: './verify' }"><button type="submit" class="btn btn-primary">Sign
-            Up</button></router-link>
+          Up</button></router-link>
     </div>
   </form>
 </div>
