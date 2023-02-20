@@ -23,21 +23,24 @@ const protectRoute = asyncHandler(async (req, res, next) => {
       // get user from token and do not include the password
       // because we put userId into the function: generateToken
       // we can access it when the token is decoded
-      
-      req.User = await User.findById(decoded.id).select("-password");
+      /**
+       * Only have token after sign in, and by assigning to req.user, all req after sign in have access to the req.user data
+       */
+
+      req.user = await User.findById(decoded.id).select("-password");
 
       //calling the middleware
       next();
     } catch (error) {
-        console.log(error)
-        res.status(401)
-        throw new Error("Not authorized")
+      console.log(error);
+      res.status(401);
+      throw new Error("Not authorized");
     }
   }
-  if(!token){
-    res.status(401)
-    throw new Error("Not authorized. Cannot get the JWT token")
+  if (!token) {
+    res.status(401);
+    throw new Error("Not authorized. Cannot get the JWT token");
   }
 });
 
-module.exports = protectRoute;
+module.exports = { protectRoute };
