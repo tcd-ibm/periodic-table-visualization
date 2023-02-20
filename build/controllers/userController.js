@@ -43,11 +43,11 @@ const registerUser = asyncHandler(async (req, res) => {
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-    })
-  }
-  else{
-    res.status(400)
-    throw new Error("Invalid data. Failed to register the user")
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid data. Failed to register the user");
   }
 
   res.json({ message: "Register User" });
@@ -63,7 +63,23 @@ const registerUser = asyncHandler(async (req, res) => {
  * @param {*} res
  */
 const loginUser = asyncHandler(async (req, res) => {
-  res.json({ message: "Login user" });
+  // get the email and password from the request body
+  const { email, password } = req.body;
+  //fetch the user from the database by the email (if the user exists)
+  const user = await User.findOne({ email });
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      _id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid Credentials. Please try again.");
+  }
 });
 
 /**
@@ -71,13 +87,26 @@ const loginUser = asyncHandler(async (req, res) => {
  * @route  GET /api/users/me
  * @author Nuoxi Zhang
  * @nuoxiz
- * @access Public
+ * @access Private
  * @param {*} req
  * @param {*} res
  */
 const getUser = asyncHandler(async (req, res) => {
   res.json({ message: "Get user data" });
 });
+
+/**
+ * @description Generate JWT token
+ * @author Nuoxi Zhang
+ * @nuoxiz
+ * @param {*} userId
+ * @returns
+ */
+const generateToken = (userId) => {
+  return jwt.sign({ userId }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+};
 
 module.exports = {
   registerUser,
