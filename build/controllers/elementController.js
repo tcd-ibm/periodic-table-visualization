@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
-const Element = require('../databaseModels/elementModel')
-
-
+const Element = require("../databaseModels/elementModel");
+const User = require("../databaseModels/userModel");
 /**
  * @description GET elements
  * @author Nuoxi Zhang
@@ -13,7 +12,8 @@ const Element = require('../databaseModels/elementModel')
  */
 
 const getElements = asyncHandler(async (req, res) => {
-  const element  = await Element.find();
+  // find all the elements that is related to the user specified by the id
+  const element = await Element.find({ user: req.user.id });
   res.status(200).json(element);
 });
 /**
@@ -31,10 +31,11 @@ const createElements = asyncHandler(async (req, res) => {
     throw new Error("Please add a title"); // override by errorHandler in middleware
   }
   // create a new element
-  const element  = await Element.create({
-    title : req.body.title
-  })
-  // send back the new element 
+  const element = await Element.create({
+    title: req.body.title,
+    user: req.user.id,
+  });
+  // send back the new element
   res.status(200).json(element);
 });
 
@@ -55,8 +56,19 @@ const deleteElements = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Element not found");
   }
-  await Element.findByIdAndDelete(req.params.id)
-  res.status(200).json({id : req.params.id});
+  const user = await User.findById(req.user.id);
+  //check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+  // make sure the user that logged in matches the user id stored in the element
+  if (element.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+  await Element.findByIdAndDelete(req.params.id);
+  res.status(200).json({ id: req.params.id });
 });
 
 /**
@@ -70,16 +82,31 @@ const deleteElements = asyncHandler(async (req, res) => {
  */
 
 const updateElements = asyncHandler(async (req, res) => {
-
   // try to find the element specified by the id
-  const element = await Element.findById(req.params.id)
-  if(!element){
-    res.status(400)
-    throw new Error("Element not found")
+  const element = await Element.findById(req.params.id);
+  if (!element) {
+    res.status(400);
+    throw new Error("Element not found");
   }
+  const user = await User.findById(req.user.id);
+  //check for user
+  if (!user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+  // make sure the user that logged in matches the user id stored in the element
+  if (element.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+
   // new : true means create an Element if it doesn't exist
   // req.body is the new data
-  const updatedElement = await Element.findByIdAndUpdate(req.params.id, req.body, {new :true})
+  const updatedElement = await Element.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
   res.status(200).json(updatedElement);
 });
 
