@@ -29,6 +29,10 @@
               Password?</button></router-link>
       </div>
 
+      <div class="my-3">
+        <button  @click="testGetElement()" type="submit" class="btn btn-primary">Test get element</button>
+      </div>
+
       
     </form>
     <p v-if="showError" id="error">Username or Password is incorrect</p>
@@ -51,13 +55,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loginUser']),
+    ...mapActions(['loginUser', 'getElements']),
     async submitForm () {
       // console.log('login.vue submitForm() is called')
       // console.log('email: ', this.form.email)
       // console.log('password: ', this.form.password)
       try {
-        // console.log('calling this.loginUser()')
+        console.log('calling this.loginUser()')
         await this.loginUser(this.form)
         // console.log(response)
         this.showError = false
@@ -65,6 +69,12 @@ export default {
         console.log(error)
         this.showError = true
       }
+    },
+    async testGetElement () {
+      console.log('testGetElement() is called')
+      const token = this.$store.getters.getAuthToken
+      console.log('token from login.vue: ', token)
+      await this.getElements(token)
     }
   }
 }
