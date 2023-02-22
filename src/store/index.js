@@ -8,6 +8,8 @@ import language from './modules/language'
 import filters from './modules/filters'
 import game from './modules/game'
 import configuration from './modules/configuration'
+import createPersistedState from 'vuex-persistedstate'
+import auth from './modules/auth'
 
 Vue.use(Vuex)
 
@@ -26,7 +28,9 @@ export default new Vuex.Store({
     language,
     filters,
     game,
-    configuration
+    configuration,
+    auth
   },
+  plugins: [createPersistedState()],
   strict: debug
 })
