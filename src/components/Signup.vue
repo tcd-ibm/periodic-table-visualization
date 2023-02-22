@@ -35,8 +35,8 @@
     </div>
 
     <div class="my-3">
-      <router-link :to="{ path: './verify' }"><button @click="submitForm()" type="submit" class="btn btn-primary">Sign
-          Up</button></router-link>
+      <button @click="submitForm()" type="submit" class="btn btn-primary">Sign
+          Up</button>
     </div>
   </form>
 </div>
@@ -62,14 +62,17 @@ export default {
   methods: {
     ...mapActions(['registerUser']),
     async submitForm () {
+      if (this.form.password !== this.form.reEnterPassword) {
+        console.log('password dont match')
+        alert('password do not match')
+        return
+      }
       try {
-        if (this.password !== this.reEnterPassword) {
-          alert('Password does not match')
-        }
         const response = await this.registerUser(this.form)
         console.log(response)
         this.showError = false
       } catch (error) {
+        console.log(error.message)
         this.showError = true
       }
     }

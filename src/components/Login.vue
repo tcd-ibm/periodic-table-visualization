@@ -12,28 +12,67 @@
     <form>
       <div class="form-group">
         <label>Email/Username</label>
-        <input type="text" class="form-control">
+        <input type="email" class="form-control" v-model="form.email">
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control">
+        <input type="password" class="form-control" v-model="form.password">
       </div>
 
+      <!-- need to verify email -->
+      <div class="my-3">
+        <button type="submit"
+              class="btn btn-primary" @click="submitForm()" >Login</button>
+      </div>
       <div class="my-3">
         <router-link :to="{ path: './reset' }"><button type="submit" class="btn btn-primary">Forgot
               Password?</button></router-link>
       </div>
 
-      <!-- need to verify email -->
-      <div class="my-3">
-        <router-link :to="{ path: './' }"><button type="submit"
-              class="btn btn-primary">Login</button></router-link>
-      </div>
+      
     </form>
+    <p v-if="showError" id="error">Username or Password is incorrect</p>
   </div>
 </div>
 </template>
 
 <script>
-export default {}
+import { mapActions } from 'vuex'
+
+export default {
+  name: 'Login',
+  data () {
+    return {
+      form: {
+        email: '',
+        password: ''
+      },
+      showError: false
+    }
+  },
+  methods: {
+    ...mapActions(['loginUser']),
+    async submitForm () {
+      // console.log('login.vue submitForm() is called')
+      // console.log('email: ', this.form.email)
+      // console.log('password: ', this.form.password)
+      try {
+        // console.log('calling this.loginUser()')
+        await this.loginUser(this.form)
+        // console.log(response)
+        this.showError = false
+      } catch (error) {
+        console.log(error)
+        this.showError = true
+      }
+    }
+  }
+}
 </script>
+
+<style scoped>
+#error {
+  color: red;
+}
+
+</style>
