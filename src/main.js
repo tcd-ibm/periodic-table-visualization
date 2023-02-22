@@ -5,12 +5,16 @@ import App from './App'
 import router from './router'
 import store from './store'
 import i18n from './i18n'
-
+import axios from 'axios'
 window.$ = window.jQuery = require('jquery')
 window.tether = window.Tether = require('tether')
 require('bootstrap')
 require('font-awesome/css/font-awesome.css')
 require('highlight.js/styles/monokai-sublime.css')
+// axios seeting
+// Tells Axios to send all request with credentials such as authorization headers
+axios.defaults.withCredentials = true
+// axios.defaults.baseURL = 'https://localhost:8080'
 
 Vue.config.productionTip = false
 

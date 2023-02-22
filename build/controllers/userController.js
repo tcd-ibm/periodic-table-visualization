@@ -15,7 +15,7 @@ const User = require("../databaseModels/userModel");
 const registerUser = asyncHandler(async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
   if (!firstname || !lastname || !email || !password) {
-    res.status(400);
+    res.status(400)
     throw new Error("Please have all the fields filled in");
   }
   //check if user already exist
@@ -49,13 +49,11 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid data. Failed to register the user");
   }
-
-  res.json({ message: "Register User" });
 });
 
 /**
  * @description Authenticate user
- * @route  POST /api/login
+ * @route  POST /api/users/login
  * @author Nuoxi Zhang
  * @nuoxiz
  * @access Public
