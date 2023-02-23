@@ -10,5 +10,9 @@ const {
 router.post("/", registerUser);
 router.post("/login", loginUser);
 router.get("/me", protectRoute, getUser);
+router.get("/confirm/:confirmationCode", verifyUser);
+
+
+
 
 module.exports = router;

@@ -19,6 +19,15 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please enter your password"],
     },
+    status: {
+      type: String,
+      enum: ["Pending", "Active"],
+      default: "Pending",
+    },
+    confirmationCode: {
+      type: String,
+      unique: true,
+    },
   },
   {
     timestamps: true,

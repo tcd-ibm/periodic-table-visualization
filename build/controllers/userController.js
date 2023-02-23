@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler"); // handle exceptions
 const User = require("../databaseModels/userModel");
 const { sendConfirmationEmail } = require('../email/nodeMailerConfig')
-const { sendChangePasswordEmail } = require("../email/changePasswordEmail");
 /**
  * @description Regsiter a new user
  * @route  POST /api/users
@@ -39,12 +38,16 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
+    // send confirmation email
+    sendConfirmationEmail(newUser.name, newUser.email, uniqueToken);
     res.status(201).json({
       _id: user.id,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
       token: generateToken(user._id),
+      status: user.status,
+      confirmationCode: token
     });
   } else {
     res.status(400);
@@ -109,8 +112,41 @@ const generateToken = (id) => {
   });
 };
 
+/**
+ * @desc verify the user and change user status to "Active"
+ * @author Nuoxi Zhang
+ * @nuoxiz
+ * @route GET /api/users/confirm/:confirmationCode
+ * @access private
+ */
+
+const verifyUser = asyncHandler(async (req, res) => {
+  const code = req.params.confirmationCode;
+  const user = await User.findOne({ confirmationCode: code });
+  if (!user) {
+    res.status(400).json({ message: "User Not Found" });
+    throw new Error("User Not Found");
+  } else {
+    await User.findOneAndUpdate(
+      { confirmationCode: code },
+      {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        status: "Active",
+        confirmationCode: code,
+      },
+      { new: true }
+    );
+    res.status(200).json({ message: "Updated User Status" });
+  }
+});
+
+
+
 module.exports = {
   registerUser,
   loginUser,
   getUser,
+  verifyUser
 };
