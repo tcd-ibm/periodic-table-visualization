@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler"); // handle exceptions
 const User = require("../databaseModels/userModel");
-
+const { sendConfirmationEmail } = require('../email/nodeMailerConfig')
+const { sendChangePasswordEmail } = require("../email/changePasswordEmail");
 /**
  * @description Regsiter a new user
  * @route  POST /api/users
