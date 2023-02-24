@@ -77,14 +77,21 @@ const loginUser = asyncHandler(async (req, res) => {
   //fetch the user from the database by the email (if the user exists)
   const user = await User.findOne({ email });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    res.json({
-      _id: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+  if(user){
+    if(user.status === "Pending"){
+      res.status(401)
+      console.log('Pending account: check your mail box and verify your email!')
+      throw new Error('Pending Account. Please Verify your email')
+    }
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.json({
+        _id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        token: generateToken(user._id),
+      });
+    }
   } else {
     res.status(400);
     throw new Error("Invalid Credentials. Please try again.");
@@ -110,8 +117,9 @@ const getUser = asyncHandler(async (req, res) => {
  * @description Generate JWT token
  * @author Nuoxi Zhang
  * @nuoxiz
+ * @access private
  * @param {*} userId
- * @returns
+ * @returns JWT token
  */
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -152,13 +160,25 @@ const verifyUser = asyncHandler(async (req, res) => {
   }
 });
 
-
+/**
+ * @description Update the confirmation code of a user. Used in registerUser
+ * @author Nuoxi Zhang 
+ * @nuoxiz
+ * @access private
+ */
 const updateConfirmationCode = asyncHandler(async (userId, newData) => {
   try {
     await User.findByIdAndUpdate(userId, newData, { new: true });
   } catch (error) {}
 });
-
+/**
+ * @description Decode the token passed in to user._id
+ * @author Nuoxi Zhang
+ * @nuoxiz
+ * @param {*} token token of the user
+ * @access private
+ * @returns The decoded JSON object
+ */
 function parseJwt(token) {
   return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
 }
