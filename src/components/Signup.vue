@@ -19,11 +19,11 @@
     </div>
     <div class="form-group">
       <label>Email</label>
-      <input type="text" class="form-control" v-model="email">
+      <input type="email" class="form-control" v-model="email">
     </div>
     <div class="form-group">
       <label>Username</label>
-      <input type="text" class="form-control" >
+      <input type="text" class="form-control" v-model="userName">
     </div>
     <div class="form-group">
       <label>Password</label>
@@ -51,6 +51,7 @@ export default {
     return {
       firstname: '',
       lastname: '',
+      userName: '',
       email: '',
       password: '',
       reEnterPassword: '',
@@ -65,12 +66,17 @@ export default {
         alert('password do not match')
         return
       }
+      if (this.firstname === '' || this.lastname === '' || this.email === '' || this.userName === '' || this.password === '' || this.reEnterPassword === '') {
+        alert('Please enter all fields and try again')
+        return
+      }
       try {
         const firstname = this.firstname
         const lastname = this.lastname
+        const userName = this.userName
         const email = this.email
         const password = this.password
-        const response = await this.registerUser({firstname, lastname, email, password})
+        const response = await this.registerUser({firstname, lastname, userName, email, password})
         console.log('Signup.vue/submitForm() response object => ', response)
         this.showError = false
       } catch (error) {

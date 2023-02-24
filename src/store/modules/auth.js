@@ -1,12 +1,12 @@
 import axios from 'axios'
 const state = {
-  user: null,
+  userName: null,
   token: null
 }
 const USER_URI = '/api/users'
 const getters = {
   isAuthenticated: (state) => !!state.user,
-  StateUser: (state) => state.user,
+  getUserName: (state) => state.userName,
   getAuthToken: (state) => state.token
 }
 
@@ -38,6 +38,7 @@ const actions = {
     try {
       const response = await axios.post(USER_URI + '/login', form)
       commit('setToken', response.data.token)
+      commit('setUserName', response.data.userName)
       return response
     } catch (error) {
       console.log('Error message from auth.js/loginUser/: ', error.message)
@@ -56,8 +57,8 @@ const actions = {
   }
 }
 const mutations = {
-  setUser (state, username) {
-    state.user = username
+  setUserName (state, username) {
+    state.userName = username
   },
   setToken (state, token) {
     state.token = token

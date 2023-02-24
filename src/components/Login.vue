@@ -65,8 +65,9 @@ export default {
       // console.log('password: ', this.form.password)
       try {
         console.log('calling this.loginUser()')
-        await this.loginUser(this.form)
-        // console.log(response)
+        const response = await this.loginUser(this.form)
+        console.log('Returned object after login: ', response)
+        console.log('UserName: ' + this.$store.getters.getUserName)
         this.showError = false
       } catch (error) {
         console.log(error)
