@@ -11,15 +11,15 @@
   <form >
     <div class="form-group">
       <label>Name</label>
-      <input type="text" class="form-control" v-model="form.firstname">
+      <input type="text" class="form-control" v-model="firstname">
     </div>
     <div class="form-group">
       <label>Surname</label>
-      <input type="text" class="form-control" v-model="form.lastname">
+      <input type="text" class="form-control" v-model="lastname">
     </div>
     <div class="form-group">
       <label>Email</label>
-      <input type="text" class="form-control" v-model="form.email">
+      <input type="text" class="form-control" v-model="email">
     </div>
     <div class="form-group">
       <label>Username</label>
@@ -27,11 +27,11 @@
     </div>
     <div class="form-group">
       <label>Password</label>
-      <input type="password" class="form-control" v-model="form.password">
+      <input type="password" class="form-control" v-model="password">
     </div>
     <div class="form-group">
       <label>Repeat Password</label>
-      <input type="password" class="form-control" v-model="form.reEnterPassword">
+      <input type="password" class="form-control" v-model="reEnterPassword">
     </div>
 
     <div class="my-3">
@@ -49,27 +49,29 @@ export default {
   name: 'Signup',
   data () {
     return {
-      form: {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        reEnterPassword: ''
-      },
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      reEnterPassword: '',
       showError: false
     }
   },
   methods: {
     ...mapActions(['registerUser']),
     async submitForm () {
-      if (this.form.password !== this.form.reEnterPassword) {
+      if (this.password !== this.reEnterPassword) {
         console.log('password dont match')
         alert('password do not match')
         return
       }
       try {
-        const response = await this.registerUser(this.form)
-        console.log(response)
+        const firstname = this.firstname
+        const lastname = this.lastname
+        const email = this.email
+        const password = this.password
+        const response = await this.registerUser({firstname, lastname, email, password})
+        console.log('Signup.vue/submitForm() response object => ', response)
         this.showError = false
       } catch (error) {
         console.log(error.message)

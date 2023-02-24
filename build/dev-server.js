@@ -7,6 +7,7 @@ if (!process.env.NODE_ENV) {
 const { errorHandler } = require("./middleware/errorMiddleware");
 var opn = require("opn");
 var path = require("path");
+const bodyParser = require("body-parser");
 var express = require("express");
 var webpack = require("webpack");
 var proxyMiddleware = require("http-proxy-middleware");
@@ -68,8 +69,12 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 
 //extra middleware so that we can read the data body of the request
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+///////////////////////
+// const maxRequestBodySize = "1mb";
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true, parameterLimit: 100000, limit: '500mb'}));
 
 // serve pure static assets
 var staticPath = path.posix.join(
