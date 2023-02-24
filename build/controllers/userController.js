@@ -13,8 +13,8 @@ const { sendConfirmationEmail } = require('../email/nodeMailerConfig')
  * @param {*} res
  */
 const registerUser = asyncHandler(async (req, res) => {
-  const { firstname, lastname, email, password } = req.body;
-  if (!firstname || !lastname || !email || !password) {
+  const { firstname, lastname, email, password, userName } = req.body;
+  if (!firstname || !lastname || !email || !password || !userName) {
     res.status(400)
     throw new Error("Please have all the fields filled in");
   }
@@ -34,13 +34,13 @@ const registerUser = asyncHandler(async (req, res) => {
     firstname,
     lastname,
     email,
+    userName,
     password: hashedPassword,
     confirmationCode: "123"
   });
   const token = generateToken(user._id);
   updateConfirmationCode(user._id, {
     _id: user._id,
-    name: user.name,
     email: user.email,
     status: user.status,
     confirmationCode: token,
@@ -86,8 +86,7 @@ const loginUser = asyncHandler(async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
       res.json({
         _id: user.id,
-        firstname: user.firstname,
-        lastname: user.lastname,
+        userName: user.userName,
         email: user.email,
         token: generateToken(user._id),
       });

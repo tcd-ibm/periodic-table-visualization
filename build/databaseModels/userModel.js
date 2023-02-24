@@ -24,6 +24,11 @@ const userSchema = mongoose.Schema(
       enum: ["Pending", "Active"],
       default: "Pending",
     },
+    userName: {
+      type: String,
+      required: [true, "Please enter an user name"],
+      unique: true
+    },
     confirmationCode: {
       type: String,
       unique: true,
