@@ -24,7 +24,7 @@ const sendConfirmationEmail = (name, email, confirmationCode) => {
     <h1>Email Confirmation</h1>
     <h2> Hello ${name} </h2>
     <p>Thank you for registering. Please confirm your email by clicking on the following link:</p>
-    <a href=https://expresstaskmanager.herokuapp.com/confirm/${confirmationCode}>Click here</a>
+    <a href=http://localhost:8080//?#/verify/${confirmationCode}>Click here</a>
     </div>`,
     },
     (err, info) => {

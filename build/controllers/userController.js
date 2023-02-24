@@ -5,7 +5,7 @@ const User = require("../databaseModels/userModel");
 const { sendConfirmationEmail } = require('../email/nodeMailerConfig')
 /**
  * @description Regsiter a new user
- * @route  POST /api/users
+ * @route  POST /api/users/register
  * @author Nuoxi Zhang
  * @nuoxiz
  * @access Public
@@ -35,19 +35,26 @@ const registerUser = asyncHandler(async (req, res) => {
     lastname,
     email,
     password: hashedPassword,
+    confirmationCode: "123"
+  });
+  const token = generateToken(user._id);
+  updateConfirmationCode(user._id, {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    status: user.status,
+    confirmationCode: token,
   });
 
   if (user) {
     // send confirmation email
-    sendConfirmationEmail(newUser.name, newUser.email, uniqueToken);
+    sendConfirmationEmail(user.firstname, user.email, token);
     res.status(201).json({
       _id: user.id,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-      token: generateToken(user._id),
-      status: user.status,
-      confirmationCode: token
+      token: token
     });
   } else {
     res.status(400);
@@ -122,13 +129,16 @@ const generateToken = (id) => {
 
 const verifyUser = asyncHandler(async (req, res) => {
   const code = req.params.confirmationCode;
-  const user = await User.findOne({ confirmationCode: code });
+  // console.log('verifyUser in the backend is called')
+  // console.log("parsejwt", parseJwt(code).id)
+  const user = await User.findById(parseJwt(code).id);
   if (!user) {
-    res.status(400).json({ message: "User Not Found" });
+    res.status(400)
+    // console.log('user not found')
     throw new Error("User Not Found");
   } else {
     await User.findOneAndUpdate(
-      { confirmationCode: code },
+      { _id: parseJwt(code).id },
       {
         _id: user._id,
         name: user.name,
@@ -143,6 +153,15 @@ const verifyUser = asyncHandler(async (req, res) => {
 });
 
 
+const updateConfirmationCode = asyncHandler(async (userId, newData) => {
+  try {
+    await User.findByIdAndUpdate(userId, newData, { new: true });
+  } catch (error) {}
+});
+
+function parseJwt(token) {
+  return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
+}
 
 module.exports = {
   registerUser,

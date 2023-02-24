@@ -14,7 +14,7 @@ import Login from '@/components/Login'
 // import LoginRoute from '@/components/Sidebar/LoginRoute'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
-import Verify from '@/components/Verify'
+import VerificationPage from '@/components/VerificationPage'
 Vue.use(Router)
 
 export default new Router({
@@ -88,11 +88,11 @@ export default new Router({
           }
         },
         {
-          path: 'Verify',
-          name: 'Verify',
+          path: 'verify/:confirmationCode',
+          name: 'VerificationPage',
           components:
           {
-            default: Verify
+            default: VerificationPage
           }
         }
       ]

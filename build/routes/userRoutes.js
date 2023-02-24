@@ -6,11 +6,12 @@ const {
   registerUser,
   loginUser,
   getUser,
+  verifyUser
 } = require("../controllers/userController");
 router.post("/", registerUser);
 router.post("/login", loginUser);
 router.get("/me", protectRoute, getUser);
-router.get("/confirm/:confirmationCode", verifyUser);
+router.get("/verify/:confirmationCode", verifyUser);
 
 
 

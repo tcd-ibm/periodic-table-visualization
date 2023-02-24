@@ -11,22 +11,48 @@ const getters = {
 }
 
 const actions = {
-  async registerUser ({ dispatch }, form) {
+  /**
+   * @description Send HTTPS post request to the backend
+   * @route POST /api/users/register
+   * @author Nuoxi Zhang
+   * @nuoxiz
+   * @param {*} param0
+   * @param {*} form
+   * @returns Newly registered user's data
+   */
+  async registerUser ({ commit }, form) {
+    console.log('data: ', form)
     const response = await axios.post(USER_URI + '/', form)
-    // let UserForm = new FormData()
-    // UserForm.append('username', form.username)
-    // UserForm.append('password', form.password)
-    // console.log('registerUser in auth.js is called')
-    // console.log('response: ', response)
+    console.log('auth.js/registerUser response object => ', response)
     return response
   },
+  /**
+   * @description Login user and store the token to Vuex
+   * @author Nuoxi Zhang
+   * @nuoxiz
+   * @param {*} param0
+   * @param {*} form
+   * @returns User's data
+   */
   async loginUser ({ commit }, form) {
-    // console.log('loginUser in auth.js is called')
-    const response = await axios.post(USER_URI + '/login', form)
-    // console.log('auth.js loginUser response: ', response)
-    commit('setToken', response.data.token)
-    // console.log('state: token => ', response.data.token)
-    return response
+    try {
+      const response = await axios.post(USER_URI + '/login', form)
+      commit('setToken', response.data.token)
+      return response
+    } catch (error) {
+      console.log('Error message from auth.js/loginUser/: ', error.message)
+    }
+  },
+  async verifyUser ({ commit }, confirmationCode) {
+    try {
+      console.log('confirmationCode: ', confirmationCode)
+      console.log('type of confirmationCode: ', typeof (confirmationCode))
+      const response = await axios.get(USER_URI + '/verify/' + JSON.stringify(confirmationCode))
+      // console.log('verifyUser in auth.js is called')
+      return response
+    } catch (error) {
+      console.log('Error message from auth.js/verifyUser: ', error.message)
+    }
   }
 }
 const mutations = {

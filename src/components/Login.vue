@@ -6,6 +6,9 @@
         <router-link :to="{ path: './signup' }"><button type="submit" class="btn btn-primary">Don't have an
               account?</button></router-link>
       </h3>
+      <h3>Verify
+        <router-link :to="{ path: './verify/4' }"><button type="submit" class="btn btn-primary">Vefication Page</button></router-link>
+      </h3>
     </div>
   </div>
   <div>
