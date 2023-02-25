@@ -31,7 +31,8 @@
     </div>
     <div class="form-group">
       <label>Repeat Password</label>
-      <input type="password" class="form-control" v-model="form.reEnterPassword">
+      <input type="passw
+      ord" class="form-control" v-model="form.reEnterPassword">
     </div>
 
     <div class="my-3">

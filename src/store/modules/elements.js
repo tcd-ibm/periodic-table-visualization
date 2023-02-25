@@ -11,7 +11,15 @@ const actions = {
     }
     const response = await axios.get(ELEMENT_URI, config)
     console.log(response.data)
-  }
+  },
+  async createElements ({ commit }, token) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    const response = await axios.get(ELEMENT_URI, config)
+    console.log(response.data)
 }
 const getters = {}
 
