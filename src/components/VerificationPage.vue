@@ -24,7 +24,7 @@ export default {
     this.myFunction()
     var strArr = this.currentUrl.split('/')
     // console.log(strArr[5])
-    const data = strArr[5]
+    const data = strArr[strArr.length - 1]
     this.callVerifyUser(data)
     // this.verifyUser(this.$route.query.confirmationCode)
   },
