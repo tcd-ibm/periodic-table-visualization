@@ -8,6 +8,7 @@ import ElementProfileOptions from '@/components/Sidebar/ElementProfileOptions'
 import About from '@/components/About'
 import GameMode from '@/components/GameMode'
 import GameModeOptions from '@/components/Sidebar/GameModeOptions'
+import AddElement from '@/components/AddElement'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
@@ -61,6 +62,13 @@ export default new Router({
           components: {
             default: MyProfile,
             sidebar: MyProfileOptions
+          }
+        },
+        {
+          path: 'addElement',
+          name: 'AddElement',
+          components: {
+            default: AddElement
           }
         },
         {

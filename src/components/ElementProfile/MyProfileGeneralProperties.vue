@@ -3,7 +3,7 @@
     <div v-if="Object.keys(element).length > 0" class="card-block">
       <div class="d-flex justify-content-evenly">
         <div>
-          <button type="button" class="btn btn-primary btn-block">Add element</button>
+          <router-link :to="'/AddElement/'" tag="button" type="button" class="btn btn-primary btn-block">Add element</router-link>
           <button type="button" class="btn btn-danger btn-block" @click="removed.push(element.symbol)">Remove selected element</button>
         </div>
         <pre>     </pre>
