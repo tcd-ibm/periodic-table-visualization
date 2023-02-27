@@ -24,8 +24,8 @@
 
       <!-- need to verify email -->
       <div class="my-3">
-        <button type="submit"
-              class="btn btn-primary" @click="submitForm()" >Login</button>
+        <router-link :to="{ path: './MyProfile' }"><button type="submit"
+              class="btn btn-primary" @click="submitForm()" >Login</button></router-link>
       </div>
       <div class="my-3">
         <router-link :to="{ path: './reset' }"><button type="submit" class="btn btn-primary">Forgot
