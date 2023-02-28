@@ -34,10 +34,15 @@ const actions = {
    * @param {*} form
    * @returns User's data
    */
-  async loginUser ({ commit }, form) {
+  async loginUser ({ commit }, data) {
     try {
-      const response = await axios.post(USER_URI + '/login', form)
+      console.log('data loginUser in auth.js: ', data.emailCopy)
+      const email = data.emailCopy
+      const password = data.passwordCopy
+      const response = await axios.post(USER_URI + '/login', {email, password})
       commit('setToken', response.data.token)
+      console.log('Token from auth.js: ', response.data.token)
+      console.log('userName from auth.js: ', response.data.userName)
       commit('setUserName', response.data.userName)
       return response
     } catch (error) {

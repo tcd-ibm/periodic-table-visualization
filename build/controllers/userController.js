@@ -76,7 +76,9 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   //fetch the user from the database by the email (if the user exists)
   const user = await User.findOne({ email });
-
+  if(!user){
+    console.log("User does not exist. Please register")
+  }
   if(user){
     if(user.status === "Pending"){
       res.status(401)

@@ -1,6 +1,6 @@
 <template>
     <div class="home row">
-      <h3 v-if="username != ''">{{username}}'s profile</h3>
+      <h3 v-if="username">{{username}}'s profile</h3>
     <div class="c-periodic-table">
       <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true"></myProfile-general-properties>
       <myProfile-general-properties v-else class="c-information" :element=this.elements[1] :preview="true"></myProfile-general-properties>
@@ -45,7 +45,7 @@
         selectedElementId: '',
         showInfo: false,
         removed: ['blank'],
-        username: this.$store.getters.getUserName
+        username: ''
       }
     },
     methods: {
