@@ -15,17 +15,17 @@
     <form>
       <div class="form-group">
         <label>Email/Username</label>
-        <input type="email" class="form-control" v-model="form.email">
+        <input type="email" class="form-control" v-model="email">
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" v-model="form.password">
+        <input type="password" class="form-control" v-model="password">
       </div>
 
       <!-- need to verify email -->
       <div class="my-3">
-        <router-link :to="{ path: './MyProfile' }"><button type="submit"
-              class="btn btn-primary" @click="submitForm()" >Login</button></router-link>
+        <button type="submit"
+              class="btn btn-primary" @click="submitForm()" >Login</button>
       </div>
       <div class="my-3">
         <router-link :to="{ path: './reset' }"><button type="submit" class="btn btn-primary">Forgot
@@ -50,10 +50,8 @@ export default {
   name: 'Login',
   data () {
     return {
-      form: {
-        email: '',
-        password: ''
-      },
+      email: '',
+      password: '',
       showError: false
     }
   },
@@ -65,9 +63,12 @@ export default {
       // console.log('password: ', this.form.password)
       try {
         console.log('calling this.loginUser()')
-        const response = await this.loginUser(this.form)
+        const emailCopy = this.email
+        const passwordCopy = this.password
+        const response = await this.loginUser({emailCopy, passwordCopy})
         console.log('Returned object after login: ', response)
         console.log('UserName: ' + this.$store.getters.getUserName)
+        console.log('Token: ' + this.$store.getters.getAuthToken)
         this.showError = false
       } catch (error) {
         console.log(error)

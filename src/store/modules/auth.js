@@ -34,10 +34,15 @@ const actions = {
    * @param {*} form
    * @returns User's data
    */
-  async loginUser ({ commit }, form) {
+  async loginUser ({ commit }, data) {
     try {
-      const response = await axios.post(USER_URI + '/login', form)
+      console.log('data loginUser in auth.js: ', data.emailCopy)
+      const email = data.emailCopy
+      const password = data.passwordCopy
+      const response = await axios.post(USER_URI + '/login', {email, password})
       commit('setToken', response.data.token)
+      console.log('Token from auth.js: ', response.data.token)
+      console.log('userName from auth.js: ', response.data.userName)
       commit('setUserName', response.data.userName)
       return response
     } catch (error) {
@@ -53,6 +58,15 @@ const actions = {
       return response
     } catch (error) {
       console.log('Error message from auth.js/verifyUser: ', error.message)
+    }
+  },
+  async makeElement ({ commit }, element) {
+    console.log('make elem')
+    try {
+      const element = await axios.post(USER_URI + '/', element)
+      return element
+    } catch (error) {
+      console.log('Error message from auth.js/makeElement/: ', error.message)
     }
   }
 }

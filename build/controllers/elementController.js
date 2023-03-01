@@ -1,6 +1,6 @@
-const asyncHandler = require("express-async-handler");
-const Element = require("../databaseModels/elementModel");
-const User = require("../databaseModels/userModel");
+const asyncHandler = require('express-async-handler')
+const Element = require('../databaseModels/elementModel')
+const User = require('../databaseModels/userModel')
 /**
  * @description GET elements
  * @author Nuoxi Zhang
@@ -13,9 +13,9 @@ const User = require("../databaseModels/userModel");
 
 const getElements = asyncHandler(async (req, res) => {
   // find all the elements that is related to the user specified by the id
-  const element = await Element.find({ user: req.user.id });
-  res.status(200).json(element);
-});
+  const element = await Element.find({ user: req.user.id })
+  res.status(200).json(element)
+})
 /**
  * @description Create element
  * @author Nuoxi Zhang
@@ -26,18 +26,23 @@ const getElements = asyncHandler(async (req, res) => {
  * @param {*} res
  */
 const createElements = asyncHandler(async (req, res) => {
-  if (!req.body.title) {
-    res.status(400);
-    throw new Error("Please add a title"); // override by errorHandler in middleware
-  }
+  // if (!req.body.title) {
+  //   res.status(400)
+  //   throw new Error('Please add a title') // override by errorHandler in middleware
+  // }
   // create a new element
+  console.log('userid: ', req.user.id)
   const element = await Element.create({
-    title: req.body.title,
-    user: req.user.id,
-  });
+    name: req.body.name,
+    atomic_mass: req.body.am,
+    atomic_number: req.body.an,
+    symbol: req.body.symbol,
+    description: req.body.description,
+    user: req.user.id
+  })
   // send back the new element
-  res.status(200).json(element);
-});
+  res.status(200).json(element)
+})
 
 /**
  * @description DELETE elements specifies by the id
@@ -51,25 +56,25 @@ const createElements = asyncHandler(async (req, res) => {
 
 const deleteElements = asyncHandler(async (req, res) => {
   // try to find the element specified by the id
-  const element = await Element.findById(req.params.id);
+  const element = await Element.findById(req.params.id)
   if (!element) {
-    res.status(400);
-    throw new Error("Element not found");
+    res.status(400)
+    throw new Error('Element not found')
   }
-  const user = await User.findById(req.user.id);
-  //check for user
+  const user = await User.findById(req.user.id)
+  // check for user
   if (!user) {
-    res.status(401);
-    throw new Error("User not found");
+    res.status(401)
+    throw new Error('User not found')
   }
   // make sure the user that logged in matches the user id stored in the element
   if (element.user.toString() !== user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
+    res.status(401)
+    throw new Error('User not authorized')
   }
-  await Element.findByIdAndDelete(req.params.id);
-  res.status(200).json({ id: req.params.id });
-});
+  await Element.findByIdAndDelete(req.params.id)
+  res.status(200).json({ id: req.params.id })
+})
 
 /**
  * @description Update content of the elements
@@ -83,21 +88,21 @@ const deleteElements = asyncHandler(async (req, res) => {
 
 const updateElements = asyncHandler(async (req, res) => {
   // try to find the element specified by the id
-  const element = await Element.findById(req.params.id);
+  const element = await Element.findById(req.params.id)
   if (!element) {
-    res.status(400);
-    throw new Error("Element not found");
+    res.status(400)
+    throw new Error('Element not found')
   }
-  const user = await User.findById(req.user.id);
-  //check for user
+  const user = await User.findById(req.user.id)
+  // check for user
   if (!user) {
-    res.status(401);
-    throw new Error("User not found");
+    res.status(401)
+    throw new Error('User not found')
   }
   // make sure the user that logged in matches the user id stored in the element
   if (element.user.toString() !== user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
+    res.status(401)
+    throw new Error('User not authorized')
   }
 
   // new : true means create an Element if it doesn't exist
@@ -106,13 +111,13 @@ const updateElements = asyncHandler(async (req, res) => {
     req.params.id,
     req.body,
     { new: true }
-  );
-  res.status(200).json(updatedElement);
-});
+  )
+  res.status(200).json(updatedElement)
+})
 
 module.exports = {
   getElements,
   createElements,
   deleteElements,
-  updateElements,
-};
+  updateElements
+}
