@@ -33,7 +33,11 @@ const createElements = asyncHandler(async (req, res) => {
   // create a new element
   console.log('userid: ', req.user.id)
   const element = await Element.create({
-    title: req.body.name,
+    name: req.body.name,
+    atomic_mass: req.body.am,
+    atomic_number: req.body.an,
+    symbol: req.body.symbol,
+    description: req.body.description,
     user: req.user.id
   })
   // send back the new element

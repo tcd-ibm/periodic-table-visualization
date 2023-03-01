@@ -52,6 +52,10 @@ export default {
   methods: {
     ...mapActions(['createElements']),
     async addElement () {
+      if (!this.element.name || !this.element.symbol || !this.element.an || !this.element.am || !this.element.description) {
+        alert('Please fill in all the fields.')
+        return
+      }
       console.log('Addelement in addelement.vue called')
       const element = {
         name: this.element.name,
