@@ -6,8 +6,23 @@ const elementSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-
-    title: {
+    name: {
+      type: String,
+      required: true,
+    },
+    symbol: {
+      type: String,
+      required: true,
+    },
+    atomic_mass: {
+      type: String,
+      required: true,
+    },
+    atomic_number: {
+      type: String,
+      required: true,
+    },
+    description: {
       type: String,
       required: true,
     },

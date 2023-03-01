@@ -20,7 +20,8 @@
   </div>
   <div class="form-group">
   <label>Description</label>
-  <input type="text" :maxlength="250" class="form-control" v-model="element.description">
+  <!-- <input type="text" :maxlength="250" class="form-control" v-model="element.description"> -->
+  <textarea class="form-control" cols="30" rows="10" v-model="element.description"></textarea>
   </div>
   <div class="my-3">
   <button  @click="addElement()" class="btn btn-primary">Create element</button>
@@ -51,6 +52,10 @@ export default {
   methods: {
     ...mapActions(['createElements']),
     async addElement () {
+      if (!this.element.name || !this.element.symbol || !this.element.an || !this.element.am || !this.element.description) {
+        alert('Please fill in all the fields.')
+        return
+      }
       console.log('Addelement in addelement.vue called')
       const element = {
         name: this.element.name,
