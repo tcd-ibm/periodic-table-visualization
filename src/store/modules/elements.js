@@ -11,6 +11,23 @@ const actions = {
     }
     const response = await axios.get(ELEMENT_URI, config)
     console.log(response.data)
+  },
+  async createElements ({ commit }, data) {
+    console.log('createElements in element.js is called')
+    const token = data.token
+    const element = data.element
+
+    console.log('token in elements.js:', token)
+    console.log('element data in elements.js:', element)
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    const response = await axios.post(ELEMENT_URI + '/', element, config)
+    // const response = await axios.post(ELEMENT_URI + '/' + elementId, element, config)
+    // axios.post()
+    console.log(response.data)
   }
 }
 const getters = {}

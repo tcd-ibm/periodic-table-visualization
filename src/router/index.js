@@ -9,6 +9,7 @@ import About from '@/components/About'
 import GameMode from '@/components/GameMode'
 import GameModeOptions from '@/components/Sidebar/GameModeOptions'
 import AddElement from '@/components/AddElement'
+import UpdateElement from '@/components/UpdateElement'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
@@ -69,6 +70,13 @@ export default new Router({
           name: 'AddElement',
           components: {
             default: AddElement
+          }
+        },
+        {
+          path: 'updateElement',
+          name: 'updateElement',
+          components: {
+            default: UpdateElement
           }
         },
         {

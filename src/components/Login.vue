@@ -68,6 +68,7 @@ export default {
         const response = await this.loginUser(this.form)
         console.log('Returned object after login: ', response)
         console.log('UserName: ' + this.$store.getters.getUserName)
+        console.log('Token: ' + this.$store.getters.getAuthToken)
         this.showError = false
       } catch (error) {
         console.log(error)
