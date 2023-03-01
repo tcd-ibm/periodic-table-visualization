@@ -59,6 +59,15 @@ const actions = {
     } catch (error) {
       console.log('Error message from auth.js/verifyUser: ', error.message)
     }
+  },
+  async makeElement ({ commit }, element) {
+    console.log('make elem')
+    try {
+      const element = await axios.post(USER_URI + '/', element)
+      return element
+    } catch (error) {
+      console.log('Error message from auth.js/makeElement/: ', error.message)
+    }
   }
 }
 const mutations = {

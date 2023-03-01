@@ -5,6 +5,7 @@
         <div>
           <router-link :to="'/AddElement/'" tag="button" type="button" class="btn btn-primary btn-block">Add element</router-link>
           <button type="button" class="btn btn-danger btn-block" @click="removed.push(element.symbol)">Remove selected element</button>
+          <router-link :to="'/updateElement/'" tag="button" type="button" class="btn btn-primary btn-block">Update element</router-link>
         </div>
         <pre>     </pre>
         <div>

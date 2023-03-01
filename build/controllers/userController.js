@@ -109,10 +109,10 @@ const loginUser = asyncHandler(async (req, res) => {
  * @param {*} res
  */
 const getUser = asyncHandler(async (req, res) => {
-  const {_id, firstname, lastname, email} = await User.findById(req.user.id);
+  const {_id, firstname, lastname, email} = await User.findById(req.user.id)
 
-  res.status(200).json({id: _id, firstname, lastname, email});
-});
+  res.status(200).json({id: _id, firstname, lastname, email})
+})
 
 /**
  * @description Generate JWT token
