@@ -10,6 +10,8 @@ COPY ./package*.json ./
 
 RUN  yum install -y bzip2
 
+RUN npm -g install chromedriver --unsafe-perm=true --allow-root
+
 # a package needed for this project
 RUN npm install phantomjs-prebuilt@2.1.13 --unsafe-perm
 
