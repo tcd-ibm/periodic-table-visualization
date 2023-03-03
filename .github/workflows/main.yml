@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY: quay.io/sweng
+  REGISTRY: quay.io
   IMAGE_NAME: ${{ github.repository }}
 
 jobs: 
