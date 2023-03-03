@@ -24,7 +24,7 @@
   <textarea class="form-control" cols="30" rows="10" v-model="element.description"></textarea>
   </div>
   <div class="my-3">
-  <button  @click="addElement()" class="btn btn-primary">Create element</button>
+  <button  @click="addElement(); this.$delete(this.removed,0)" class="btn btn-primary">Create element</button>
   </div>
   <div class="my-3">
   <router-link :to="{ path: './MyProfile' }"><button type="button" class="btn btn-danger btn-block">Cancel</button></router-link>

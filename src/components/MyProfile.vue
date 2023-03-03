@@ -44,7 +44,7 @@
       return {
         selectedElementId: '',
         showInfo: false,
-        removed: ['blank'],
+        removed: [],
         username: this.$store.getters.getUserName
       }
     },
