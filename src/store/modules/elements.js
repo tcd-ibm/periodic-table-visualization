@@ -42,7 +42,7 @@ const actions = {
         Authorization: `Bearer ${token}`
       }
     }
-    await axios.put(ELEMENT_URI + '/' + JSON.stringify(objectId), element, config)
+    await axios.put(ELEMENT_URI + '/' + objectId.toString(), element, config)
     console.log('axios.put called')
   }
 }
