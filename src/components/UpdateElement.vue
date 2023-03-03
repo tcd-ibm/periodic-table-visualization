@@ -27,7 +27,7 @@
     <input type="text" :maxlength="250" class="form-control" v-model="element.description">
     </div>
     <div class="my-3">
-    <button @click="updateElement()" class="btn btn-primary">Update element</button>
+    <button @click="updateElemntLocal()" class="btn btn-primary">Update element</button>
     </div>
     <div class="my-3">
     <router-link :to="{ path: './MyProfile' }"><button type="button"
@@ -56,8 +56,8 @@ export default {
   },
   methods: {
     ...mapActions(['updateElement']),
-    async updateElement () {
-      console.log('updateElement in updateElement.vue called')
+    async updateElemntLocal () {
+      console.log('updateElement in updateElemntLocal.vue called')
       const element = {
         name: this.element.name,
         symbol: this.element.symbol,
@@ -68,6 +68,7 @@ export default {
       const token = this.$store.getters.getAuthToken
       const objectId = this.objectId
       await this.updateElement({ element, token, objectId })
+      // await this.getElement(token)
       // const id = // get the ID of the element you want to update
       //    await axios.put(`/api/elements/${id}`, { element }, {
       //      headers: { Authorization: `Bearer ${token}` }

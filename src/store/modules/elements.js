@@ -41,7 +41,8 @@ const actions = {
         Authorization: `Bearer ${token}`
       }
     }
-    await axios.put(ELEMENT_URI + objectId, element, config)
+    await axios.put(ELEMENT_URI + '/' + objectId, element, config)
+    console.log('axios.put called')
   }
 }
 const getters = {}
