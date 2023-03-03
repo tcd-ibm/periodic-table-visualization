@@ -5,26 +5,34 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY: quay.io/sweng/periodic-table-visualization
+  REGISTRY: quay.io/sweng
   IMAGE_NAME: ${{ github.repository }}
 
 jobs: 
-  build-push-img:
+  build-img:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
 
+
+    - name: 'Login to Quay'
+      uses: redhat-actions/podman-login@v1
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+
     - name: Buildah action
       id: build-image
       uses: redhat-actions/buildah-build@v2
       with: 
-        image: ${{ env.IMAGE_NAME }}
+        image: ${{ IMAGE_NAME }}
         tags: v1 ${{ github.sha }}
         containerfiles: |
           ./Dockerfile
-
     - name: Push to image registry
       id: push-image
       uses: redhat-actions/push-to-registry@v2
