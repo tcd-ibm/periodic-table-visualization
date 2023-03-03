@@ -34,6 +34,7 @@ const actions = {
     const token = data.token
     const element = data.element
     const objectId = data.objectId
+    console.log('objectId in element.js', objectId)
     console.log('token in elements.js:', token)
     console.log('element data in elements.js:', element)
     const config = {
@@ -41,7 +42,7 @@ const actions = {
         Authorization: `Bearer ${token}`
       }
     }
-    await axios.put(ELEMENT_URI + '/' + objectId, element, config)
+    await axios.put(ELEMENT_URI + '/' + JSON.stringify(objectId), element, config)
     console.log('axios.put called')
   }
 }
