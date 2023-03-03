@@ -3,6 +3,10 @@
   <h2>Update your element</h2>
   <form>
     <div class="form-group">
+    <label>ObjectId</label>
+    <input type="text" :maxlength="20" class="form-control" v-model="objectId">
+    </div>
+    <div class="form-group">
     <label>Name</label>
     <input type="text" :maxlength="20" class="form-control" v-model="element.name">
     </div>
@@ -38,35 +42,37 @@
 import { mapActions } from 'vuex'
 export default {
   data () {
-  return {
-    element: {
-    name: '',
-    symbol: '',
-    an: '',
-    am: '',
-    description: ''
-    },
-    showError: false
-  }
+    return {
+      objectId: null,
+      element: {
+        name: '',
+        symbol: '',
+        an: '',
+        am: '',
+        description: ''
+      },
+      showError: false
+    }
   },
   methods: {
-  ...mapActions(['updateElement']),
-  async updateElement () {
-    console.log('updateElement in updateElement.vue called')
-    const element = {
-    name: this.element.name,
-    symbol: this.element.symbol,
-    an: this.element.an,
-    am: this.element.am,
-    description: this.element.description
+    ...mapActions(['updateElement']),
+    async updateElement () {
+      console.log('updateElement in updateElement.vue called')
+      const element = {
+        name: this.element.name,
+        symbol: this.element.symbol,
+        an: this.element.an,
+        am: this.element.am,
+        description: this.element.description
+      }
+      const token = this.$store.getters.getAuthToken
+      const objectId = this.objectId
+      await this.updateElement({ element, token, objectId })
+      // const id = // get the ID of the element you want to update
+      //    await axios.put(`/api/elements/${id}`, { element }, {
+      //      headers: { Authorization: `Bearer ${token}` }
+      //    })
     }
-    const token = this.$store.getters.getAuthToken
-    await this.updateElement({ element, token })
-     const id = // get the ID of the element you want to update
-        await axios.put(`/api/elements/${id}`, { element }, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-  }
   }
 }
 
