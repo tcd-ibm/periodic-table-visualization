@@ -10,13 +10,12 @@ COPY ./package*.json ./
 
 RUN  yum install -y bzip2
 
-RUN npm -g install chromedriver --unsafe-perm=true --allow-root
+RUN sudo npm -g install chromedriver --unsafe-perm=true --allow-root
 
 # a package needed for this project
-RUN npm install phantomjs-prebuilt@2.1.13 --unsafe-perm
+RUN sudo npm install phantomjs-prebuilt@2.1.13 --unsafe-perm
 
-RUN npm uninstall node-sass
-RUN npm install sass --save-dev
+RUN npm install --save-dev node-sass
 
 #installs all the dependencies
 RUN npm install
