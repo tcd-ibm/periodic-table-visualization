@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY: quay.io/repository/sweng/periodic-table-visualization/
+  REGISTRY: quay.io/sweng/periodic-table-visualization
   IMAGE_NAME: ${{ github.repository }}
 
 jobs: 
