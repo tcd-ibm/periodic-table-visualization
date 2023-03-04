@@ -8,6 +8,14 @@ WORKDIR /usr/src/app
 
 COPY ./package*.json ./
 
+RUN yum install -y bzip2
+
+# a package needed for this project
+RUN npm install phantomjs-prebuilt@^2.1.14 --unsafe-perm
+
+# installing peer dependency
+RUN npm install node-sass@^4.0.0
+
 #installs all the dependencies
 RUN npm install
 
