@@ -1,7 +1,7 @@
 const express = require('express')
 const {
   getElements,
-  updateElements,
+  updateElement,
   deleteElements,
   createElements
 } = require('../controllers/elementController')
@@ -11,5 +11,5 @@ const { protectRoute } = require('../middleware/authMiddleware')
 router.get('/', protectRoute, getElements)
 router.post('/', protectRoute, createElements)
 router.delete('/:id', protectRoute, deleteElements)
-router.put('/:id', protectRoute, updateElements)
+router.put('/:id', protectRoute, updateElement)
 module.exports = router
