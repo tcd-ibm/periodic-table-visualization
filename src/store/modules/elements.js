@@ -1,6 +1,9 @@
 import axios from 'axios'
 const ELEMENT_URI = '/api/elements'
-const state = require('../../assets/data/mendelable.json')
+// const state = require('../../assets/data/mendelable.json')
+const state = {
+  elements: null
+}
 const mutations = {}
 const actions = {
   async getElements ({ commit }, token) {
@@ -25,25 +28,22 @@ const actions = {
       }
     }
     const response = await axios.post(ELEMENT_URI + '/', element, config)
-    // const response = await axios.post(ELEMENT_URI + '/' + elementId, element, config)
-    // axios.post()
-    console.log(response.data)
+    console.log('Create element: ', response.data)
   },
   async updateElement ({ commit }, data) {
-    console.log('updateElement in element.js is called')
+    // console.log('updateElement in element.js is called')
     const token = data.token
     const element = data.element
     const objectId = data.objectId
-    console.log('objectId in element.js', objectId)
-    console.log('token in elements.js:', token)
-    console.log('element data in elements.js:', element)
+    // console.log('objectId in element.js', objectId)
+    // console.log('token in elements.js:', token)
+    // console.log('element data in elements.js:', element)
     const config = {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }
     await axios.put(ELEMENT_URI + '/' + objectId.toString(), element, config)
-    console.log('axios.put called')
   }
 }
 const getters = {}

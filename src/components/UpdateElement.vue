@@ -4,7 +4,7 @@
   <form>
     <div class="form-group">
     <label>ObjectId</label>
-    <input type="text" :maxlength="20" class="form-control" v-model="objectId">
+    <input type="text" :maxlength="50" class="form-control" v-model="objectId">
     </div>
     <div class="form-group">
     <label>Name</label>
@@ -43,7 +43,7 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      objectId: null,
+      objectId: '',
       element: {
         name: '',
         symbol: '',
@@ -73,7 +73,6 @@ export default {
       //    await axios.put(`/api/elements/${id}`, { element }, {
       //      headers: { Authorization: `Bearer ${token}` }
       //    })
-
     }
   }
 }

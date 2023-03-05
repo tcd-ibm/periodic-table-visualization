@@ -66,20 +66,6 @@ export default {
       }
       const token = this.$store.getters.getAuthToken
       await this.createElements({element, token})
-      // test()
-    },
-    async testCreateElement () {
-      try {
-        // const token = this.$store.getters.getAuthToken
-        // console.log('token: ', token)
-        // console.log(addElement)
-        // const response = await this.makeElement(this.element)
-        // console.log('response: ' + response)
-        // await this.getElements(token)
-      } catch (error) {
-        console.log(error)
-        this.showError = true
-      }
     }
   }
 }

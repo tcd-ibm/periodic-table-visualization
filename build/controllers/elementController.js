@@ -89,15 +89,11 @@ const deleteElements = asyncHandler(async (req, res) => {
 
 const updateElement = asyncHandler(async (req, res) => {
   // try to find the element specified by the id
-  console.log('elementcontroller.js')
   const element = await Element.findById(req.params.id)
-  console.log('elementcontroller.js 1')
   if (!element) {
     res.status(400)
-    console.log('elementcontroller.js 2')
     throw new Error('Element not found')
   }
-  console.log('elementcontroller.js 3')
   const user = await User.findById(req.user.id)
   // check for user
   if (!user) {
@@ -118,7 +114,6 @@ const updateElement = asyncHandler(async (req, res) => {
     { new: true }
   )
   res.status(200).json(updatedElement)
-  // db.elements.update({title: ''}, {$set: {fieldTooChange: req.body}})
 })
 
 module.exports = {
