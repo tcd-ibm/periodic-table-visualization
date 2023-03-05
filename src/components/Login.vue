@@ -35,8 +35,10 @@
       <div class="my-3">
         <!--<button  @click="testGetElement()" type="submit" class="btn btn-primary">Test get element</button>-->
       </div>
-
-      
+      <div>
+        Test Get Elements
+        <router-link :to="{ path: './getElements' }"><button type="submit" class="btn btn-primary">Test getElements()</button></router-link>
+      </div>
     </form>
     <p v-if="showError" id="error">Username or Password is incorrect</p>
   </div>
@@ -45,7 +47,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-
+// import TestGetElement from './TestGetElement.vue'
 export default {
   name: 'Login',
   data () {

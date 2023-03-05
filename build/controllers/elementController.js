@@ -14,8 +14,15 @@ const User = require('../databaseModels/userModel')
 
 const getElements = asyncHandler(async (req, res) => {
   // find all the elements that is related to the user specified by the id
-  const element = await Element.find({ user: req.user.id })
-  res.status(200).json(element)
+  const elements = await Element.find({ user: req.user.id })
+  elements.map(element => { {element._id,
+    element.name,
+    element.user,
+    element.atomic_mass,
+    element.atomic_number,
+    element.symbol,
+    element.description;} })
+  res.status(200).json(elements)
 })
 /**
  * @description Create element
