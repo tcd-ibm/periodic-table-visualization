@@ -17,6 +17,7 @@ import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import VerificationPage from '@/components/VerificationPage'
+import TestGetElements from '@/components/TestGetElement'
 Vue.use(Router)
 
 export default new Router({
@@ -109,6 +110,14 @@ export default new Router({
           components:
           {
             default: VerificationPage
+          }
+        },
+        {
+          path: 'getElements',
+          name: 'TestGetElementsPage',
+          component:
+          {
+            default: TestGetElements
           }
         }
       ]
