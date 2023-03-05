@@ -33,7 +33,7 @@
       </div>
 
       <div class="my-3">
-        <button  @click="testGetElement()" type="submit" class="btn btn-primary">Test get element</button>
+        <!--<button  @click="testGetElement()" type="submit" class="btn btn-primary">Test get element</button>-->
       </div>
 
       

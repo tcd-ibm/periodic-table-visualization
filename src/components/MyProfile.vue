@@ -44,8 +44,8 @@
       return {
         selectedElementId: '',
         showInfo: false,
-        removed: ['blank'],
-        username: ''
+        removed: [],
+        username: this.$store.getters.getUserName
       }
     },
     methods: {
@@ -64,7 +64,13 @@
           }
         }
         return filteredElementsContainElementsOfGroup
+      },
+      syncUserName () {
+        this.username = this.$store.getters.getUserName
       }
+    },
+    created () {
+      this.syncUserName()
     }
   }
 </script>

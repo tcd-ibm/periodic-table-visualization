@@ -73,6 +73,7 @@ export default {
       //    await axios.put(`/api/elements/${id}`, { element }, {
       //      headers: { Authorization: `Bearer ${token}` }
       //    })
+
     }
   }
 }
