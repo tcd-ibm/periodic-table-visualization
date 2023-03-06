@@ -18,6 +18,7 @@ import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import VerificationPage from '@/components/VerificationPage'
 import TestGetElements from '@/components/TestGetElement'
+import Logout from '@/components/Logout'
 Vue.use(Router)
 
 export default new Router({
@@ -102,6 +103,14 @@ export default new Router({
           components:
           {
             default: Signup
+          }
+        },
+        {
+          path: 'Logout',
+          name: 'Logout',
+          components:
+          {
+            default: Logout
           }
         },
         {

@@ -1,5 +1,5 @@
 <template>
-  <div class="home row">
+    <div class="home row">
     <div class="col-12 px-0 d-flex flex-column flex-sm-row">
       <!-- Navbar -->
       <div class="bg-inverse px-0 py-5">
@@ -28,18 +28,18 @@
             </li>
             <!-- Daniel Padmore-->
             <!-- MyProfile-->
-            <li class="nav-item mt-5">
+            <li class="nav-item mt-5" v-if="username !== ''">
               <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')">
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
             </li>
             <!-- Andrew Syomushkin-->
             <!-- Sign in-->
-            <li class="nav-item mt-5">
+            <li class="nav-item mt-5" v-else>
                 <router-link to="./Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
                   <i @click="trackClick('Login', 'inbound')" class="material-icons">login</i>
                 </router-link>
-              </li>
+            </li>
           </div>
         </ul>
       </div>
@@ -80,6 +80,7 @@
   import PeriodicTable from './PeriodicTable'
   import LanguageSwitcher from './shared/LanguageSwitcher'
   import * as types from '@/store/mutation-types'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'home',
@@ -87,6 +88,10 @@
       LanguageSwitcher, PeriodicTable, ElementProfile
     },
     computed: {
+      ...mapGetters({
+        elements: 'localizedElements',
+        filteredElements: 'filteredElements'
+      }),
       search: {
         get () {
           return this.$store.state.filters.search
@@ -98,6 +103,7 @@
     },
     data () {
       return {
+        username: this.$store.getters.getUserName,
         msg: 'Mendelable',
         isMenuOpened: false,
         githubLink: 'https://github.com/pulsardev/mendelable'
@@ -109,7 +115,13 @@
       },
       trackClick (destination, eventCategory) {
         window.ga('send', 'event', eventCategory, 'click', destination)
+      },
+      syncUserName () {
+        this.username = this.$store.getters.getUserName
       }
+    },
+    created () {
+      this.syncUserName()
     }
   }
 </script>
