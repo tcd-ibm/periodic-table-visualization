@@ -57,7 +57,7 @@ on:
   workflow_dispatch:
   push:
     # Edit to the branch(es) you want to build and deploy on each push.
-    branches: [ "main" ]
+    branches: [ "openshift" ]
 
 jobs:
   # 🖊️ EDIT if you want to run vulnerability check on your project before deploying
