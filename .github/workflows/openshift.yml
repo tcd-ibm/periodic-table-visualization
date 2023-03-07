@@ -94,7 +94,7 @@ jobs:
           }
           else {
             core.info("A registry password is required");
-            secrets["REGISTRY_PASSWORD"] = `${{ secrets.REGISTRY_PASSWORD }}`;
+            secrets["IMAGE_REGISTRY_PASSWORD"] = `${{ secrets.REGISTRY_PASSWORD }}`;
           }
 
           const missingSecrets = Object.entries(secrets).filter(([ name, value ]) => {
@@ -129,6 +129,13 @@ jobs:
       if: env.IMAGE_TAGS == ''
       run: |
         echo "IMAGE_TAGS=latest ${GITHUB_SHA::12}" | tee -a $GITHUB_ENV
+        
+    - name: Log in to Red Hat Registry
+      uses: redhat-actions/podman-login@v1
+      with:
+        registry: registry.redhat.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
 
     # https://github.com/redhat-actions/buildah-build#readme
     - name: Build from Dockerfile
