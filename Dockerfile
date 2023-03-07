@@ -8,8 +8,10 @@ WORKDIR /usr/src/app
 
 COPY ./package*.json ./
 
+RUN yum install bzip2 -y
+
 # a package needed for this project
-RUN npm install phantomjs-prebuilt@^2.1.16 --unsafe-perm
+RUN npm install phantomjs-prebuilt@^2.1.13 --unsafe-perm
 
 #installs all the dependencies
 RUN npm install
