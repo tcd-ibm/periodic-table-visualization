@@ -1,7 +1,4 @@
-FROM registry.redhat.io/ubi8/nodejs-14:latest
-
-# run w/ root privlages
-USER root
+FROM registry.access.redhat.com/ubi8/ubi:8.1
 
 # creates app directory
 WORKDIR /usr/src/app
@@ -10,8 +7,8 @@ COPY ./package*.json ./
 
 RUN yum install bzip2 -y
 
-# a package needed for this project
-RUN npm install phantomjs-prebuilt@^2.1.13 --unsafe-perm
+RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash - && \
+    yum install -y nodejs
 
 #installs all the dependencies
 RUN npm install
