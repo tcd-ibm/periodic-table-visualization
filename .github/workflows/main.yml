@@ -2,7 +2,7 @@ name: build & push image
 
 on: 
   push:
-    branches: [ openshift ]
+    branches: [ main ]
 
 env:
   REGISTRY: quay.io
