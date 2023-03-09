@@ -161,6 +161,16 @@ const verifyUser = asyncHandler(async (req, res) => {
   }
 })
 
+const logoutUser = asyncHandler(async (req, res) => {
+  // invalidate the user's token
+  const user = await User.findById(req.user.id)
+  user.token = null
+  user.username = ''
+  await user.save()
+
+  res.status(200).json({ message: 'User logged out' })
+})
+
 /**
  * @description Update the confirmation code of a user. Used in registerUser
  * @author Nuoxi Zhang
@@ -188,5 +198,6 @@ module.exports = {
   registerUser,
   loginUser,
   getUser,
-  verifyUser
+  verifyUser,
+  logoutUser
 }
