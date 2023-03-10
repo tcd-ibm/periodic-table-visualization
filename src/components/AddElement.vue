@@ -62,7 +62,9 @@ export default {
         symbol: this.element.symbol,
         an: this.element.an,
         am: this.element.am,
-        description: this.element.description
+        description: this.element.description,
+        position: 105,
+        group: ['Default']
       }
       const token = this.$store.getters.getAuthToken
       await this.createElements({element, token})

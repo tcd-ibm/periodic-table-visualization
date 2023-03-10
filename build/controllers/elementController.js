@@ -46,7 +46,9 @@ const createElements = asyncHandler(async (req, res) => {
     atomic_number: req.body.an,
     symbol: req.body.symbol,
     description: req.body.description,
-    user: req.user.id
+    user: req.user.id,
+    position: req.body.position,
+    group: req.body.group
   })
   // send back the new element
   res.status(200).json(element)

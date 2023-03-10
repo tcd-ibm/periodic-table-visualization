@@ -26,6 +26,13 @@ const elementSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    position: {
+      type: Number,
+      required: [true, "Please specify the position"],
+    },
+    group: {
+      type: [String],
+    }
   },
   {
     timestamps: true,
