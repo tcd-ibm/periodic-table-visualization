@@ -42,6 +42,7 @@ export default {
       element: {
         name: '',
         symbol: '',
+        position: '',
         an: '',
         am: '',
         description: ''
@@ -60,6 +61,8 @@ export default {
       const element = {
         name: this.element.name,
         symbol: this.element.symbol,
+        // set position (nextAvailablePosition)
+        position: "pos"+nextAvailablePosition,
         an: this.element.an,
         am: this.element.am,
         description: this.element.description
