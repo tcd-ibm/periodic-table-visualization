@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema(
     confirmationCode: {
       type: String,
       unique: true,
-    },
+    }
   },
   {
     timestamps: true,
