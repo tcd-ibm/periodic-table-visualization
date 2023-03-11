@@ -62,15 +62,20 @@ export default {
         name: this.element.name,
         symbol: this.element.symbol,
         // set position (nextAvailablePosition)
-        position: "pos"+nextAvailablePosition,
         an: this.element.an,
         am: this.element.am,
         description: this.element.description,
-        position: 105,
-        group: ['Default']
+        position: 77,
+        group: ['Test']
       }
       const token = this.$store.getters.getAuthToken
       await this.createElements({element, token})
+    },
+    getNextAvailablePosition (userElements) {
+      // allElementPositions = ['1','0','43'...]; // all element positions in userElements
+      // nextAvailablePosition = 0;
+      // while (allElementPositions.includes(nextAvailablePosition)) { nextAvailablePosition++}
+      // returrn nextAvailablePosition
     }
   }
 }

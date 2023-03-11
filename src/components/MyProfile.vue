@@ -1,18 +1,20 @@
 <template>
-    <div class="home row">
-      <h3 v-if="username">{{username}}'s profile</h3>
+    <div>
+      <h3 v-if="username">{{username}}'s profile<br></h3>
     <div class="c-periodic-table">
       <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true"></myProfile-general-properties>
-      <myProfile-general-properties v-else class="c-information" :element=this.elements[1] :removed="removed" :preview="true"></myProfile-general-properties>
+      <myProfile-general-properties v-else class="c-information" :element=this.userElements[0] :removed="removed" :preview="true"></myProfile-general-properties>
       <div :key="element.id" v-for="element in userElements"
           v-if="!removed.includes(element.symbol)"
-          :data-element-group='element.elementGroup' :data-group='element.group' :data-period='element.period'
-          class='element' :class="element.position && element.position.toLowerCase()"
+          :data-element-group="getGroup(element)" :data-group='element.group'
+          class='element' :class="'pos' + getPosition(element)"
           :style="{ opacity: filteredElements.includes(element.atomicNumber) ? 1 : 0.25 }">
-        <router-link :to="'/element/'" @mousedown.native="showElement(element)" @mouseout.native="hideElement()">
-          <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
-        </router-link>
+          <router-link :to="'/element/'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
+            <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
+          </router-link>
       </div>
+      <div v-else class='element' :data-element-group="non-metal"><router-link :to="'/AddElement/'"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
+      <div class="element" :data-element-group="non-metal" v-for="i in (118 - userElements.length)"><router-link :to="'/AddElement/'"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
       <div class="element lanthanoid" data-element-group="lanthanoid" :style="{ opacity: filteredElementsContainElementsOfGroup('lanthanoid') ? 1 : 0.25 }"></div>
       <div class="element actinoid" data-element-group="actinoid" :style="{ opacity: filteredElementsContainElementsOfGroup('actinoid') ? 1 : 0.25 }"></div>
     </div>
@@ -36,7 +38,7 @@
         filteredElements: 'filteredElements'
       }),
       selectedElement () {
-        return this.elements[this.selectedElementId] || {}
+        return this.userElements[this.selectedElementId] || {}
       }
     },
     data () {
@@ -50,9 +52,9 @@
     },
     methods: {
       ...mapActions(['getElements', 'deleteElement']),
-      showElement (element) {
+      showElement (index) {
         this.showInfo = true
-        this.selectedElementId = element.atomicNumber
+        this.selectedElementId = index
       },
       hideElement () {
         this.showInfo = false
@@ -65,6 +67,12 @@
           }
         }
         return filteredElementsContainElementsOfGroup
+      },
+      getPosition (element) {
+        return element.position
+      },
+      getGroup (element) {
+        return element.group
       },
       syncUserName () {
         this.username = this.$store.getters.getUserName

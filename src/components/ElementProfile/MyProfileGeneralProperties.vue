@@ -10,7 +10,7 @@
         <pre>     </pre>
         <div>
           <h4>{{ element.name }}</h4>
-          <h6>{{ $t("element.group." + element.elementGroup) }}</h6>
+          <h6>{{ $t("element.group." + element.group) }}</h6>
           <div class="d-flex justify-content-evenly">
             <featured-value :value="element.atomicNumber" title="element.atomicNumber" :element="element" :colored="true"></featured-value>
               <pre>    </pre>
