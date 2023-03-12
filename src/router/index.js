@@ -67,7 +67,7 @@ export default new Router({
           }
         },
         {
-          path: 'addElement',
+          path: 'addElement/:position',
           name: 'AddElement',
           components: {
             default: AddElement

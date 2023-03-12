@@ -3,14 +3,14 @@
     <div v-if="Object.keys(element).length > 0" class="card-block">
       <div class="d-flex justify-content-evenly">
         <div>
-          <router-link :to="'/AddElement/'" tag="button" type="button" class="btn btn-primary btn-block" :disabled="!removed.length">Add element</router-link>
+          
           <button type="button" class="btn btn-danger btn-block" @click="removed.push(element.symbol)">Remove selected element</button>
           <router-link :to="'/updateElement/'" tag="button" type="button" class="btn btn-primary btn-block">Update element</router-link>
         </div>
         <pre>     </pre>
         <div>
           <h4>{{ element.name }}</h4>
-          <h6>{{ $t("element.group." + element.elementGroup) }}</h6>
+          <h6>{{ $t("element.group." + element.group) }}</h6>
           <div class="d-flex justify-content-evenly">
             <featured-value :value="element.atomicNumber" title="element.atomicNumber" :element="element" :colored="true"></featured-value>
               <pre>    </pre>

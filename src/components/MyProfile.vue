@@ -1,19 +1,32 @@
 <template>
-    <div class="home row">
-      <h3 v-if="username">{{username}}'s profile</h3>
+    <div>
+      <h3 v-if="username">{{username}}'s profile<br></h3>
     <div class="c-periodic-table">
-      <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true"></myProfile-general-properties>
-      <myProfile-general-properties v-else class="c-information" :element=this.elements[1] :preview="true"></myProfile-general-properties>
-      <div :key="element.id" v-for="element in elements"
-          v-if="!removed.includes(element.symbol)"
-          :data-element-group='element.elementGroup' :data-group='element.group' :data-period='element.period'
-          class='element' :class="element.symbol && element.symbol.toLowerCase()"
-          :style="{ opacity: filteredElements.includes(element.atomicNumber) ? 1 : 0.25 }">
-        <router-link :to="'/element/'" @mousedown.native="showElement(element)" @mouseout.native="hideElement()">
-          <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
-        </router-link>
-      </div>
+      <block1 :class="'block1'"></block1>
+      <block2 :class="'block2'"></block2>
+      <block3 :class="'block3'"></block3>
+      <block4 :class="'block4'"></block4>
+      <block5 :class="'block5'"></block5>
+      <block6 :class="'block6'"></block6>
 
+      <block7 :class="'block7'"></block7>
+      <block8 :class="'block8'"></block8>
+
+      <block9 :class="'block9'"></block9>
+      <block10 :class="'block10'"></block10>
+      
+      <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true"></myProfile-general-properties>
+      <myProfile-general-properties v-else class="c-information" :element="'sample'" :removed="removed" :preview="true"></myProfile-general-properties>
+      <div class="element" :data-element-group="non-metal" v-for="i in 118" v-if="empty(userElements, i - 1)"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
+      <div :key="element.id" v-else v-for="element in userElements"
+          v-if="!removed.includes(element.symbol)"
+          :data-element-group="getGroup(element)" :data-group='element.group'
+          class='element' :class="'pos' + getPosition(element)"
+          :style="{ opacity: filteredElements.includes(element.atomicNumber) ? 1 : 0.25 }">
+          <router-link :to="'/element/'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
+            <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
+          </router-link>
+      </div>
       <div class="element lanthanoid" data-element-group="lanthanoid" :style="{ opacity: filteredElementsContainElementsOfGroup('lanthanoid') ? 1 : 0.25 }"></div>
       <div class="element actinoid" data-element-group="actinoid" :style="{ opacity: filteredElementsContainElementsOfGroup('actinoid') ? 1 : 0.25 }"></div>
     </div>
@@ -37,7 +50,7 @@
         filteredElements: 'filteredElements'
       }),
       selectedElement () {
-        return this.elements[this.selectedElementId] || {}
+        return this.userElements[this.selectedElementId] || {}
       }
     },
     data () {
@@ -51,9 +64,9 @@
     },
     methods: {
       ...mapActions(['getElements', 'deleteElement']),
-      showElement (element) {
+      showElement (index) {
         this.showInfo = true
-        this.selectedElementId = element.atomicNumber
+        this.selectedElementId = index
       },
       hideElement () {
         this.showInfo = false
@@ -66,6 +79,21 @@
           }
         }
         return filteredElementsContainElementsOfGroup
+      },
+      getPosition (element) {
+        return element.position
+      },
+      getGroup (element) {
+        return element.group
+      },
+      empty (userElements, i) {
+        let pos = i
+        for (let i = 0; i < userElements.length; i++) {
+          if (userElements[i].position === pos) {
+            return 0
+          }
+        }
+        return 1
       },
       syncUserName () {
         this.username = this.$store.getters.getUserName
@@ -100,5 +128,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/scss/components/periodic-table";
+  @import "../assets/scss/components/myProfile-table";
 </style>

@@ -29,7 +29,7 @@
             <!-- Daniel Padmore-->
             <!-- MyProfile-->
             <li class="nav-item mt-5">
-              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')">
+              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')" v-if="username">
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
             </li>
@@ -100,6 +100,7 @@
       return {
         msg: 'Mendelable',
         isMenuOpened: false,
+        username: this.$store.getters.getUserName, // if username is not null user must be signed in
         githubLink: 'https://github.com/pulsardev/mendelable'
       }
     },
