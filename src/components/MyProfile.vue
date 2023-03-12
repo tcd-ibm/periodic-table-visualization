@@ -2,6 +2,19 @@
     <div>
       <h3 v-if="username">{{username}}'s profile<br></h3>
     <div class="c-periodic-table">
+      <block1 :class="'block1'"></block1>
+      <block2 :class="'block2'"></block2>
+      <block3 :class="'block3'"></block3>
+      <block4 :class="'block4'"></block4>
+      <block5 :class="'block5'"></block5>
+      <block6 :class="'block6'"></block6>
+
+      <block7 :class="'block7'"></block7>
+      <block8 :class="'block8'"></block8>
+
+      <block9 :class="'block9'"></block9>
+      <block10 :class="'block10'"></block10>
+      
       <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true"></myProfile-general-properties>
       <myProfile-general-properties v-else class="c-information" :element=this.userElements[0] :removed="removed" :preview="true"></myProfile-general-properties>
       <div :key="element.id" v-for="element in userElements"

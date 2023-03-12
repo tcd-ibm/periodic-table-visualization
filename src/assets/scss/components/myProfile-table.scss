@@ -200,6 +200,19 @@ ol, li {
       background: #eee;
     }
 
+    .block1 { grid-column: 2; grid-row: 1; }
+    .block2 { grid-column: 13; grid-row: 1; }
+    .block3 { grid-column: 14; grid-row: 1; }
+    .block4 { grid-column: 15; grid-row: 1; }
+    .block5 { grid-column: 16; grid-row: 1; }
+    .block6 { grid-column: 17; grid-row: 1; }
+
+    .block7 { grid-column: 1; grid-row: 8; }
+    .block8 { grid-column: 1; grid-row: 9; }
+
+    .block9 { grid-column: 17; grid-row: 8; }
+    .block10 { grid-column: 18; grid-row: 8; }
+
     .pos0 { grid-column: 1; grid-row: 1; }
 
     .pos1 { grid-column: 18; grid-row: 1; }

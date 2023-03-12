@@ -45,7 +45,8 @@ export default {
         position: '',
         an: '',
         am: '',
-        description: ''
+        description: '',
+        group: []
       },
       showError: false
     }
@@ -65,17 +66,18 @@ export default {
         an: this.element.an,
         am: this.element.am,
         description: this.element.description,
-        position: 77,
-        group: ['Test']
+        position: 117,
+        group: ['noble-gas']
       }
       const token = this.$store.getters.getAuthToken
       await this.createElements({element, token})
     },
-    getNextAvailablePosition (userElements) {
+    getPosition () {
       // allElementPositions = ['1','0','43'...]; // all element positions in userElements
       // nextAvailablePosition = 0;
       // while (allElementPositions.includes(nextAvailablePosition)) { nextAvailablePosition++}
       // returrn nextAvailablePosition
+      // return 1
     }
   }
 }
