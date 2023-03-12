@@ -35,7 +35,7 @@
     </div>
 
     <div class="my-3">
-      <button @click="submitForm()" type="submit" class="btn btn-primary">Sign
+      <button @click="submitForm()" type="button" class="btn btn-primary">Sign
           Up</button>
     </div>
   </form>
@@ -79,6 +79,7 @@ export default {
         const response = await this.registerUser({firstname, lastname, userName, email, password})
         console.log('Signup.vue/submitForm() response object => ', response)
         this.showError = false
+        this.$router.push('Login')
       } catch (error) {
         console.log(error.message)
         this.showError = true
