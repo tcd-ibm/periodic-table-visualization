@@ -6,9 +6,7 @@
         <router-link :to="{ path: './signup' }"><button type="submit" class="btn btn-primary">Don't have an
               account?</button></router-link>
       </h3>
-      <h3>Verify
-        <router-link :to="{ path: './verify/4' }"><button type="submit" class="btn btn-primary">Vefication Page</button></router-link>
-      </h3>
+
     </div>
   </div>
   <div>
@@ -24,7 +22,7 @@
 
       <!-- need to verify email -->
       <div class="my-3">
-        <button type="submit"
+        <button type="button"
               class="btn btn-primary" @click="submitForm()" >Login</button>
       </div>
       <div class="my-3">
@@ -32,13 +30,7 @@
               Password?</button></router-link>
       </div>
 
-      <div class="my-3">
-        <!--<button  @click="testGetElement()" type="submit" class="btn btn-primary">Test get element</button>-->
-      </div>
-      <div>
-        Test Get Elements
-        <router-link :to="{ path: './getElements' }"><button type="submit" class="btn btn-primary">Test getElements()</button></router-link>
-      </div>
+      
     </form>
     <p v-if="showError" id="error">Username or Password is incorrect</p>
   </div>
@@ -72,6 +64,7 @@ export default {
         console.log('UserName: ' + this.$store.getters.getUserName)
         console.log('Token: ' + this.$store.getters.getAuthToken)
         this.showError = false
+        this.$router.push('myProfile')
       } catch (error) {
         console.log(error)
         this.showError = true

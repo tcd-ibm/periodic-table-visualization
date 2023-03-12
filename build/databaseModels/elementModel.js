@@ -31,7 +31,7 @@ const elementSchema = mongoose.Schema(
       required: [true, "Please specify the position"],
     },
     group: {
-      type: [String],
+      type: String,
     }
   },
   {
