@@ -1,6 +1,7 @@
 <template>
     <div>
-      <h3 v-if="username">{{username}}'s profile<br></h3>
+      <h3 v-if="username">{{username}}'s profile
+      <router-link :to="{ path: './logout' }"><button type="submit" class="btn btn-primary">Logout?</button></router-link></h3>
     <div class="c-periodic-table">
       <block1 :class="'block1'"></block1>
       <block2 :class="'block2'"></block2>

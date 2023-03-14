@@ -13,6 +13,7 @@ import UpdateElement from '@/components/UpdateElement'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 // import LoginRoute from '@/components/Sidebar/LoginRoute'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
@@ -86,6 +87,14 @@ export default new Router({
           components:
           {
             default: Login
+          }
+        },
+        {
+          path: 'Logout',
+          name: 'Logout',
+          components:
+          {
+            default: Logout
           }
         },
         {

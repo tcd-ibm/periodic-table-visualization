@@ -59,7 +59,21 @@ const actions = {
     } catch (error) {
       console.log('Error message from auth.js/verifyUser: ', error.message)
     }
+  },
+  async logoutUser ({ commit }, data) {
+    try {
+      console.log('in auth.js')
+      const username = data.username
+      const password = data.password
+      const token = data.token
+      console.log(username)
+      console.log(password)
+      console.log(token)
+    } catch (error) {
+      console.log('Error message from auth.js/verifyUser: ', error.message)
+    }
   }
+
 }
 const mutations = {
   setUserName (state, username) {

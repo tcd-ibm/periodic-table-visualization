@@ -28,14 +28,14 @@
             </li>
             <!-- Daniel Padmore-->
             <!-- MyProfile-->
-            <li class="nav-item mt-5">
+            <li class="nav-item mt-5" v-if="this.$store.getters.getAuthToken"> <!-- checks if theres a token -->
               <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')" v-if="username">
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
             </li>
             <!-- Andrew Syomushkin-->
             <!-- Sign in-->
-            <li class="nav-item mt-5">
+            <li class="nav-item mt-5" v-else>
                 <router-link to="./Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
                   <i @click="trackClick('Login', 'inbound')" class="material-icons">login</i>
                 </router-link>
