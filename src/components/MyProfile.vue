@@ -102,27 +102,11 @@
         const token = this.$store.getters.getAuthToken
         const res = await this.getElements(token)
         this.userElements = res
-        // this.userElements is an array
-        // console.log('userElement in myProfile.vue: ', this.userElements)
-        // console.log('res in myprofile: ', res)
-      },
-      async deleteElemetLocal () {
-        const token = this.$store.getters.getAuthToken
-        const objectId = '6404c7223de32f15948ead1c'
-        // Daniel you have to get the objectId which is
-        // the_id field if you inspect an element returned
-        // by the this.getElements()
-        // console.log('userElements before delete: ', this.userElements)
-        await this.deleteElement({token, objectId})
-        await this.getElementsLocal()
-        // console.log('userElements after delete: ', this.userElements)
       }
     },
     created () {
       this.syncUserName()
       this.getElementsLocal()
-      this.deleteElemetLocal()
-      // console.log('userElements in myProfile: ', this.userElements)
     }
   }
 </script>
