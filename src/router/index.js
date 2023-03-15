@@ -13,6 +13,8 @@ import UpdateElement from '@/components/UpdateElement'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
+import NotFoundPage from '@/compnents/NotFoundPage'
+import Confirmation from '@/compnents/Confirmation'
 // import LoginRoute from '@/components/Sidebar/LoginRoute'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
@@ -119,6 +121,20 @@ export default new Router({
           {
             default: TestGetElements
           }
+        },
+
+        {
+          path: 'Confirmation',
+          name: 'Confirmation',
+          component:
+          {
+            default: Confirmation
+          }
+        },
+
+        {
+          path: '*',
+          component: NotFoundPage
         }
       ]
     },
