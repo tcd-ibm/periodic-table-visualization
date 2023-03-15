@@ -38,7 +38,7 @@ const actions = {
     console.log('data loginUser in auth.js: ', data.emailCopy)
     const email = data.emailCopy
     const password = data.passwordCopy
-    const response = await axios.post(USER_URI + '/login', {email, password})
+    const response = await axios.post(USER_URI + '/login', { email, password })
     await commit('setToken', response.data.token)
     console.log('Token from auth.js: ', response.data.token)
     console.log('userName from auth.js: ', response.data.userName)
@@ -46,16 +46,12 @@ const actions = {
     return response
   },
   async verifyUser ({ commit }, confirmationCode) {
-    try {
-      console.log('confirmationCode: ', confirmationCode)
-      console.log('type of confirmationCode: ', typeof (confirmationCode))
-      const response = await axios.get(USER_URI + '/verify/' + JSON.stringify(confirmationCode))
-      // console.log('verifyUser in auth.js is called')
-      return response
-    } catch (error) {
-      // console.log('Error message from auth.js/verifyUser: ', error.message)
-      return error.data
-    }
+    console.log('confirmationCode: ', confirmationCode)
+    console.log('type of confirmationCode: ', typeof confirmationCode)
+    const response = await axios.get(
+      USER_URI + '/verify/' + JSON.stringify(confirmationCode)
+    )
+    return response
   }
 }
 const mutations = {

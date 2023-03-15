@@ -35,7 +35,7 @@
     </div>
 
     <div class="my-3">
-      <button @click="submitForm()" type="submit" class="btn btn-primary">Sign
+      <button @click="submitForm()" type="button" class="btn btn-primary">Sign
           Up</button>
     </div>
   </form>
@@ -61,12 +61,12 @@ export default {
     ...mapActions(['registerUser']),
     async submitForm () {
       if (this.password !== this.reEnterPassword) {
-        console.log('password dont match')
-        alert('password do not match')
+        console.log('Password do not match')
+        alert('Password do not match')
         return
       }
       if (this.firstname === '' || this.lastname === '' || this.email === '' || this.userName === '' || this.password === '' || this.reEnterPassword === '') {
-        alert('Please enter all fields and try again')
+        alert('Please enter all fields and try again.')
         return
       }
       try {
@@ -76,10 +76,43 @@ export default {
         const email = this.email
         const password = this.password
         const response = await this.registerUser({firstname, lastname, userName, email, password})
+        this.showSuccessMessage('Success! Please check our email to verify your account!')
         console.log('Signup.vue/submitForm() response object => ', response)
       } catch (error) {
-        console.log(error.message)
+        this.showErrorMessage(error.response.data.message)
       }
+    },
+    showErrorMessage (errorMessage) {
+      this.$toast.error(errorMessage, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
+    },
+    showSuccessMessage (message) {
+      this.$toast.success(message, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
     }
   }
 }

@@ -56,7 +56,7 @@ export default {
         alert('Please enter your password')
         return
       }
-      var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
       if (!this.email.match(validRegex)) {
         this.showErrorMessage('Invalid email format. Please try again!')
         return

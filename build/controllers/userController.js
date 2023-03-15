@@ -18,11 +18,12 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error("Please have all the fields filled in");
   }
+  console.log('registerUser email: ', email)
   //check if user already exist
-  const userExist = await User.findOne({ email });
+  const userExist = await User.findOne({ email: email });
   if (userExist) {
     res.status(400);
-    throw new Error("User already exists");
+    throw new Error("User already exists. Please use another email!");
   }
 
   //hash password
@@ -77,21 +78,22 @@ const loginUser = asyncHandler(async (req, res) => {
   //fetch the user from the database by the email (if the user exists)
   const user = await User.findOne({ email });
   if(!user){
-    console.log("User does not exist. Please register")
+    res.status(400);
+    throw new Error("User does not exist. Please register");
   }
   if(user){
     if(user.status === "Pending"){
       res.status(401)
-      console.log('Pending account: check your mail box and verify your email!')
       throw new Error('Pending Account. Please Verify your email')
     }
     if (user && (await bcrypt.compare(password, user.password))) {
+      const newToken = generateToken(user._id)
       res.json({
         _id: user.id,
         userName: user.userName,
         email: user.email,
-        token: generateToken(user._id),
-      });
+        token: newToken
+      })
     }
     else{
        res.status(400);
@@ -147,7 +149,6 @@ const verifyUser = asyncHandler(async (req, res) => {
   const user = await User.findById(parseJwt(code).id);
   if (!user) {
     res.status(400)
-    // console.log('user not found')
     throw new Error("User Not Found");
   } else {
     await User.findOneAndUpdate(
