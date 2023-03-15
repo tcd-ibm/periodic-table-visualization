@@ -15,19 +15,51 @@ export default {
       this.currentUrl = 'Current Url: ' + window.location.href
     },
     async callVerifyUser (data) {
-      // console.log('data in callVerifyUSer: ', data)
-      // console.log('type of data: ', typeof (data))
-      await this.verifyUser(data)
+      try {
+        await this.verifyUser(data)
+        this.showSuccessMessage('Success: Account Verified!')
+      } catch (error) {
+        this.showErrorMessage(error.response.data.message)
+      }
+    },
+    showErrorMessage (errorMessage) {
+      this.$toast.error(errorMessage, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
+    },
+    showSuccessMessage (message) {
+      this.$toast.success(message, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
     }
   },
   created () {
     this.myFunction()
-    console.log('currentURL: ', this.currentUrl)
     var strArr = this.currentUrl.split('/')
-    // console.log(strArr[5])
     const data = strArr[strArr.length - 1]
     this.callVerifyUser(data)
-    // this.verifyUser(this.$route.query.confirmationCode)
   },
   data () {
     return {
