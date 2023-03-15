@@ -28,7 +28,6 @@
         <router-link :to="{ path: './reset' }"><button type="button" class="btn btn-primary">Forgot
               Password?</button></router-link>
       </div>
-
     </form>
   </div>
 </div>

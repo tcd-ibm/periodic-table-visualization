@@ -15,9 +15,9 @@
       <block9 :class="'block9'"></block9>
       <block10 :class="'block10'"></block10>
       
-      <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true"></myProfile-general-properties>
+      <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true" ></myProfile-general-properties>
       <myProfile-general-properties v-else class="c-information" :element="'sample'" :removed="removed" :preview="true"></myProfile-general-properties>
-      <div class="element" :data-element-group="non-metal" v-for="i in 118" v-if="empty(userElements, i - 1)"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
+      <div class="element" :data-element-group="non-metal" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
       <div :key="element.id" v-else v-for="element in userElements"
           v-if="!removed.includes(element.symbol)"
           :data-element-group="getGroup(element)" :data-group='element.group'

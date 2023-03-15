@@ -26,7 +26,8 @@
   <label>Group</label>
   <div>
     <div>
-      <input v-model="element.group" type="radio" id="group1" name="group" value="non-metal" />
+      <input v-model="element.group" type="radio" id="group1" name="group" value="non-metal" checked/>
+
       <label for="group1" ><FONT COLOR="#03a9f4">Nonmetals&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT></label>
       <input v-model="element.group" type="radio" id="group2" name="group" value="halogen" />
       <label for="group2"><FONT COLOR="#f06292">Halogens&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT></label>
@@ -67,6 +68,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+// import Router from 'vue-router'
 export default {
   data () {
     return {
@@ -85,6 +87,7 @@ export default {
   methods: {
     ...mapActions(['createElements']),
     async addElement () {
+      console.log('element group:', this.element.group)
       if (!this.element.name || !this.element.symbol || !this.element.an || !this.element.am || !this.element.description || !this.element.group) {
         alert('Please fill in all the fields.')
         return
@@ -120,6 +123,7 @@ export default {
         icon: true,
         rtl: false
       })
+      this.$router.push('myProfile')
     }
   }
 }
