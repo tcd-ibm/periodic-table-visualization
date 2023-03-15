@@ -48,6 +48,19 @@ export default {
   methods: {
     ...mapActions(['loginUser', 'getElements']),
     async submitForm () {
+      if (!this.email) {
+        alert('Please enter an email.')
+        return
+      }
+      if (!this.password) {
+        alert('Please enter your password')
+        return
+      }
+      var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      if (!this.email.match(validRegex)) {
+        this.showErrorMessage('Invalid email format. Please try again!')
+        return
+      }
       try {
         const emailCopy = this.email
         const passwordCopy = this.password
