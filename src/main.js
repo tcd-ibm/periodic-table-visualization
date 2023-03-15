@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 import i18n from './i18n'
 import axios from 'axios'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
+
 window.$ = window.jQuery = require('jquery')
 window.tether = window.Tether = require('tether')
 require('bootstrap')
@@ -26,4 +29,10 @@ new Vue({
   i18n,
   template: '<App/>',
   components: { App }
+})
+
+Vue.use(Toast, {
+  transition: 'Vue-Toastification__bounce',
+  maxToasts: 20,
+  newestOnTop: true
 })

@@ -6,41 +6,30 @@
         <router-link :to="{ path: './signup' }"><button type="submit" class="btn btn-primary">Don't have an
               account?</button></router-link>
       </h3>
-      <h3>Verify
-        <router-link :to="{ path: './verify/4' }"><button type="submit" class="btn btn-primary">Vefication Page</button></router-link>
-      </h3>
     </div>
   </div>
   <div>
     <form>
       <div class="form-group">
-        <label>Email/Username</label>
-        <input type="email" class="form-control" v-model="email">
+        <label>Email</label>
+        <input type="email" class="form-control" v-model="email" required>
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" v-model="password">
+        <input type="password" class="form-control" v-model="password" required>
       </div>
 
       <!-- need to verify email -->
       <div class="my-3">
-        <button type="submit"
+        <button type="button"
               class="btn btn-primary" @click="submitForm()" >Login</button>
       </div>
       <div class="my-3">
-        <router-link :to="{ path: './reset' }"><button type="submit" class="btn btn-primary">Forgot
+        <router-link :to="{ path: './reset' }"><button type="button" class="btn btn-primary">Forgot
               Password?</button></router-link>
       </div>
 
-      <div class="my-3">
-        <!--<button  @click="testGetElement()" type="submit" class="btn btn-primary">Test get element</button>-->
-      </div>
-      <div>
-        Test Get Elements
-        <router-link :to="{ path: './getElements' }"><button type="submit" class="btn btn-primary">Test getElements()</button></router-link>
-      </div>
     </form>
-    <p v-if="showError" id="error">Username or Password is incorrect</p>
   </div>
 </div>
 </template>
@@ -53,35 +42,55 @@ export default {
   data () {
     return {
       email: '',
-      password: '',
-      showError: false
+      password: ''
     }
   },
   methods: {
     ...mapActions(['loginUser', 'getElements']),
     async submitForm () {
-      // console.log('login.vue submitForm() is called')
-      // console.log('email: ', this.form.email)
-      // console.log('password: ', this.form.password)
       try {
-        console.log('calling this.loginUser()')
         const emailCopy = this.email
         const passwordCopy = this.password
         const response = await this.loginUser({emailCopy, passwordCopy})
         console.log('Returned object after login: ', response)
         console.log('UserName: ' + this.$store.getters.getUserName)
         console.log('Token: ' + this.$store.getters.getAuthToken)
-        this.showError = false
+        this.showSuccessMessage('Welcome ' + this.$store.getters.getUserName + '!')
       } catch (error) {
-        console.log(error)
-        this.showError = true
+        this.showErrorMessage(error.response.data.message)
       }
     },
-    async testGetElement () {
-      console.log('testGetElement() is called')
-      const token = this.$store.getters.getAuthToken
-      console.log('token from login.vue: ', token)
-      await this.getElements(token)
+    showErrorMessage (errorMessage) {
+      this.$toast.error(errorMessage, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
+    },
+    showSuccessMessage (message) {
+      this.$toast.success(message, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
     }
   }
 }

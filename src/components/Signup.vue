@@ -54,8 +54,7 @@ export default {
       userName: '',
       email: '',
       password: '',
-      reEnterPassword: '',
-      showError: false
+      reEnterPassword: ''
     }
   },
   methods: {
@@ -78,10 +77,8 @@ export default {
         const password = this.password
         const response = await this.registerUser({firstname, lastname, userName, email, password})
         console.log('Signup.vue/submitForm() response object => ', response)
-        this.showError = false
       } catch (error) {
         console.log(error.message)
-        this.showError = true
       }
     }
   }
