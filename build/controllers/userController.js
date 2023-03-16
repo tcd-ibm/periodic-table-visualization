@@ -228,7 +228,12 @@ const changePassword = asyncHandler(async (req, res) => {
  * @route GET /api/users/changePassword/:userId
  */
 const sendChangePassword = asyncHandler(async (req, res) => {
-  const user = req.body
+  const email = req.body
+  const user = await User.findOne({email: email})
+  if (!user) {
+    res.json(404)
+    throw new Error('Email does not exists in database.')
+  }
   sendChangePasswordEmail(user.name, user.email, user._id);
 });
 

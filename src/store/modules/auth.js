@@ -52,6 +52,9 @@ const actions = {
       USER_URI + '/verify/' + JSON.stringify(confirmationCode)
     )
     return response
+  },
+  async sendChangePasswordEmail ({ commit }, data) {
+    // await axios.post(USER_URI + '/reset/' + JSON.stringify(data._id), data)
   }
 }
 const mutations = {
