@@ -16,7 +16,6 @@ import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import VerificationPage from '@/components/VerificationPage'
-import ChangePasswordPage from '@/components/ChangePassword'
 import ResetPassword from '@/components/ResetPassword'
 Vue.use(Router)
 
@@ -113,13 +112,6 @@ export default new Router({
           name: 'VerificationPage',
           components: {
             default: VerificationPage
-          }
-        },
-        {
-          path: 'ChangePassword/:id',
-          name: 'ChangePasswordPage',
-          component: {
-            default: ChangePasswordPage
           }
         }
       ]
