@@ -200,14 +200,14 @@ function parseJwt(token) {
  */
 const changePassword = asyncHandler(async (req, res) => {
   const { _id, newPassword } = req.body;
-  const user = await UserModel.findById(_id);
+  const user = await User.findById(_id);
   if (!user) {
     res.status(400).json({ message: "User not found" });
     throw new Error("User not found");
   } else {
     const salt = await bcrypt.genSalt(11);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
-    const userWithNewPassword = await UserModel.findByIdAndUpdate(
+    const userWithNewPassword = await User.findByIdAndUpdate(
       _id,
       { password: hashedPassword },
       { new: true }
@@ -228,14 +228,17 @@ const changePassword = asyncHandler(async (req, res) => {
  * @route GET /api/users/changePassword/:userId
  */
 const sendChangePassword = asyncHandler(async (req, res) => {
-  const email = req.body
+  const {email} = req.body
+  console.log('req.body in userCOntroller: ', JSON.stringify(req.body))
+  console.log('email in userController: ', email)
   const user = await User.findOne({email: email})
+  console.log('user: ' + user)
   if (!user) {
-    res.json(404)
+    res.status(404)
     throw new Error('Email does not exists in database.')
   }
-  sendChangePasswordEmail(user.name, user.email, user._id);
-});
+  sendChangePasswordEmail(user.firstname, user.email, user._id);
+});``
 
 
 

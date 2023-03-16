@@ -15,7 +15,7 @@ router.post("/login", loginUser);
 router.get("/me", protectRoute, getUser);
 router.get("/verify/:confirmationCode", verifyUser);
 router.put("/reset/:userId", changePassword);
-router.post("/reset/:userId", sendChangePassword);
+router.post("/reset", sendChangePassword);
 
 
 
