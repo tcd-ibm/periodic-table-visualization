@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler"); // handle exceptions
 const User = require("../databaseModels/userModel");
 const { sendConfirmationEmail } = require('../email/nodeMailerConfig')
+const { sendChangePasswordEmail } = require("../email/changePasswordEmail");
 /**
  * @description Regsiter a new user
  * @route  POST /api/users/register
@@ -188,6 +189,51 @@ const updateConfirmationCode = asyncHandler(async (userId, newData) => {
 function parseJwt(token) {
   return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
 }
+
+
+/**
+ * @desc change user password
+ * @author Nuoxi Zhang
+ * @nuoxiz
+ * @route PUT /api/users/changePassword/:userId
+ * @access private
+ */
+const changePassword = asyncHandler(async (req, res) => {
+  const { _id, newPassword } = req.body;
+  const user = await UserModel.findById(_id);
+  if (!user) {
+    res.status(400).json({ message: "User not found" });
+    throw new Error("User not found");
+  } else {
+    const salt = await bcrypt.genSalt(11);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const userWithNewPassword = await UserModel.findByIdAndUpdate(
+      _id,
+      { password: hashedPassword },
+      { new: true }
+    );
+    if (userWithNewPassword) {
+      res.status(201).json(userWithNewPassword);
+    } else {
+      res
+        .status(400)
+        .json({ message: "Failed to Change Password. Please try again" });
+      throw new Error("Failed to Change Password. Please try again");
+    }
+  }
+});
+
+/**
+ * @desc send change password email
+ * @route GET /api/users/changePassword/:userId
+ */
+const sendChangePassword = asyncHandler(async (req, res) => {
+  const user = req.body
+  sendChangePasswordEmail(user.name, user.email, user._id);
+});
+
+
+
 
 module.exports = {
   registerUser,
