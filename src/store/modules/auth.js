@@ -62,13 +62,18 @@ const actions = {
   },
   async logoutUser ({ commit }, data) {
     try {
-      console.log('in auth.js')
-      const username = data.username
-      const password = data.password
-      const token = data.token
-      console.log(username)
-      console.log(password)
-      console.log(token)
+      // do not need to take in data, so logoutUser() should only take {commit}
+      // all you need is to clear username and token by setting it to null.
+      // must have await before commit()
+      // await commit('setUserName', null)
+      
+//       console.log('in auth.js')
+//       const username = data.username
+//       const password = data.password
+//       const token = data.token
+//       console.log(username)
+//       console.log(password)
+//       console.log(token)
     } catch (error) {
       console.log('Error message from auth.js/verifyUser: ', error.message)
     }
