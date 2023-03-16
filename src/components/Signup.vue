@@ -78,6 +78,7 @@ export default {
         const response = await this.registerUser({firstname, lastname, userName, email, password})
         this.showSuccessMessage('Success! Please check our email to verify your account!')
         console.log('Signup.vue/submitForm() response object => ', response)
+        this.$router.push('Login')
       } catch (error) {
         this.showErrorMessage(error.response.data.message)
       }

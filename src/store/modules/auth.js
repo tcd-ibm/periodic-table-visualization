@@ -57,6 +57,8 @@ const actions = {
     console.log('sendChangePasswordEmail in auth.js called')
     console.log('data: ' + JSON.stringify(data))
     await axios.post(USER_URI + '/reset', data)
+    console.log('returned in auth.js')
+    return
   },
   async changePassword ({ commit }, data) {
     console.log('changePassword in auth.js: ', JSON.stringify(data))

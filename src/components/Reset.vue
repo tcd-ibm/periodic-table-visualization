@@ -3,7 +3,7 @@
     <div>
         <div>
             <h3>Reset Password?
-            <router-link :to="{ path: './login' }"><button type="button" class="btn btn-primary">Login</button></router-link>
+            <router-link :to="{ path: './Login' }"><button type="button" class="btn btn-primary">Login</button></router-link>
             </h3>
             <hr>
         </div>
@@ -42,14 +42,33 @@ export default {
         }
         console.log('onClick() in Reset.vue called' + this.email)
         const email = this.email
-        const data = {email}
-        await this.sendChangePasswordEmail(data)
+        await this.sendChangePasswordEmail({email})
+        console.log('1')
+        this.showSuccessMessage('Email sent. Please check your mail box')
+        console.log('2')
+        this.$router.push('Login')
       } catch (error) {
         this.showErrorMessage(error.response.data.message)
       }
     },
     showErrorMessage (errorMessage) {
       this.$toast.error(errorMessage, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
+    },
+    showSuccessMessage (message) {
+      this.$toast.success(message, {
         position: 'top-right',
         timeout: 5000,
         closeOnClick: true,

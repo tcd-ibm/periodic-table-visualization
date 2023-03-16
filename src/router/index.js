@@ -94,7 +94,7 @@ export default new Router({
           }
         },
         {
-          path: 'Reset',
+          path: 'reset',
           name: 'Reset',
           components: {
             default: Reset

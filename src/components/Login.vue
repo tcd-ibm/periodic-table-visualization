@@ -25,11 +25,8 @@
               class="btn btn-primary" @click="submitForm()" >Login</button>
       </div>
       <div class="my-3">
-        <router-link :to="{ path: './reset' }"><button type="button" class="btn btn-primary">Forgot
+        <router-link :to="{ path: './Reset' }"><button type="button" class="btn btn-primary">Forgot
               Password?</button></router-link>
-      </div>
-      <div class="my-3">
-        <router-link :to="{ path: './ResetPassword/5' }"><button type="button" class="btn btn-primary">Test ChangePassword</button></router-link>
       </div>
     </form>
   </div>
@@ -71,6 +68,7 @@ export default {
         console.log('UserName: ' + this.$store.getters.getUserName)
         console.log('Token: ' + this.$store.getters.getAuthToken)
         this.showSuccessMessage('Welcome ' + this.$store.getters.getUserName + '!')
+        this.$router.push('myProfile')
       } catch (error) {
         this.showErrorMessage(error.response.data.message)
       }
