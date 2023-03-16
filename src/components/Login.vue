@@ -28,6 +28,9 @@
         <router-link :to="{ path: './reset' }"><button type="button" class="btn btn-primary">Forgot
               Password?</button></router-link>
       </div>
+      <div class="my-3">
+        <router-link :to="{ path: './ResetPassword/5' }"><button type="button" class="btn btn-primary">Test ChangePassword</button></router-link>
+      </div>
     </form>
   </div>
 </div>

@@ -238,7 +238,7 @@ const sendChangePassword = asyncHandler(async (req, res) => {
     throw new Error('Email does not exists in database.')
   }
   sendChangePasswordEmail(user.firstname, user.email, user._id);
-});``
+});
 
 
 

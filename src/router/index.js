@@ -16,7 +16,8 @@ import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import VerificationPage from '@/components/VerificationPage'
-import TestGetElements from '@/components/TestGetElement'
+import ChangePasswordPage from '@/components/ChangePassword'
+import ResetPassword from '@/components/ResetPassword'
 Vue.use(Router)
 
 export default new Router({
@@ -82,41 +83,43 @@ export default new Router({
         {
           path: 'Login',
           name: 'Login',
-          components:
-          {
+          components: {
             default: Login
+          }
+        },
+        {
+          path: 'ResetPassword/:userID',
+          name: 'ResetPassword',
+          components: {
+            default: ResetPassword
           }
         },
         {
           path: 'Reset',
           name: 'Reset',
-          components:
-          {
+          components: {
             default: Reset
           }
         },
         {
           path: 'Signup',
           name: 'Signup',
-          components:
-          {
+          components: {
             default: Signup
           }
         },
         {
           path: 'verify/:confirmationCode',
           name: 'VerificationPage',
-          components:
-          {
+          components: {
             default: VerificationPage
           }
         },
         {
-          path: 'getElements',
-          name: 'TestGetElementsPage',
-          component:
-          {
-            default: TestGetElements
+          path: 'ChangePassword/:id',
+          name: 'ChangePasswordPage',
+          component: {
+            default: ChangePasswordPage
           }
         }
       ]

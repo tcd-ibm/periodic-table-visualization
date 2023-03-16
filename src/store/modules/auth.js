@@ -57,6 +57,10 @@ const actions = {
     console.log('sendChangePasswordEmail in auth.js called')
     console.log('data: ' + JSON.stringify(data))
     await axios.post(USER_URI + '/reset', data)
+  },
+  async changePassword ({ commit }, data) {
+    console.log('changePassword in auth.js: ', JSON.stringify(data))
+    await axios.put(USER_URI + '/ChangePassword/' + data._id, data)
   }
 }
 const mutations = {

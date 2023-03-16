@@ -25,7 +25,7 @@ const sendChangePasswordEmail = (name, email, userId) => {
     <h1>Change Your Password</h1>
     <h2> Hello ${name} </h2>
     <p>Please change your password by clicking on the following link:</p>
-    <a href=http://localhost:8080//?#/changePassword/${userId}>Click here</a>
+    <a href=http://localhost:8080//?#/ResetPassword/${userId}>Click here</a>
     </div>`,
     },
     (err, info) => {
