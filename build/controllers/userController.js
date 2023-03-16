@@ -239,5 +239,7 @@ module.exports = {
   registerUser,
   loginUser,
   getUser,
-  verifyUser
+  verifyUser,
+  sendChangePassword,
+  changePassword
 };
