@@ -25,8 +25,19 @@ export default {
       const username = this.$store.getters.getUserName
       console.log(username)
       await this.logoutUser()
-      console.log('made it out')
       this.$router.push('Login')
+    },
+    mounted () {
+      window.addEventListener('beforeunload', (event) => {
+        event.preventDefault()
+        event.returnValue = ''
+        this.logout()
+      })
+    },
+    beforeDestroy () {
+      window.removeEventListener('beforeunload', () => {
+        this.logout()
+      })
     }
   }
 }

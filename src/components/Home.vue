@@ -29,7 +29,7 @@
             <!-- Daniel Padmore-->
             <!-- MyProfile-->
             <li class="nav-item mt-5" v-if="this.$store.getters.getAuthToken"> <!-- checks if theres a token -->
-              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')" v-if="username">
+              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')">
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
             </li>
