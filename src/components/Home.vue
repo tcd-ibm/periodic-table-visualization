@@ -39,7 +39,10 @@
                 <router-link to="./Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
                   <i @click="trackClick('Login', 'inbound')" class="material-icons">login</i>
                 </router-link>
-              </li>
+            </li>
+            <!-- <li>
+              <i @click="fun" >tick</i>
+            </li> -->
           </div>
         </ul>
       </div>
@@ -111,6 +114,10 @@
       trackClick (destination, eventCategory) {
         window.ga('send', 'event', eventCategory, 'click', destination)
       }
+      // fun () {
+      //   const username = this.$store.getters.getUserName
+      //   console.log(username)
+      // }
     }
   }
 </script>

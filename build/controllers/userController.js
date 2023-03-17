@@ -165,25 +165,12 @@ const logoutUser = asyncHandler(async (req, res) => {
   try {
     const token = req.header('Authorization').replace('Bearer ', '')
     // check if the token is already revoked
-    if (await isTokenRevoked(token)) {
-      throw new Error('Token already revoked')
-    }
-    // add the token to the blacklist
-    await addToRevokedList(token)
+    console.log(token)
     res.status(200).send('User logged out successfully')
   } catch (error) {
     res.status(400).send(error.message)
   }
 })
-
-// helper functions for token revocation
-const RevokedToken = this.$store.getters.getAuthToken
-const isTokenRevoked = async (token) => {
-  return await RevokedToken.exists({ token })
-}
-const addToRevokedList = async (token) => {
-  await new RevokedToken({ token }).save()
-}
 
 /**
  * @description Update the confirmation code of a user. Used in registerUser
