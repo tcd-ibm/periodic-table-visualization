@@ -6,6 +6,8 @@ import router from './router'
 import store from './store'
 import i18n from './i18n'
 import axios from 'axios'
+// import Toast from 'vue-toastification'
+// import 'vue-toastification/dist/index.css'
 // import { mapActions } from 'vuex'
 window.$ = window.jQuery = require('jquery')
 window.tether = window.Tether = require('tether')
@@ -29,18 +31,8 @@ new Vue({
   components: { App }
 })
 
-// const app = createApp({
-//   extends: App,
-//   created () {
-//     window.addEventListener('beforeunload', this.leaving)
-//   },
-//   methods:
-//   {
-//     ...mapActions(['logoutUser']),
-//     leaving () {
-//       this.logoutUser()
-//     }
-//   }
+// Vue.use(Toast, {
+//   transition: 'Vue-Toastification__bounce',
+//   maxToasts: 20,
+//   newestOnTop: true
 // })
-
-// app.mount('#app')

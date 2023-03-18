@@ -5,12 +5,18 @@
 </template>
 
 <script>
-  // note to Andrew: I think this is where you should detect browswer close event and call logout
-  export default {
-    name: 'app'
+import { mapActions } from 'vuex'
+export default {
+  name: 'app',
+  methods: {
+    ...mapActions(['logoutUser'])
+  },
+  created () {
+    this.logoutUser()
   }
+}
 </script>
 
 <style lang="scss">
-  @import './assets/scss/design.scss';
+@import './assets/scss/design.scss';
 </style>
