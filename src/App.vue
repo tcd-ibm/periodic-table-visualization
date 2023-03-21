@@ -12,6 +12,7 @@ export default {
     ...mapActions(['sendChangePasswordEmail', 'logoutUser'])
   },
   created () {
+    // need to find a way to distinguish page refresh and browser/tab close
     window.addEventListener('beforeunload', this.logoutUser())
   }
 }
