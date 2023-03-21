@@ -25,13 +25,6 @@ export default {
       await this.logoutUser()
       this.$router.push('Login')
     }
-  },
-  mounted () {
-    window.addEventListener('beforeunload', this.logout)
-    console.log('HELLO')
-  },
-  beforeDestroy () {
-    window.removeEventListener('beforeunload', this.logout)
   }
 }
 </script>

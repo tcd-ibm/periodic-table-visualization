@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="app container-fluid">
-    <router-view></router-view>
-  </div>
+    <div id="app" class="app container-fluid">
+      <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -9,10 +9,10 @@ import { mapActions } from 'vuex'
 export default {
   name: 'app',
   methods: {
-    ...mapActions(['logoutUser'])
+    ...mapActions(['sendChangePasswordEmail', 'logoutUser'])
   },
   created () {
-    this.logoutUser()
+    window.addEventListener('beforeunload', this.logoutUser())
   }
 }
 </script>

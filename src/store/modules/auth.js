@@ -78,6 +78,13 @@ const actions = {
     } catch (error) {
       console.log('Error message from auth.js/logoutUser: ', error.message)
     }
+  },
+  async sendChangePasswordEmail ({commit}, details) {
+    try {
+      console.log('inside sendChangePasswordEmail in auth.js')
+    } catch (error) {
+      console.log('Error message from auth.js/sendChangePasswordEmail: ', error.message)
+    }
   }
 
 }
