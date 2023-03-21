@@ -48,6 +48,8 @@ env:
   IMAGE_REGISTRY: quay.io/sweng
   IMAGE_REGISTRY_USER: ${{ secrets.REGISTRY_USERNAME }}
   IMAGE_REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+  
+  ENV_VARS: ${{ secrets.ENVIRON }}
 
   # 🖊️ EDIT to specify custom tags for the container image, or default tags will be generated below.
   IMAGE_TAGS: ""
@@ -188,7 +190,7 @@ jobs:
         image: ${{ steps.push-image.outputs.registry-path }}
         namespace: ${{ env.OPENSHIFT_NAMESPACE }}
         port: ${{ env.APP_PORT }}
-        build_env: ${{ secrets.ENVIRON }}
+        build_env: ${{ env.ENV_VARS }}
 
     - name: Print application URL
       env:
