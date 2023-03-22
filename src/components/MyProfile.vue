@@ -22,7 +22,7 @@
           v-if="!removed.includes(element.symbol)"
           :data-element-group="getGroup(element)" :data-group='element.group'
           class='element' :class="'pos' + getPosition(element)"
-          :style="{ opacity: filteredElements.includes(element.atomicNumber) ? 1 : 0.25 }">
+          :style="{ opacity: filteredElementsContainElementsOfGroup(element.group) ? 1 : 0.25 }">
           <router-link :to="'/element/'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
             <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
           </router-link>
