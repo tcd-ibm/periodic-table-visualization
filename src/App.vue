@@ -12,10 +12,10 @@ export default {
     ...mapActions(['sendChangePasswordEmail'])
   },
   created () {
-    window.addEventListener('beforeunload', (event) => {
+    window.addEventListener('unload', (event) => {
       event.preventDefault()
-      const email = 'nzhang@tcd.ie'
-      this.sendChangePasswordEmail({email})
+      // const email = 'nzhang@tcd.ie'
+      // this.sendChangePasswordEmail({email})
     })
   }
 }
