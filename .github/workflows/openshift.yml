@@ -192,7 +192,7 @@ jobs:
         port: ${{ env.APP_PORT }}
         build_env: ${{ env.ENV_VARS }}
 
-    - name: Print application URL
+    - name: Print application URL 
       env:
         ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
         SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
