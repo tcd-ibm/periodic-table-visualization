@@ -17,6 +17,7 @@ import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import VerificationPage from '@/components/VerificationPage'
 import ResetPassword from '@/components/ResetPassword'
+import UserElementDescription from '@/components/UserElementDescription'
 Vue.use(Router)
 
 export default new Router({
@@ -77,6 +78,13 @@ export default new Router({
           name: 'updateElement',
           components: {
             default: UpdateElement
+          }
+        },
+        {
+          path: 'userElementDescription',
+          name: 'userElementDescription',
+          components: {
+            default: UserElementDescription
           }
         },
         {
