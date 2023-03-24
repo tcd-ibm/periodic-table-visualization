@@ -13,6 +13,8 @@ import UpdateElement from '@/components/UpdateElement'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
+import NotFoundPage from '@/compnents/NotFoundPage'
+import Confirmation from '@/compnents/Confirmation'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import VerificationPage from '@/components/VerificationPage'
@@ -120,6 +122,14 @@ export default new Router({
           name: 'VerificationPage',
           components: {
             default: VerificationPage
+          }
+        },
+        {
+          path: 'Confirmation',
+          name: 'Confirmation',
+          component:
+          {
+            default: Confirmation
           }
         }
       ]
