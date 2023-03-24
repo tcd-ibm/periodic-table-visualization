@@ -24,6 +24,28 @@ const getElements = asyncHandler(async (req, res) => {
     element.description;} })
   res.status(200).json(elements)
 })
+
+const tryGetElements = asyncHandler(async (req, res) => {
+  console.log('data in controller: '+ JSON.stringify(req.body))
+  const id = "64007ac5ddcff99fb3e12359";
+  console.log("tryGetElements id: " + id)
+
+    const elements = await Element.find({ user: id });
+    elements.map((element) => {
+      {
+        element._id,
+          element.name,
+          element.user,
+          element.atomic_mass,
+          element.atomic_number,
+          element.symbol,
+          element.description;
+      }
+    });
+    res.status(200).json(elements);
+
+})
+
 /**
  * @description Create element
  * @author Nuoxi Zhang
@@ -129,5 +151,6 @@ module.exports = {
   getElements,
   createElements,
   deleteElements,
-  updateElement
+  updateElement,
+  tryGetElements,
 }

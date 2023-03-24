@@ -15,11 +15,11 @@ import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
 import NotFoundPage from '@/compnents/NotFoundPage'
 import Confirmation from '@/compnents/Confirmation'
-// import LoginRoute from '@/components/Sidebar/LoginRoute'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import VerificationPage from '@/components/VerificationPage'
-import TestGetElements from '@/components/TestGetElement'
+import ResetPassword from '@/components/ResetPassword'
+import UserElementDescription from '@/components/UserElementDescription'
 Vue.use(Router)
 
 export default new Router({
@@ -83,46 +83,47 @@ export default new Router({
           }
         },
         {
+          path: 'userElementDescription',
+          name: 'userElementDescription',
+          components: {
+            default: UserElementDescription
+          }
+        },
+        {
           path: 'Login',
           name: 'Login',
-          components:
-          {
+          components: {
             default: Login
           }
         },
         {
-          path: 'Reset',
+          path: 'ResetPassword/:userID',
+          name: 'ResetPassword',
+          components: {
+            default: ResetPassword
+          }
+        },
+        {
+          path: 'reset',
           name: 'Reset',
-          components:
-          {
+          components: {
             default: Reset
           }
         },
         {
           path: 'Signup',
           name: 'Signup',
-          components:
-          {
+          components: {
             default: Signup
           }
         },
         {
           path: 'verify/:confirmationCode',
           name: 'VerificationPage',
-          components:
-          {
+          components: {
             default: VerificationPage
           }
         },
-        {
-          path: 'getElements',
-          name: 'TestGetElementsPage',
-          component:
-          {
-            default: TestGetElements
-          }
-        },
-
         {
           path: 'Confirmation',
           name: 'Confirmation',
@@ -130,11 +131,6 @@ export default new Router({
           {
             default: Confirmation
           }
-        },
-
-        {
-          path: '*',
-          component: NotFoundPage
         }
       ]
     },

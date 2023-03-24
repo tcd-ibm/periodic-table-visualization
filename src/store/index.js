@@ -10,7 +10,6 @@ import game from './modules/game'
 import configuration from './modules/configuration'
 import createPersistedState from 'vuex-persistedstate'
 import auth from './modules/auth'
-
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'

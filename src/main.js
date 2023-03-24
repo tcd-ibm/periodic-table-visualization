@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 import i18n from './i18n'
 import axios from 'axios'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
+import { mapActions } from 'vuex'
 window.$ = window.jQuery = require('jquery')
 window.tether = window.Tether = require('tether')
 require('bootstrap')
@@ -25,5 +28,20 @@ new Vue({
   store,
   i18n,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  methods: {
+    ...mapActions(['sendChangePasswordEmail']),
+    created () {
+      window.addEventListener('beforeunload', () => {
+        const email = 'nzhang@tcd.ie'
+        this.sendChangePasswordEmail({email})
+      })
+    }
+  }
+})
+
+Vue.use(Toast, {
+  transition: 'Vue-Toastification__bounce',
+  maxToasts: 20,
+  newestOnTop: true
 })

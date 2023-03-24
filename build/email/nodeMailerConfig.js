@@ -24,7 +24,7 @@ const sendConfirmationEmail = (name, email, confirmationCode) => {
     <h1>Email Confirmation</h1>
     <h2> Hello ${name} </h2>
     <p>Thank you for registering. Please confirm your email by clicking on the following link:</p>
-    <a href=http://localhost:8080//?#/verify/${confirmationCode}>Click here</a>
+    <a href=https://periodic-table-visualization-deployment-oyeyemit-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/#/verify/${confirmationCode}>Click here</a>
     <p>This link will be active for <b>7 days</b>. You will need to register again if you have not verified your email by that time</p>
     </div>`,
     },

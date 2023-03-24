@@ -16,13 +16,13 @@
       <block10 :class="'block10'"></block10>
       
       <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true" ></myProfile-general-properties>
-      <myProfile-general-properties v-else class="c-information" :element="'sample'" :removed="removed" :preview="true"></myProfile-general-properties>
+      <div class="c-information"></div>
       <div class="element" :data-element-group="non-metal" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
       <div :key="element.id" v-else v-for="element in userElements"
           v-if="!removed.includes(element.symbol)"
           :data-element-group="getGroup(element)" :data-group='element.group'
           class='element' :class="'pos' + getPosition(element)"
-          :style="{ opacity: filteredElements.includes(element.atomicNumber) ? 1 : 0.25 }">
+          :style="{ opacity: filteredElementsContainElementsOfGroup(element.group) ? 1 : 0.25 }">
           <router-link :to="'/element/'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
             <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
           </router-link>
@@ -102,27 +102,11 @@
         const token = this.$store.getters.getAuthToken
         const res = await this.getElements(token)
         this.userElements = res
-        // this.userElements is an array
-        // console.log('userElement in myProfile.vue: ', this.userElements)
-        // console.log('res in myprofile: ', res)
-      },
-      async deleteElemetLocal () {
-        const token = this.$store.getters.getAuthToken
-        const objectId = '6404c7223de32f15948ead1c'
-        // Daniel you have to get the objectId which is
-        // the_id field if you inspect an element returned
-        // by the this.getElements()
-        // console.log('userElements before delete: ', this.userElements)
-        await this.deleteElement({token, objectId})
-        await this.getElementsLocal()
-        // console.log('userElements after delete: ', this.userElements)
       }
     },
     created () {
       this.syncUserName()
       this.getElementsLocal()
-      // this.deleteElemetLocal()
-      // console.log('userElements in myProfile: ', this.userElements)
     }
   }
 </script>
