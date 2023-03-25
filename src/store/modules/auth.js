@@ -60,38 +60,14 @@ const actions = {
   },
   async logoutUser ({ commit }) {
     try {
-      // do not need to take in data, so logoutUser() should only take {commit}
-      // all you need is to clear username and token by setting it to null.
-      // must have await before commit()
-      console.log('inside logout in auth.js')
       await commit('setUserName', null)
       await commit('setToken', null)
-      console.log('userName after logout ' + state.userName)
-      console.log('token after logout ' + state.token)
-      //       console.log('in auth.js')
-      //       const username = data.username
-      //       const password = data.password
-      //       const token = data.token
-      //       console.log(username)
-      //       console.log(password)
-      //       console.log(token)
+      localStorage.removeItem('userName')
+      localStorage.removeItem('userToken')
     } catch (error) {
       console.log('Error message from auth.js/logoutUser: ', error.message)
     }
   },
-  // async sendChangePasswordEmail ({commit}, details) {
-  //   try {
-  //     console.log('inside sendChangePasswordEmail in auth.js')
-  //   } catch (error) {
-  //     console.log('Error message from auth.js/sendChangePasswordEmail: ', error.message)
-  //   }
-  //   console.log('confirmationCode: ', confirmationCode)
-  //   console.log('type of confirmationCode: ', typeof confirmationCode)
-  //   const response = await axios.get(
-  //     USER_URI + '/verify/' + JSON.stringify(confirmationCode)
-  //   )
-  //   return response
-  // },
   async sendChangePasswordEmail ({ commit }, data) {
     console.log('sendChangePasswordEmail in auth.js called')
     console.log('data: ' + JSON.stringify(data))

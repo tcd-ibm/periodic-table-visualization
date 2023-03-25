@@ -28,7 +28,7 @@
             </li>
             <!-- Daniel Padmore-->
             <!-- MyProfile-->
-            <li class="nav-item mt-5" v-if="this.$store.getters.getAuthToken"> <!-- checks if theres a token -->
+            <li class="nav-item mt-5" v-if="this.userName"> <!-- checks if theres a token -->
               <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')">
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
@@ -105,7 +105,8 @@
         msg: 'Mendelable',
         isMenuOpened: false,
         username: this.$store.getters.getUserName, // if username is not null user must be signed in
-        githubLink: 'https://github.com/pulsardev/mendelable'
+        githubLink: 'https://github.com/pulsardev/mendelable',
+        userName: ''
       }
     },
     methods: {
@@ -119,6 +120,9 @@
       //   const username = this.$store.getters.getUserName
       //   console.log(username)
       // }
+    },
+    created () {
+      this.userName = localStorage.getItem('userName')
     }
   }
 </script>
