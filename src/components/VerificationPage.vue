@@ -1,7 +1,6 @@
 <template>
   <div><h3>Your email is verified! Please procced to login</h3>
-    <router-link :to="{ path: './login' }"><button type="login" class="btn btn-primary">Login</button></router-link></div>
-    
+    <router-link :to="{ path: '/login' }"><button type="login" class="btn btn-primary" >Login</button></router-link></div>
 </template>
 
 <script>

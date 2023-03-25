@@ -13,13 +13,13 @@ import UpdateElement from '@/components/UpdateElement'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
-import NotFoundPage from '@/compnents/NotFoundPage'
-import Confirmation from '@/compnents/Confirmation'
+import VerificationPage from '@/components/VerificationPage'
+// import Confirmation from '@/components/Confirmation'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
-import VerificationPage from '@/components/VerificationPage'
 import ResetPassword from '@/components/ResetPassword'
 import UserElementDescription from '@/components/UserElementDescription'
+import ErrorPage from '@/components/ErrorPage'
 Vue.use(Router)
 
 export default new Router({
@@ -90,6 +90,13 @@ export default new Router({
           }
         },
         {
+          path: 'error',
+          name: 'ErrorPage',
+          components: {
+            default: ErrorPage
+          }
+        },
+        {
           path: 'Login',
           name: 'Login',
           components: {
@@ -123,21 +130,13 @@ export default new Router({
           components: {
             default: VerificationPage
           }
-        },
-        {
-          path: 'Confirmation',
-          name: 'Confirmation',
-          component:
-          {
-            default: Confirmation
-          }
         }
       ]
     },
     {
       path: '*',
       redirect: {
-        name: 'MyProfile'
+        name: 'ErrorPage'
       }
     }
   ]
