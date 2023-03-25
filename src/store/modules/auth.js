@@ -46,6 +46,41 @@ const actions = {
     return response
   },
   async verifyUser ({ commit }, confirmationCode) {
+    try {
+      console.log('confirmationCode: ', confirmationCode)
+      console.log('type of confirmationCode: ', typeof (confirmationCode))
+      const response = await axios.get(USER_URI + '/verify/' + JSON.stringify(confirmationCode))
+      // console.log('verifyUser in auth.js is called')
+      return response
+    } catch (error) {
+      console.log('Error message from auth.js/verifyUser: ', error.message)
+    }
+  },
+  async logoutUser ({ commit }) {
+    try {
+      // do not need to take in data, so logoutUser() should only take {commit}
+      // all you need is to clear username and token by setting it to null.
+      // must have await before commit()
+      console.log('inside logout in auth.js')
+      await commit('setUserName', null)
+      await commit('setToken', null)
+      //       console.log('in auth.js')
+      //       const username = data.username
+      //       const password = data.password
+      //       const token = data.token
+      //       console.log(username)
+      //       console.log(password)
+      //       console.log(token)
+    } catch (error) {
+      console.log('Error message from auth.js/logoutUser: ', error.message)
+    }
+  },
+  async sendChangePasswordEmail ({commit}, details) {
+    try {
+      console.log('inside sendChangePasswordEmail in auth.js')
+    } catch (error) {
+      console.log('Error message from auth.js/sendChangePasswordEmail: ', error.message)
+    }
     console.log('confirmationCode: ', confirmationCode)
     console.log('type of confirmationCode: ', typeof confirmationCode)
     const response = await axios.get(
@@ -64,6 +99,7 @@ const actions = {
     console.log('changePassword in auth.js: ', JSON.stringify(data))
     await axios.put(USER_URI + '/ChangePassword/' + data._id, data)
   }
+
 }
 const mutations = {
   setUserName (state, username) {

@@ -13,8 +13,8 @@ import UpdateElement from '@/components/UpdateElement'
 import MyProfile from '@/components/MyProfile'
 import MyProfileOptions from '@/components/Sidebar/MyProfileOptions'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 import VerificationPage from '@/components/VerificationPage'
-// import Confirmation from '@/components/Confirmation'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
 import ResetPassword from '@/components/ResetPassword'
@@ -104,6 +104,15 @@ export default new Router({
           }
         },
         {
+          path: 'Logout',
+          name: 'Logout',
+          components:
+          {
+            default: Logout
+          }
+        },
+        {
+          path: 'Reset',
           path: 'ResetPassword/:userID',
           name: 'ResetPassword',
           components: {

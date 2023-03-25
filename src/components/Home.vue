@@ -28,18 +28,22 @@
             </li>
             <!-- Daniel Padmore-->
             <!-- MyProfile-->
-            <li class="nav-item mt-5">
-              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')" v-if="username">
+            <li class="nav-item mt-5" v-if="this.$store.getters.getAuthToken"> <!-- checks if theres a token -->
+              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')">
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
             </li>
             <!-- Andrew Syomushkin-->
             <!-- Sign in-->
-            <li class="nav-item mt-5">
+            <li class="nav-item mt-5" v-else>
                 <router-link to="/Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
+
                   <i @click="trackClick('Login', 'inbound')" class="material-icons">login</i>
                 </router-link>
-              </li>
+            </li>
+            <!-- <li>
+              <i @click="fun" >tick</i>
+            </li> -->
           </div>
         </ul>
       </div>
@@ -111,6 +115,10 @@
       trackClick (destination, eventCategory) {
         window.ga('send', 'event', eventCategory, 'click', destination)
       }
+      // fun () {
+      //   const username = this.$store.getters.getUserName
+      //   console.log(username)
+      // }
     }
   }
 </script>
