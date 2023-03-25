@@ -39,6 +39,8 @@ new Vue({
       })
     }
   }
+}
+)
 Vue.use(Toast, {
   transition: 'Vue-Toastification__bounce',
   maxToasts: 20,

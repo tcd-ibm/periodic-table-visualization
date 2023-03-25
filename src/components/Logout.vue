@@ -24,6 +24,7 @@ export default {
       console.log(username)
       await this.logoutUser()
       this.$router.push('Login')
+      location.reload()
     }
   }
 }
