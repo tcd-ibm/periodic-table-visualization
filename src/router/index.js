@@ -17,7 +17,6 @@ import Logout from '@/components/Logout'
 import VerificationPage from '@/components/VerificationPage'
 import Signup from '@/components/Signup'
 import Reset from '@/components/Reset'
-import ResetPassword from '@/components/ResetPassword'
 import UserElementDescription from '@/components/UserElementDescription'
 import ErrorPage from '@/components/ErrorPage'
 Vue.use(Router)
@@ -109,14 +108,6 @@ export default new Router({
           components:
           {
             default: Logout
-          }
-        },
-        {
-          path: 'Reset',
-          path: 'ResetPassword/:userID',
-          name: 'ResetPassword',
-          components: {
-            default: ResetPassword
           }
         },
         {

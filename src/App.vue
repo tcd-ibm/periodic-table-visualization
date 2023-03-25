@@ -6,54 +6,82 @@
 
 <script>
 import { mapActions } from 'vuex'
-import axios from 'axios'
+// import axios from 'axios'
+
 export default {
   name: 'app',
   methods: {
-    ...mapActions(['sendChangePasswordEmail', 'logoutUser']),
-    myUnload (event) {
-      if (window.SessionStorage) {
-      // flag the page as being unloading
-        window.SessionStorage['myUnloadEventFlag'] = new Date().getTime()
-      }
-      // notify the server that we want to disconnect the user in a few seconds (I used 5 seconds)
-      // synchronous AJAX call
-      axios.post('/api/logoutUser', { timeout: 5000 })
-        .then(response => {
-          // handle success response
-          this.logoutUser()
-        })
-        .catch(error => {
-          // handle error response
-          console.log(error)
-        })
-    },
-    myLoad (event) {
-      if (window.SessionStorage) {
-        var t0 = Number(window.SessionStorage['myUnloadEventFlag'])
-        if (isNaN(t0)) {
-          t0 = 0
-        }
-        var t1 = new Date().getTime()
-        var duration = t1 - t0
-        if (duration < 10 * 1000) {
-          // less than 10 seconds since the previous Unload event => it's a browser reload (so cancel the disconnection request)
-          // asynchronous AJAX call
-          axios.post('/api/cancelDisconnectionRequest')
-            .then(response => {
-            // handle success response
-            })
-            .catch(error => {
-            // handle error response
-              console.log(error)
-            })
-        } else {
-          this.logoutUser() // last unload event was for a tab/window close => do whatever you want (I do nothing here)
-        }
-      }
+    ...mapActions(['logoutUser']),
+    async logoutUserLocal () {
+      await this.logoutUser()
     }
+  },
+  created () {
+    // localStorage.setItem('user', 'nuoxi')
+    // const user = localStorage.getItem('user')
+    // console.log('localStorage content: ' + user)
+    const userName = localStorage.getItem('userName')
+    const token = localStorage.getItem('userToken')
+    console.log('on created() userName ' + userName + ' , token: ' + token)
+    window.addEventListener('beforeunload', (e) => {
+      e.preventDefault()
+      if (sessionStorage.getItem('reloaded') != null) {
+        this.logoutUserLocal()
+        console.log('page was reloaded')
+      } else {
+        console.log('page was not reloaded')
+      }
+    })
   }
 }
+
+// export default {
+//   name: 'app',
+//   methods: {
+//     ...mapActions(['logoutUser']),
+//     myUnload (event) {
+//       if (window.SessionStorage) {
+//       // flag the page as being unloading
+//         window.SessionStorage['myUnloadEventFlag'] = new Date().getTime()
+//       }
+//       // notify the server that we want to disconnect the user in a few seconds (I used 5 seconds)
+//       // synchronous AJAX call
+//       axios.post('/api/users/logout', { timeout: 5000 })
+//         .then(response => {
+//           // handle success response
+//           this.logoutUser()
+//         })
+//         .catch(error => {
+//           // handle error response
+//           console.log(error)
+//         })
+//     },
+//     myLoad (event) {
+//       if (window.SessionStorage) {
+//         var t0 = Number(window.SessionStorage['myUnloadEventFlag'])
+//         if (isNaN(t0)) {
+//           t0 = 0
+//         }
+//         var t1 = new Date().getTime()
+//         var duration = t1 - t0
+//         if (duration < 10 * 1000) {
+//           // less than 10 seconds since the previous Unload event => it's a browser reload (so cancel the disconnection request)
+//           // asynchronous AJAX call
+//           axios.post('/api/cancelDisconnectionRequest')
+//             .then(response => {
+//             // handle success response
+//             })
+//             .catch(error => {
+//             // handle error response
+//               console.log(error)
+//             })
+//         } else {
+//           this.logoutUser() // last unload event was for a tab/window close => do whatever you want (I do nothing here)
+//         }
+//       }
+//     }
+//   }
+// }
 </script>
 
 <style lang="scss">
