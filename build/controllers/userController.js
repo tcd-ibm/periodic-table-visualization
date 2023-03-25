@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler') // handle exceptions
 const User = require('../databaseModels/userModel')
 const { sendConfirmationEmail } = require('../email/nodeMailerConfig')
+const { sendChangePasswordEmail } = require("../email/changePasswordEmail");
 /**
  * @description Regsiter a new user
  * @route  POST /api/users/register
@@ -18,11 +19,20 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Please have all the fields filled in')
   }
+
   // check if user already exist
-  const userExist = await User.findOne({ email })
+  //const userExist = await User.findOne({ email })
+ // if (userExist) {
+   // res.status(400)
+    //throw new Error('User already exists')
+
+  console.log('registerUser email: ', email)
+  //check if user already exist
+  const userExist = await User.findOne({ email: email });
   if (userExist) {
-    res.status(400)
-    throw new Error('User already exists')
+    res.status(400);
+    throw new Error("User already exists. Please use another email!");
+
   }
 
   // hash password
@@ -73,25 +83,38 @@ const registerUser = asyncHandler(async (req, res) => {
  */
 const loginUser = asyncHandler(async (req, res) => {
   // get the email and password from the request body
-  const { email, password } = req.body
+
+  //const { email, password } = req.body
   // fetch the user from the database by the email (if the user exists)
-  const user = await User.findOne({ email })
-  if (!user) {
-    console.log('User does not exist. Please register')
+  //const user = await User.findOne({ email })
+  //if (!user) {
+//console.log('User does not exist. Please register')
+
+  const { email, password } = req.body;
+  //fetch the user from the database by the email (if the user exists)
+  const user = await User.findOne({ email });
+  if(!user){
+    res.status(400);
+    throw new Error("User does not exist. Please register");
+
   }
   if (user) {
     if (user.status === 'Pending') {
       res.status(401)
-      console.log('Pending account: check your mail box and verify your email!')
       throw new Error('Pending Account. Please Verify your email')
     }
     if (user && (await bcrypt.compare(password, user.password))) {
+      const newToken = generateToken(user._id)
       res.json({
         _id: user.id,
         userName: user.userName,
         email: user.email,
-        token: generateToken(user._id)
+        token: newToken
       })
+    }
+    else{
+       res.status(400);
+       throw new Error("Incorrect password. Please try again!");
     }
   } else {
     res.status(400)
@@ -143,8 +166,7 @@ const verifyUser = asyncHandler(async (req, res) => {
   const user = await User.findById(parseJwt(code).id)
   if (!user) {
     res.status(400)
-    // console.log('user not found')
-    throw new Error('User Not Found')
+    throw new Error("User Not Found");
   } else {
     await User.findOneAndUpdate(
       { _id: parseJwt(code).id },
@@ -195,10 +217,66 @@ function parseJwt (token) {
   return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
 }
 
+
+/**
+ * @desc change user password
+ * @author Nuoxi Zhang
+ * @nuoxiz
+ * @route PUT /api/users/changePassword/:userId
+ * @access private
+ */
+const changePassword = asyncHandler(async (req, res) => {
+  const { _id, newPassword } = req.body;
+  const user = await User.findById(_id);
+  if (!user) {
+    res.status(400).json({ message: "User not found" });
+    throw new Error("User not found");
+  } else {
+    const salt = await bcrypt.genSalt(11);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const userWithNewPassword = await User.findByIdAndUpdate(
+      _id,
+      { password: hashedPassword },
+      { new: true }
+    );
+    if (userWithNewPassword) {
+      res.status(201).json(userWithNewPassword);
+    } else {
+      res
+        .status(400)
+        .json({ message: "Failed to Change Password. Please try again" });
+      throw new Error("Failed to Change Password. Please try again");
+    }
+  }
+});
+
+/**
+ * @desc send change password email
+ * @route GET /api/users/changePassword/:userId
+ */
+const sendChangePassword = asyncHandler(async (req, res) => {
+  const {email} = req.body
+  console.log('req.body in userCOntroller: ', JSON.stringify(req.body))
+  console.log('email in userController: ', email)
+  const user = await User.findOne({email: email})
+  console.log('user: ' + user)
+  if (!user) {
+    res.status(404)
+    throw new Error('Email does not exists in database.')
+  }
+  sendChangePasswordEmail(user.firstname, user.email, user._id);
+});
+
+
+
+
 module.exports = {
   registerUser,
   loginUser,
   getUser,
   verifyUser,
-  logoutUser
-}
+  logoutUser,
+  sendChangePassword,
+  changePassword
+};
+

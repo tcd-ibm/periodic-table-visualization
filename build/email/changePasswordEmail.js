@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 
 const userEmail = process.env.EMAIL;
 const password = process.env.PASSWORD;
-
+{/* <a href=http://localhost:8080//?#/ResetPassword/${userId}>Click here</a> */}
 //transport has the sender information for authentication
 const transport = nodemailer.createTransport({
   host: "smtp.office365.com",
@@ -25,7 +25,7 @@ const sendChangePasswordEmail = (name, email, userId) => {
     <h1>Change Your Password</h1>
     <h2> Hello ${name} </h2>
     <p>Please change your password by clicking on the following link:</p>
-    <a href=https://expresstaskmanager.herokuapp.com/changePassword/${userId}>Click here</a>
+    <a href=https://periodic-table-visualization-nuoxizhang-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/#/ResetPassword/${userId}>Click here</a>
     </div>`,
     },
     (err, info) => {

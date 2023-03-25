@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY: quay.io
+  REGISTRY: quay.io 
   IMAGE_NAME: periodic-table-visualization
 
 jobs: 

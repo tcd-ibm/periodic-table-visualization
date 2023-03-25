@@ -27,6 +27,7 @@
   <div>
     <div>
       <input v-model="element.group" type="radio" id="group1" name="group" value="non-metal" checked/>
+
       <label for="group1" ><FONT COLOR="#03a9f4">Nonmetals&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT></label>
       <input v-model="element.group" type="radio" id="group2" name="group" value="halogen" />
       <label for="group2"><FONT COLOR="#f06292">Halogens&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</FONT></label>
@@ -104,6 +105,24 @@ export default {
       }
       const token = this.$store.getters.getAuthToken
       await this.createElements({element, token})
+      this.showSuccessMessage('Element created at position: ' + element.position)
+      this.$router.push('myProfile')
+    },
+    showSuccessMessage (message) {
+      this.$toast.success(message, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
       this.$router.push('myProfile')
     }
   }

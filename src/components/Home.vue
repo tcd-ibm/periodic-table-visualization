@@ -17,7 +17,7 @@
               </router-link>
             </li>
             <li class="nav-item mt-5">
-              <router-link to="/game" exact class="nav-link d-flex justify-content-center" :title="$t('home.gameMode')">
+              <router-link to="./game" exact class="nav-link d-flex justify-content-center" :title="$t('home.gameMode')">
                 <i @click="trackClick('game', 'inbound')" class="material-icons md-36">games</i>
               </router-link>
             </li>
@@ -36,7 +36,8 @@
             <!-- Andrew Syomushkin-->
             <!-- Sign in-->
             <li class="nav-item mt-5" v-else>
-                <router-link to="./Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
+                <router-link to="/Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
+
                   <i @click="trackClick('Login', 'inbound')" class="material-icons">login</i>
                 </router-link>
             </li>

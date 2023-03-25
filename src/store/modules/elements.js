@@ -21,6 +21,17 @@ const actions = {
     console.log('response in element.js: ', response.data)
     return response.data
   },
+  async tryGetElements ({ commit }, data) {
+    // const config = {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`
+    //   }
+    // }
+    console.log('userId in element.js => ' + JSON.stringify(data))
+    const res = await axios.get(ELEMENT_URI + '/tryGetElements')
+    console.log('tryGetElements in element.js is called')
+    return res
+  },
   async createElements ({ commit }, data) {
     console.log('createElements in element.js is called')
     const token = data.token
