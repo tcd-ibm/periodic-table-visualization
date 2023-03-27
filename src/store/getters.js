@@ -6,6 +6,7 @@ export const mainCounter = state => state.counters.main
 export const localizedElements = state => {
   // let locale = state.language.locale === 'en_US' ? 'default' : state.language.locale
   let defaultElements = state.elements.default
+  // console.log('state.elements.default: ' + JSON.stringify(state.elements.default))
   return defaultElements
   // let localizedData = state.elements[locale]
   // return fromJS(defaultElements).mergeDeep(localizedData).toJS()
@@ -33,7 +34,6 @@ export const filteredElements = state => {
         idsFilteredByGroups.push(+id)
       }
     }
-
     filteredDataIds = idsFilteredByGroups
   }
 

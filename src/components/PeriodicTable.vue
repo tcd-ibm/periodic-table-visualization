@@ -32,12 +32,14 @@
         filteredElements: 'filteredElements'
       }),
       selectedElement () {
+        // console.log('type of this.selectId: ' + typeof (this.selectedElementId))
+        // console.log('PeriodicTbale.vue: elements: ' + JSON.stringify(this.elements))
         return this.elements[this.selectedElementId] || {}
       }
     },
     data () {
       return {
-        selectedElementId: 0,
+        selectedElementId: 1,
         showInfo: false
       }
     },
