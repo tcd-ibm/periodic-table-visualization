@@ -24,7 +24,7 @@
           
 =======
       <div class="element" :data-element-group="groups[10]" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
-      <div :key="element.id" v-else v-for="element in userElements"
+      <div :key="element.id" v-for="element in userElements"
           v-if="!removed.includes(element.symbol)"
 >>>>>>> 818128c1e81cf83afd34995ac9837e5a5dc84b27
           :data-element-group="getGroup(element)" :data-group='element.group'
