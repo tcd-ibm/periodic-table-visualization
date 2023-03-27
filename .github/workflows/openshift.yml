@@ -198,7 +198,7 @@ jobs:
 #         build_env: ${{ env.ENV_VARS }}
   
     - name: add env variables 
-      run: oc set env dc/periodic-table-visualization MONGO_URI=${{ env.MONGO_URI }}
+      run: oc set env pod/periodic-table-visualization MONGO_URI=${{ env.MONGO_URI }}  JWT_SECRET=${{ env.JWT_SECRET }} EMAIL=${{ env.EMAIL }} PASSWORD=${{ env.PASSWORD }} 
       
     - name: Print application URL 
       env:
