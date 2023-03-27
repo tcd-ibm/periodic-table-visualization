@@ -1,7 +1,6 @@
 <template>
     <div>
-      <h3 v-if="username">{{username}}'s profile
-      <router-link :to="{ path: './logout' }"><button type="submit" class="btn btn-primary">Logout?</button></router-link></h3>
+      <h3 v-if="username">{{username}}'s profile<br></h3>
     <div class="c-periodic-table">
       <div :class="'block1'"></div>
       <div :class="'block2'"></div>
@@ -18,15 +17,9 @@
       
       <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true" ></myProfile-general-properties>
       <div class="c-information"></div>
-<<<<<<< HEAD
-      <div class="element" :data-element-group="non-metal" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
-      <div :key="element.id" v-else-if="!empty(userElements, i - 1)" v-for="element in userElements"
-          
-=======
       <div class="element" :data-element-group="groups[10]" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
       <div :key="element.id" v-for="element in userElements"
           v-if="!removed.includes(element.symbol)"
->>>>>>> 818128c1e81cf83afd34995ac9837e5a5dc84b27
           :data-element-group="getGroup(element)" :data-group='element.group'
           class='element' :class="'pos' + getPosition(element)"
           :style="{ opacity: filteredElementsContainElementsOfGroup(element.group) ? 1 : 0.25 }">
@@ -122,31 +115,11 @@
         const token = this.$store.getters.getAuthToken
         const res = await this.getElements(token)
         this.userElements = res
-      },
-      showSuccessMessage (message) {
-        this.$toast.success(message, {
-          position: 'top-right',
-          timeout: 5000,
-          closeOnClick: true,
-          pauseOnFocusLoss: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 0.6,
-          showCloseButtonOnHover: false,
-          hideProgressBar: false,
-          closeButton: 'button',
-          icon: true,
-          rtl: false
-        })
       }
     },
     created () {
       this.syncUserName()
       this.getElementsLocal()
-      if (localStorage.getItem('firstTimeLogIn') === 1) {
-        localStorage.setItem('firstTimeLogIn', 2)
-        this.showSuccessMessage('Welcome ' + localStorage.getItem('userName'))
-      }
     }
   }
 </script>

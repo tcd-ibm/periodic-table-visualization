@@ -37,7 +37,7 @@
     },
     data () {
       return {
-        selectedElementId: '',
+        selectedElementId: 0,
         showInfo: false
       }
     },
