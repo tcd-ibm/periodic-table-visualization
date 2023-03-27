@@ -19,7 +19,7 @@
       <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true" ></myProfile-general-properties>
       <div class="c-information"></div>
       <div class="element" :data-element-group="groups[10]" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
-      <div :key="element.id" v-else v-for="element in userElements"
+      <div :key="element.id" v-for="element in userElements"
           v-if="!removed.includes(element.symbol)"
           :data-element-group="getGroup(element)" :data-group='element.group'
           class='element' :class="'pos' + getPosition(element)"
