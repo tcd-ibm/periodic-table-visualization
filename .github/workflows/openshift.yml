@@ -196,9 +196,12 @@ jobs:
         namespace: ${{ env.OPENSHIFT_NAMESPACE }}
         port: ${{ env.APP_PORT }}
 #         build_env: ${{ env.ENV_VARS }}
+
+    - name: get pod name
+      run: echo "POD_NAME=$(oc get pods -o custom-columns=POD:.metadata.name --no-headers)" >> $GITHUB_ENV
   
     - name: add env variables 
-      run: oc set env pod/periodic-table-visualization-7b7559c74b-gcqbr MONGO_URI=${{ env.MONGO_URI }}  JWT_SECRET=${{ env.JWT_SECRET }} EMAIL=${{ env.EMAIL }} PASSWORD=${{ env.PASSWORD }} 
+      run: oc set env pod/$POD_NAME MONGO_URI=${{ env.MONGO_URI }}  JWT_SECRET=${{ env.JWT_SECRET }} EMAIL=${{ env.EMAIL }} PASSWORD=${{ env.PASSWORD }} 
       
     - name: Print application URL 
       env:
