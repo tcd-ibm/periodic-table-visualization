@@ -3,22 +3,22 @@
       <h3 v-if="username">{{username}}'s profile
       <router-link :to="{ path: './logout' }"><button type="submit" class="btn btn-primary">Logout?</button></router-link></h3>
     <div class="c-periodic-table">
-      <block1 :class="'block1'"></block1>
-      <block2 :class="'block2'"></block2>
-      <block3 :class="'block3'"></block3>
-      <block4 :class="'block4'"></block4>
-      <block5 :class="'block5'"></block5>
-      <block6 :class="'block6'"></block6>
+      <div :class="'block1'"></div>
+      <div :class="'block2'"></div>
+      <div :class="'block3'"></div>
+      <div :class="'block4'"></div>
+      <div :class="'block5'"></div>
+      <div :class="'block6'"></div>
 
-      <block7 :class="'block7'"></block7>
-      <block8 :class="'block8'"></block8>
+      <div :class="'block7'"></div>
+      <div :class="'block8'"></div>
 
-      <block9 :class="'block9'"></block9>
-      <block10 :class="'block10'"></block10>
+      <div :class="'block9'"></div>
+      <div :class="'block10'"></div>
       
       <myProfile-general-properties v-if="Object.keys(selectedElement).length > 0" class="c-information" :element="selectedElement" :removed="removed" :preview="true" ></myProfile-general-properties>
       <div class="c-information"></div>
-      <div class="element" :data-element-group="non-metal" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
+      <div class="element" :data-element-group="groups[10]" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
       <div :key="element.id" v-else v-for="element in userElements"
           v-if="!removed.includes(element.symbol)"
           :data-element-group="getGroup(element)" :data-group='element.group'
@@ -60,7 +60,20 @@
         showInfo: false,
         removed: [],
         username: this.$store.getters.getUserName,
-        userElements: []
+        userElements: [],
+        groups: [
+          'non-metal',
+          'halogen',
+          'metalloid',
+          'metal',
+          'alkali-metal',
+          'alkaline-earth-metal',
+          'transition-metal',
+          'noble-gas',
+          'lanthanoid',
+          'actinoid',
+          'add'
+        ]
       }
     },
     methods: {
