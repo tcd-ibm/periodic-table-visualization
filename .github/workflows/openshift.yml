@@ -198,10 +198,11 @@ jobs:
 #         build_env: ${{ env.ENV_VARS }}
 
     - name: get pod name
-      run: echo "POD_NAME=$(oc get pods -o custom-columns=POD:.metadata.name --no-headers)" >> $GITHUB_ENV
+      run: echo "POD_NAME=$(echo $(oc get pods -o custom-columns=POD:.metadata.name --no-headers))" >> $GITHUB_ENV
+       
   
     - name: add env variables 
-      run: oc set env pod/$POD_NAME MONGO_URI=${{ env.MONGO_URI }}  JWT_SECRET=${{ env.JWT_SECRET }} EMAIL=${{ env.EMAIL }} PASSWORD=${{ env.PASSWORD }} 
+      run: oc set env pod/${{ env.POD_NAME }} MONGO_URI=${{ env.MONGO_URI }}  JWT_SECRET=${{ env.JWT_SECRET }} EMAIL=${{ env.EMAIL }} PASSWORD=${{ env.PASSWORD }} 
       
     - name: Print application URL 
       env:
