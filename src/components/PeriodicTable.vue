@@ -33,7 +33,7 @@
       }),
       selectedElement () {
         // console.log('type of this.selectId: ' + typeof (this.selectedElementId))
-        // console.log('PeriodicTbale.vue: elements: ' + JSON.stringify(this.elements))
+        console.log('PeriodicTbale.vue: elements: ' + JSON.stringify(this.elements))
         return this.elements[this.selectedElementId] || {}
       }
     },
