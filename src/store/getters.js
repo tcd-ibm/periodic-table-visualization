@@ -19,7 +19,9 @@ export const filteredElements = state => {
   let localizedData = localizedElements(state)
 
   // Filter by text query
-  for (let key of Object.keys(localizedData)) {
+  for (let key = 1; key <= 118; key++) {
+    // console.log('key: ' + key)
+    // console.log('localizedData[key]: ' + localizedData[1])
     if (localizedData[key].name.toLowerCase().includes(search.toLowerCase())) {
       filteredDataIds.push(+key)
     }
