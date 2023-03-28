@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  // import { mapGetters } from 'vuex'
   import ElementBadge from './ElementBadge'
   import ElementDefinition from './ElementDefinition'
   import ElementGeneralProperties from './ElementProfile/ElementGeneralProperties'
@@ -27,10 +27,10 @@
       ElementGeneralProperties, ElementDefinition, ElementBadge
     },
     computed: {
-      ...mapGetters({
-        elements: 'localizedElements',
-        filteredElements: 'filteredElements'
-      }),
+      // ...mapGetters({
+      //   elements: 'localizedElements',
+      //   filteredElements: 'filteredElements'
+      // }),
       selectedElement () {
         // console.log('type of this.selectId: ' + typeof (this.selectedElementId))
         // console.log('PeriodicTbale.vue: elements: ' + JSON.stringify(this.elements))
@@ -40,7 +40,9 @@
     data () {
       return {
         selectedElementId: 1,
-        showInfo: false
+        showInfo: false,
+        elements: '',
+        filteredElements: ''
       }
     },
     methods: {
@@ -60,6 +62,12 @@
         }
         return filteredElementsContainElementsOfGroup
       }
+    },
+    created () {
+      this.elements = this.$store.getters.localizedElements
+      this.filteredElements = this.$store.getters.filteredElements
+      console.log('elements in periodic table: ' + JSON.stringify(this.elements))
+      console.log('filteredElements in periodic table: ' + JSON.stringify(this.filteredElements))
     }
   }
 </script>
