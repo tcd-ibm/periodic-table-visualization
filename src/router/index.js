@@ -136,7 +136,7 @@ export default new Router({
     {
       path: '*',
       redirect: {
-        name: 'ErrorPage'
+        name: 'MyProfile'
       }
     }
   ]
