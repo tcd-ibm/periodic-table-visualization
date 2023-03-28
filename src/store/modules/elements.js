@@ -1,10 +1,9 @@
 import axios from 'axios'
 const ELEMENT_URI = '/api/elements'
-const element = require('../../assets/data/mendelable.json')
 const state = {
-  userElements: null,
-  elements: element
+  userElements: null
 }
+console.log('elements.js: ' + JSON.stringify(state.elements))
 const mutations = {
   setUserElements (state, elements) {
     state.userElements = elements

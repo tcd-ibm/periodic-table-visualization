@@ -1,11 +1,11 @@
 // import { fromJS } from 'immutable'
-
+const element = require('../assets/data/mendelable.json')
 // export const mainCounter = state => state.counters.main
 
 // Elements
-export const localizedElements = state => {
+export const localizedElements = () => {
   // let locale = state.language.locale === 'en_US' ? 'default' : state.language.locale
-  let defaultElements = state.elements.default
+  let defaultElements = element.default
   console.log('Default element: ' + JSON.stringify(defaultElements))
   // console.log('state.elements.default: ' + JSON.stringify(state.elements.default))
   return defaultElements
@@ -22,7 +22,7 @@ export const filteredElements = state => {
   // Filter by text query
   for (let key = 1; key <= 118; key++) {
     // console.log('key: ' + key)
-    // console.log('localizedData[key]: ' + localizedData[1])
+    console.log('localizedData[key]: ' + localizedData[key])
     if (localizedData[key].name.toLowerCase().includes(search.toLowerCase())) {
       filteredDataIds.push(+key)
     }

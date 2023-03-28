@@ -64,6 +64,7 @@
       }
     },
     created () {
+      console.log('Version 1.0')
       // this.elements = this.$store.getters.localizedElements
       // this.filteredElements = this.$store.getters.filteredElements
       // console.log('elements in periodic table: ' + JSON.stringify(this.elements))
