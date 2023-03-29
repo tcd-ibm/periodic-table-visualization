@@ -17,7 +17,7 @@ const protectRoute = asyncHandler(async (req, res, next) => {
       // get token from the header
       // since Bearer will be at index 0 and the token at index 1
       token = req.headers.authorization.split(' ')[1]
-      console.log('Token in protectRoute, ', token)
+      // console.log('Token in protectRoute, ', token)
       // verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
 

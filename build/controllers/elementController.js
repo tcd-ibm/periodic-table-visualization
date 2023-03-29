@@ -25,27 +25,6 @@ const getElements = asyncHandler(async (req, res) => {
   res.status(200).json(elements)
 })
 
-const tryGetElements = asyncHandler(async (req, res) => {
-  console.log('data in controller: '+ JSON.stringify(req.body))
-  const id = "64007ac5ddcff99fb3e12359";
-  console.log("tryGetElements id: " + id)
-
-    const elements = await Element.find({ user: id });
-    elements.map((element) => {
-      {
-        element._id,
-          element.name,
-          element.user,
-          element.atomic_mass,
-          element.atomic_number,
-          element.symbol,
-          element.description;
-      }
-    });
-    res.status(200).json(elements);
-
-})
-
 /**
  * @description Create element
  * @author Nuoxi Zhang
@@ -56,12 +35,7 @@ const tryGetElements = asyncHandler(async (req, res) => {
  * @param {*} res
  */
 const createElements = asyncHandler(async (req, res) => {
-  // if (!req.body.title) {
-  //   res.status(400)
-  //   throw new Error('Please add a title') // override by errorHandler in middleware
-  // }
   // create a new element
-  console.log('userid: ', req.user.id)
   const element = await Element.create({
     name: req.body.name,
     atomic_mass: req.body.am,
@@ -151,6 +125,5 @@ module.exports = {
   getElements,
   createElements,
   deleteElements,
-  updateElement,
-  tryGetElements,
+  updateElement
 }

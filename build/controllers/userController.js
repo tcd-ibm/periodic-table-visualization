@@ -19,14 +19,6 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Please have all the fields filled in')
   }
-
-  // check if user already exist
-  //const userExist = await User.findOne({ email })
- // if (userExist) {
-   // res.status(400)
-    //throw new Error('User already exists')
-
-  console.log('registerUser email: ', email)
   //check if user already exist
   const userExist = await User.findOne({ email: email });
   if (userExist) {
@@ -83,13 +75,6 @@ const registerUser = asyncHandler(async (req, res) => {
  */
 const loginUser = asyncHandler(async (req, res) => {
   // get the email and password from the request body
-
-  //const { email, password } = req.body
-  // fetch the user from the database by the email (if the user exists)
-  //const user = await User.findOne({ email })
-  //if (!user) {
-//console.log('User does not exist. Please register')
-
   const { email, password } = req.body;
   //fetch the user from the database by the email (if the user exists)
   const user = await User.findOne({ email });
@@ -161,8 +146,6 @@ const generateToken = (id) => {
 
 const verifyUser = asyncHandler(async (req, res) => {
   const code = req.params.confirmationCode
-  // console.log('verifyUser in the backend is called')
-  // console.log('parsejwt', parseJwt(code).id)
   const user = await User.findById(parseJwt(code).id)
   if (!user) {
     res.status(400)
@@ -252,19 +235,18 @@ const changePassword = asyncHandler(async (req, res) => {
 
 /**
  * @desc send change password email
- * @route GET /api/users/changePassword/:userId
+ * @route POST /api/users/reset
  */
 const sendChangePassword = asyncHandler(async (req, res) => {
   const {email} = req.body
-  console.log('req.body in userCOntroller: ', JSON.stringify(req.body))
-  console.log('email in userController: ', email)
   const user = await User.findOne({email: email})
-  console.log('user: ' + user)
   if (!user) {
     res.status(404)
     throw new Error('Email does not exists in database.')
+  }else {
+    sendChangePasswordEmail(user.firstname, user.email, user._id)
+    res.status(200).json({message: 'Email Send'})
   }
-  sendChangePasswordEmail(user.firstname, user.email, user._id);
 });
 
 

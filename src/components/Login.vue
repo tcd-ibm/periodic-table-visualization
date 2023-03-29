@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loginUser', 'getElements', 'tryGetElements']),
+    ...mapActions(['loginUser', 'getElements']),
     async submitForm () {
       if (!this.email) {
         alert('Please enter an email.')
@@ -63,10 +63,10 @@ export default {
       try {
         const emailCopy = this.email
         const passwordCopy = this.password
-        const response = await this.loginUser({emailCopy, passwordCopy})
-        console.log('Returned object after login: ', response)
-        console.log('UserName: ' + this.$store.getters.getUserName)
-        console.log('Token: ' + this.$store.getters.getAuthToken)
+        await this.loginUser({emailCopy, passwordCopy})
+        // console.log('Returned object after login: ', response)
+        // console.log('UserName: ' + this.$store.getters.getUserName)
+        // console.log('Token: ' + this.$store.getters.getAuthToken)
         // this.showSuccessMessage('Welcome ' + this.$store.getters.getUserName + '!')
         localStorage.setItem('firstTimeLogIn', 1)
         this.$router.push('myProfile')
@@ -92,13 +92,6 @@ export default {
         rtl: false
       })
     }
-    // async tryGetElementsLocal () {
-    //   const id = '64007ac5ddcff99fb3e12359'
-    //   const user = {id}
-    //   console.log('getElements() called in Login.vue created()')
-    //   const res = await this.tryGetElements(user)
-    //   console.log('Nuoxis elements: ' + JSON.stringify(res))
-    // },
   }
 }
 </script>

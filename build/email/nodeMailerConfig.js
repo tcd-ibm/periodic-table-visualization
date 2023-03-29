@@ -14,6 +14,13 @@ const transport = nodemailer.createTransport({
   },
 });
 
+/**
+ * @author Nuoxi Zhang
+ * @nuoxiz
+ * @param {*} name name of the user
+ * @param {*} email email of the user
+ * @param {*} confirmationCode 
+ */
 const sendConfirmationEmail = (name, email, confirmationCode) => {
   transport.sendMail(
     {

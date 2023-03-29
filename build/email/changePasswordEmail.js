@@ -15,6 +15,13 @@ const transport = nodemailer.createTransport({
   },
 });
 
+/**
+ * @author Nuoxi Zhang
+ * @nuoxiz
+ * @param {*} name 
+ * @param {*} email 
+ * @param {*} userId 
+ */
 const sendChangePasswordEmail = (name, email, userId) => {
   transport.sendMail(
     {

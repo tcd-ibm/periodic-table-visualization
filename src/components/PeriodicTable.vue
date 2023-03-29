@@ -32,8 +32,6 @@
         filteredElements: 'filteredElements'
       }),
       selectedElement () {
-        // console.log('type of this.selectId: ' + typeof (this.selectedElementId))
-        console.log('PeriodicTbale.vue: elements: ' + JSON.stringify(this.elements))
         return this.elements[this.selectedElementId] || {}
       }
     },
@@ -41,8 +39,6 @@
       return {
         selectedElementId: 1,
         showInfo: false
-        // elements: '',
-        // filteredElements: ''
       }
     },
     methods: {
@@ -65,10 +61,6 @@
     },
     created () {
       console.log('Version 1.0')
-      // this.elements = this.$store.getters.localizedElements
-      // this.filteredElements = this.$store.getters.filteredElements
-      // console.log('elements in periodic table: ' + JSON.stringify(this.elements))
-      // console.log('filteredElements in periodic table: ' + JSON.stringify(this.filteredElements))
     }
   }
 </script>

@@ -92,7 +92,7 @@ export default {
         alert('Please fill in all the fields.')
         return
       }
-      console.log('Addelement in addelement.vue called')
+      // console.log('Addelement in addelement.vue called')
       const element = {
         name: this.element.name,
         symbol: this.element.symbol,

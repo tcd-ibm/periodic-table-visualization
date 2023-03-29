@@ -61,7 +61,6 @@ export default {
     ...mapActions(['registerUser']),
     async submitForm () {
       if (this.password !== this.reEnterPassword) {
-        console.log('Password do not match')
         alert('Password do not match')
         return
       }
@@ -75,9 +74,9 @@ export default {
         const userName = this.userName
         const email = this.email
         const password = this.password
-        const response = await this.registerUser({firstname, lastname, userName, email, password})
+        await this.registerUser({firstname, lastname, userName, email, password})
         this.showSuccessMessage('Success! Please check our email to verify your account!')
-        console.log('Signup.vue/submitForm() response object => ', response)
+        // console.log('Signup.vue/submitForm() response object => ', response)
         this.$router.push('Login')
       } catch (error) {
         this.showErrorMessage(error.response.data.message)

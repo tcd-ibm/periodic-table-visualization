@@ -28,7 +28,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['sendChangePasswordEmail']),
+    ...mapActions(['sendChangePasswordEmail', 'logoutUser']),
     async onClick () {
       try {
         if (!this.email) {
@@ -40,12 +40,12 @@ export default {
           this.showErrorMessage('Invalid email format. Please try again!')
           return
         }
-        console.log('onClick() in Reset.vue called' + this.email)
         const email = this.email
         await this.sendChangePasswordEmail({email})
-        console.log('1')
         this.showSuccessMessage('Email sent. Please check your mail box')
-        console.log('2')
+        if (this.$store.getters.getUserName) {
+          await this.logoutUser()
+        }
         this.$router.push('Login')
       } catch (error) {
         this.showErrorMessage(error.response.data.message)
