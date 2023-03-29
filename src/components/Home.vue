@@ -29,16 +29,22 @@
             <!-- Daniel Padmore-->
             <!-- MyProfile-->
             <li class="nav-item mt-5" v-if="this.userName"> <!-- checks if theres a token -->
-              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('home.myProfile')">
+              <router-link to="/myProfile" exact class="nav-link d-flex justify-content-center" :title="$t('Home')">
                 <i @click="trackClick('myProfile', 'inbound')" class="material-icons">person</i>
               </router-link>
             </li>
             <!-- Andrew Syomushkin-->
             <!-- Sign in-->
-            <li class="nav-item mt-5" v-else>
-                <router-link to="/Login"  exact class="nav-link d-flex justify-content-center" :title="$t('home.Login')">
+            <li class="nav-item mt-5" v-if="this.userName === null">
+                <router-link to="/Login"  exact class="nav-link d-flex justify-content-center" :title="$t('Log in')">
 
                   <i @click="trackClick('Login', 'inbound')" class="material-icons">login</i>
+                </router-link>
+            </li>
+            <li class="nav-item mt-5" v-if="this.userName">
+              <router-link to="/Logout"  exact class="nav-link d-flex justify-content-center" :title="$t('Log out')">
+
+                  <i @click="trackClick('Login', 'inbound')" class="material-icons">logout</i>
                 </router-link>
             </li>
             <!-- <li>

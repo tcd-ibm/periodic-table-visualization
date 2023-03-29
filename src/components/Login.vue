@@ -91,17 +91,14 @@ export default {
         icon: true,
         rtl: false
       })
-    },
-    async tryGetElementsLocal () {
-      const id = '64007ac5ddcff99fb3e12359'
-      const user = {id}
-      console.log('getElements() called in Login.vue created()')
-      const res = await this.tryGetElements(user)
-      console.log('Nuoxis elements: ' + JSON.stringify(res))
     }
-  },
-  created () {
-    this.tryGetElementsLocal()
+    // async tryGetElementsLocal () {
+    //   const id = '64007ac5ddcff99fb3e12359'
+    //   const user = {id}
+    //   console.log('getElements() called in Login.vue created()')
+    //   const res = await this.tryGetElements(user)
+    //   console.log('Nuoxis elements: ' + JSON.stringify(res))
+    // },
   }
 }
 </script>

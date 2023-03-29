@@ -2,7 +2,7 @@
 <template>
     <div id="ErrorPage">
       <h1>ERROR!</h1>
-      <p>Sorry there has been an error.</p>
+      <p>404 Page Not Found</p>
       <p>
         ⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
   ⠘⣿⣿⡟⠲⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -24,10 +24,10 @@
   ⠀⠀⠀⠀⠾⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠤⠦⠤⠤⠤⠤
       </p>
       <p>
-        If the error persists please contact the helpline
+        If the error persists please contact the develope team:
       </p>
       <p>
-        @periodictable@gmail.com
+        swenggroup262023@outlook.com
       </p>
     </div>
   </template>

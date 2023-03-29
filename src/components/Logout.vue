@@ -4,8 +4,8 @@
       Would you like to logout?
     </div>
     <div>
-      <button type="button" class="btn btn-primary" @click="logout()">Logout</button>
-      <router-link :to="{ path: './Home' }"><button type="submit" class="btn btn-primary">Go home</button></router-link>
+      <button type="button" class="btn btn-primary" @click="logout()">Log out</button>
+      <router-link :to="{ path: '/MyProfile' }"><button type="submit" class="btn btn-primary">Back to home</button></router-link>
     </div>
   </div>
 </template>
