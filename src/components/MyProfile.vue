@@ -23,7 +23,7 @@
           :data-element-group="getGroup(element)" :data-group='element.group'
           class='element' :class="'pos' + getPosition(element)"
           :style="{ opacity: filteredElementsContainElementsOfGroup(element.group) ? 1 : 0.25 }">
-          <router-link :to="'/element/'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
+          <router-link :to="'/element'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
             <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
           </router-link>
       </div>
