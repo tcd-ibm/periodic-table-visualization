@@ -5,5 +5,10 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
     },
     baseUrl: "http://localhost:8080",
+
+  },
+  env:{
+    "email":"",
+    "password":""
   },
 });

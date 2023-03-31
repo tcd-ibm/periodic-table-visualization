@@ -25,5 +25,5 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          TESTING_EMAIL: ${{ secrets.TESTING_EMAIL }}
-          TESTING_PASSWORD: ${{ secrets.TESTING_PASSWORD }}
+          CYPRESS_email: ${{ secrets.TESTING_EMAIL }}
+          CYPRESS_password: ${{ secrets.TESTING_PASSWORD }}
