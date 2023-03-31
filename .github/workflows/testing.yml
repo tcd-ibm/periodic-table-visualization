@@ -24,4 +24,6 @@ jobs:
           MONGO_URI: ${{ secrets.MONGO_URI }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           EMAIL: ${{ secrets.EMAIL }}
-          PASSWORD: =${{ secrets.PASSWORD }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          TESTING_EMAIL: ${{ secrets.TESTING_EMAIL }}
+          TESTING_PASSWORD: ${{ secrets.TESTING_PASSWORD }}
