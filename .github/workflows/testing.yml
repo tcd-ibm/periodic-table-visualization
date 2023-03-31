@@ -20,3 +20,8 @@ jobs:
         uses: cypress-io/github-action@v4.1.0
         with:
           start: npm run start
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: =${{ secrets.PASSWORD }}
