@@ -84,6 +84,11 @@ describe("The home page", () => {
         cy.get("input").eq(5).type("new description")
         cy.get(".btn.btn-primary").click()
         cy.get(".nav-item").eq(4).click()
+
+        // delete element so that there's always an empty table at the start of every set of tests...
+        cy.get(".c-element-definition.d-flex.flex-column.justify-content-between.u-aspect-ratio").eq(0).should("exist")
+        cy.get(".c-element-definition.d-flex.flex-column.justify-content-between.u-aspect-ratio").eq(0).click()
+        cy.get(".btn.btn-danger.btn-block").eq(0).click()
     })
 
 })
