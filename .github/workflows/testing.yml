@@ -1,0 +1,29 @@
+name: Cypress Tests
+
+# on: [push]
+
+on:
+  push:
+    # Edit to the branch(es) you want to build and deploy on each push.
+    branches: [ "testing" ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.21.3
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v4.1.0
+        with:
+          start: npm run start
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          CYPRESS_email: ${{ secrets.TESTING_EMAIL }}
+          CYPRESS_password: ${{ secrets.TESTING_PASSWORD }}
