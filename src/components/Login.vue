@@ -2,7 +2,7 @@
 <div>
   <div>
     <div>
-      <h3>Login
+      <h3 class="centralise">Login
         <router-link :to="{ path: './signup' }"><button type="submit" class="btn btn-primary">Don't have an
               account?</button></router-link>
       </h3>
@@ -10,21 +10,20 @@
   </div>
   <div>
     <form>
-      <div class="form-group">
+      <div class="centralise">
         <label>Email</label>
         <input type="email" class="form-control" v-model="email" required>
       </div>
-      <div class="form-group">
+      <div class="centralise">
         <label>Password</label>
         <input type="password" class="form-control" v-model="password" required>
       </div>
-
       <!-- need to verify email -->
-      <div class="my-3">
+      <div class="centralise">
         <button type="button"
               class="btn btn-primary" @click="submitForm()" >Login</button>
       </div>
-      <div class="my-3">
+      <div class="centralise">
         <router-link :to="{ path: './Reset' }"><button type="button" class="btn btn-primary">Forgot
               Password?</button></router-link>
       </div>
@@ -99,6 +98,13 @@ export default {
 <style scoped>
 #error {
   color: red;
+}
+
+.centralise {
+  text-align: center;
+  padding-bottom:5px;
+  padding-right: 400px;
+  padding-left: 400px;
 }
 
 </style>

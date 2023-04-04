@@ -30,7 +30,7 @@
       <input type="password" class="form-control" v-model="password">
     </div>
     <div class="form-group">
-      <label>Repeat Password</label>
+      <label >Repeat Password</label>
       <input type="password" class="form-control" v-model="reEnterPassword">
     </div>
 
