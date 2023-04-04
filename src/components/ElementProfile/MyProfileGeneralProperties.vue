@@ -22,11 +22,9 @@
         <form >
           <div class="form-group">
             <pre></pre>
-            <input type="text" v-model="search" class="form-control" id="searchInput" :placeholder="$t('general.search')">
+            <router-link :to="{ name: 'userElementDescription', params: { element: element} }" tag="button" type="button" class="btn btn-primary btn-block">View detailed information</router-link>
           </div>
         </form>
-        <pre>     </pre>
-        <div><pre></pre><router-link :to="{ name: 'userElementDescription', params: { element: element} }" tag="button" type="button" class="btn btn-primary btn-block">View detailed information</router-link></div>
       </div>
       <div v-if="!preview">
         <highlight v-if="debug" :data="element"></highlight>
@@ -45,7 +43,6 @@
   import FeaturedValue from './MyProfileFeaturedValue'
   import Highlight from '../shared/Highlight'
   import LineChart from '../shared/LineChart'
-  import * as types from '@/store/mutation-types'
 
   export default {
     name: 'MyProfile-general-properties',
@@ -56,15 +53,7 @@
     computed: {
       ...mapState({
         debug: state => state.configuration.debug
-      }),
-      search: {
-        get () {
-          return this.$store.state.filters.search
-        },
-        set (value) {
-          this.$store.commit(types.UPDATE_SEARCH, value)
-        }
-      }
+      })
     },
     methods: {
       ...mapActions(['getElements', 'deleteElement']),
