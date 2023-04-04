@@ -1,6 +1,13 @@
 <template>
     <div>
       <h3 v-if="username">{{username}}'s profile<br></h3>
+      <div class="d-flex justify-content-between">
+        <form>
+          <div class="form-group">
+            <input v-model="searchQuery" class="form-control" :placeholder="$t('general.search')" @keyup="search()">
+          </div>
+        </form>
+      </div>
     <div class="c-periodic-table">
       <div :class="'block1'"></div>
       <div :class="'block2'"></div>
@@ -19,14 +26,17 @@
       <div class="c-information"></div>
       <div class="element" :data-element-group="groups[10]" v-for="i in 118" v-if="empty(userElements, i - 1)" :key="i"><router-link :to="{ name: 'AddElement', params: { pos: i - 1} }"><br><center><div class="material-icons">add_box</div></center><br></router-link></div>
       <div :key="element.id" v-for="element in userElements"
-          v-if="!removed.includes(element.symbol)"
+          v-if="!removed.includes(element.name)"
           :data-element-group="getGroup(element)" :data-group='element.group'
           class='element' :class="'pos' + getPosition(element)"
-          :style="{ opacity: filteredElementsContainElementsOfGroup(element.group) ? 1 : 0.25 }">
+          :style="{ opacity: filteredElementsContainElementsOfGroup(element.group) ? 1 : 0.25}">
           <router-link :to="'/element'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
             <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
           </router-link>
       </div>
+      <div v-else :data-element-group="getGroup(element)" :data-group='element.group' class='element' :class="'pos' + getPosition(element)" :style="{ opacity: 0.25}"><router-link :to="'/element'" @mousedown.native="showElement(userElements.indexOf(element))" @mouseout.native="hideElement()">
+            <element-definition class="u-aspect-ratio" :element="element" :detailed="true"></element-definition>
+          </router-link></div>
       <div class="element lanthanoid" data-element-group="lanthanoid" :style="{ opacity: filteredElementsContainElementsOfGroup('lanthanoid') ? 1 : 0.25 }"></div>
       <div class="element actinoid" data-element-group="actinoid" :style="{ opacity: filteredElementsContainElementsOfGroup('actinoid') ? 1 : 0.25 }"></div>
     </div>
@@ -51,10 +61,19 @@
       }),
       selectedElement () {
         return this.userElements[this.selectedElementId] || {}
+      },
+      search () {
+        this.removed = []
+        for (let key = 0; key < this.userElements.length; key++) {
+          if (!this.userElements[key].name.toLowerCase().includes(this.searchQuery.toLowerCase())) {
+            this.removed.push(this.userElements[key].name)
+          }
+        }
       }
     },
     data () {
       return {
+        searchQuery: '',
         selectedElementId: '',
         showInfo: false,
         removed: [],
