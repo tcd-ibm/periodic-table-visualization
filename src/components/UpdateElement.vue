@@ -2,10 +2,6 @@
   <div>
   <h2>Update your element "{{ this.$route.params.element.name }}" </h2>
   <form>
-    <!-- <div class="form-group">
-    <label>ObjectId</label>
-    <input type="text" :maxlength="50" class="form-control" v-model="objectId" value="this.$route.params.element._id" :placeholder="this.$route.params.element._id">
-    </div> -->
     <div class="form-group">
     <label>Name</label>
     <input type="text" :maxlength="20" class="form-control" v-model="element.name" >
@@ -121,12 +117,6 @@ export default {
       })
     },
     async updateElemntLocal () {
-      console.log('updateElement in updateElemntLocal.vue called')
-      console.log('name: ' + this.element.name)
-      console.log('symbol: ' + this.element.symbol)
-      console.log('an: ' + this.element.an)
-
-      console.log('am: ' + this.element.am)
       const element = {
         position: this.position,
         name: this.element.name,
