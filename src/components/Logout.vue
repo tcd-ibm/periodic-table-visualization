@@ -18,6 +18,7 @@ export default {
     ...mapActions(['logoutUser']),
     async logout () {
       await this.logoutUser()
+      localStorage.setItem('firstTimeLogIn', 0)
       this.$router.push('Login')
       location.reload()
     }

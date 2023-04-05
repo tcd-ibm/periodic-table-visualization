@@ -134,11 +134,40 @@
         const token = this.$store.getters.getAuthToken
         const res = await this.getElements(token)
         this.userElements = res
+      },
+      showSuccessMessage (message) {
+        this.$toast.success(message, {
+          position: 'top-right',
+          timeout: 5000,
+          closeOnClick: true,
+          pauseOnFocusLoss: true,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 0.6,
+          showCloseButtonOnHover: false,
+          hideProgressBar: false,
+          closeButton: 'button',
+          icon: true,
+          rtl: false
+        })
       }
     },
     created () {
       this.syncUserName()
       this.getElementsLocal()
+      // if (localStorage.getItem('firstTimeLogIn') === 1) {
+      //   this.showSuccessMessage('Welcome ' + this.$store.getters.getUserName + '!')
+      //   localStorage.setItem('firstTimeLogIn', 2)
+      // }
+    },
+    mounted () {
+      console.log('mounted in MyProfile.vue')
+      console.log('firstTimeLogIn: ' + localStorage.getItem('firstTimeLogIn'))
+      if (localStorage.getItem('firstTimeLogIn') >= 1) {
+        console.log('inside if in MyProfile.vue')
+        this.showSuccessMessage('Welcome ' + this.$store.getters.getUserName + '!')
+        localStorage.setItem('firstTimeLogIn', 0)
+      }
     }
   }
 </script>
