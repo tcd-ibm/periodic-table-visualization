@@ -5,6 +5,7 @@
     <div class="form-group">
     <label>Name</label>
     <input type="text" :maxlength="20" class="form-control" v-model="element.name" >
+    <input type="text" :maxlength="20" class="form-control" v-model="element.name" >
     </div>
     <div class="form-group">
     <label>Symbol</label>

@@ -40,6 +40,7 @@ const actions = {
     const token = data.token
     const element = data.element
     const objectId = data.objectId
+    console.log('objectId in element.js ' + objectId)
     const config = {
       headers: {
         Authorization: `Bearer ${token}`
