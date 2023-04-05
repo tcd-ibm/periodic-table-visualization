@@ -62,21 +62,37 @@ export default {
       try {
         const emailCopy = this.email
         const passwordCopy = this.password
-        await this.loginUser({emailCopy, passwordCopy})
-        // console.log('Returned object after login: ', response)
-        // console.log('UserName: ' + this.$store.getters.getUserName)
-        // console.log('Token: ' + this.$store.getters.getAuthToken)
+        const response = await this.loginUser({emailCopy, passwordCopy})
+        console.log('Returned object after login: ', response)
+        console.log('UserName: ' + this.$store.getters.getUserName)
+        console.log('Token: ' + this.$store.getters.getAuthToken)
         // this.showSuccessMessage('Welcome ' + this.$store.getters.getUserName + '!')
         localStorage.setItem('firstTimeLogIn', 1)
         this.$router.push('myProfile')
-        location.reload()
         // location.reload()
+        location.reload()
       } catch (error) {
         this.showErrorMessage(error.response.data.message)
       }
     },
     showErrorMessage (errorMessage) {
       this.$toast.error(errorMessage, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
+    },
+    showSuccessMessage (message) {
+      this.$toast.success(message, {
         position: 'top-right',
         timeout: 5000,
         closeOnClick: true,

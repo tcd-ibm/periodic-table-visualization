@@ -122,10 +122,6 @@
       trackClick (destination, eventCategory) {
         window.ga('send', 'event', eventCategory, 'click', destination)
       }
-      // fun () {
-      //   const username = this.$store.getters.getUserName
-      //   console.log(username)
-      // }
     },
     created () {
       this.userName = localStorage.getItem('userName')
