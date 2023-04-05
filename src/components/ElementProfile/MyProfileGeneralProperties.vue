@@ -5,7 +5,7 @@
         <div>
         
           <button type="button" class="btn btn-danger btn-block" @click="deleteElemetLocal()">Remove selected element</button>
-          <router-link :to="'/updateElement/'" tag="button" type="button" class="btn btn-primary btn-block">Update element</router-link>
+          <router-link :to="{ name: 'updateElement', params: { element: element} }" tag="button" type="button" class="btn btn-primary btn-block">Update element</router-link>
         </div>
         <pre>     </pre>
         <div>
