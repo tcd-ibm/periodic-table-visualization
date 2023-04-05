@@ -56,7 +56,7 @@
     <label for="group10"><FONT COLOR="#f44336">Alkali metals&nbsp;&nbsp;&nbsp;&nbsp;</FONT></label>
   </div>
   <div class="my-3">
-  <button type="button" @click="addElement(); this.$delete(this.removed,0)" class="btn btn-primary">Create element</button>
+  <button type="button" @click="addElement()" class="btn btn-primary">Create element</button>
   </div>
   <div class="my-3">
   <router-link :to="{ path: './MyProfile' }"><button type="button" class="btn btn-danger btn-block">Cancel</button></router-link>
