@@ -75,7 +75,7 @@ export default new Router({
           }
         },
         {
-          path: 'updateElement',
+          path: 'updateElement/',
           name: 'updateElement',
           components: {
             default: UpdateElement
