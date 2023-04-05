@@ -3,28 +3,24 @@
   <h2>Update your element "{{ this.$route.params.element.name }}" </h2>
   <form>
     <div class="form-group">
-    <label>ObjectId</label>
-    <input type="text" :maxlength="50" class="form-control" v-model="objectId" value="this.$route.params.element._id" :placeholder="this.$route.params.element._id">
-    </div>
-    <div class="form-group">
     <label>Name</label>
-    <input type="text" :maxlength="20" class="form-control" v-model="element.name" value="this.$route.params.element.name" :placeholder="this.$route.params.element.name">
+    <input type="text" :maxlength="20" class="form-control" v-model="element.name" >
     </div>
     <div class="form-group">
     <label>Symbol</label>
-    <input type="text" :maxlength="2" class="form-control" v-model="element.symbol" value="this.$route.params.element.symbol" :placeholder="this.$route.params.element.symbol">
+    <input type="text" :maxlength="2" class="form-control" v-model="element.symbol" >
     </div>
     <div class="form-group">
     <label>Atomic Number</label>
-    <input type="number" class="form-control" v-model="element.an" value="this.$route.params.element.atomic_number" :placeholder="this.$route.params.element.atomic_number">
+    <input type="number" class="form-control" v-model="element.an" >
     </div>
     <div class="form-group">
     <label>Atomic Mass</label>
-    <input type="number" class="form-control" v-model="element.am" value="this.$route.params.element.atomic_mass" :placeholder="this.$route.params.element.atomic_mass">
+    <input type="number" class="form-control" v-model="element.am">
     </div>
     <div class="form-group">
     <label>Description</label>
-    <input type="text" :maxlength="250" class="form-control" v-model="element.description" value="this.$route.params.element.description" :placeholder="this.$route.params.element.description.slice(0, 20) + '...'">
+    <input type="text area" :maxlength="250" class="form-control" v-model="element.description">
     </div>
     <label>Group</label>
     <div>
@@ -59,10 +55,10 @@
       <label for="group10"><FONT COLOR="#f44336">Alkali metals&nbsp;&nbsp;&nbsp;&nbsp;</FONT></label>
     </div>
       <div class="my-3">
-      <button @click="updateElemntLocal()" class="btn btn-primary">Update element</button>
+      <button @click="updateElemntLocal()" class="btn btn-primary" type="button">Update element</button>
       </div>
       <div class="my-3">
-      <router-link :to="{ path: './MyProfile' }"><button type="button"
+      <router-link :to="{ path: '/MyProfile' }"><button type="button"
         class="btn btn-danger btn-block">Cancel</button></router-link>
       </div>
   </form>
@@ -74,37 +70,83 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
+      position: '',
       objectId: '',
       element: {
         name: '',
         symbol: '',
         an: '',
         am: '',
-        description: ''
+        description: '',
+        group: ''
       },
       showError: false
     }
   },
   methods: {
     ...mapActions(['updateElement']),
+    showErrorMessage (errorMessage) {
+      this.$toast.error(errorMessage, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
+    },
+    showSuccessMessage (message) {
+      this.$toast.success(message, {
+        position: 'top-right',
+        timeout: 5000,
+        closeOnClick: true,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+        icon: true,
+        rtl: false
+      })
+    },
     async updateElemntLocal () {
-      console.log('updateElement in updateElemntLocal.vue called')
       const element = {
+        position: this.position,
         name: this.element.name,
         symbol: this.element.symbol,
         an: this.element.an,
         am: this.element.am,
-        description: this.element.description
+        description: this.element.description,
+        group: this.element.group
       }
       const token = this.$store.getters.getAuthToken
       const objectId = this.objectId
-      await this.updateElement({ element, token, objectId })
-      // await this.getElement(token)
-      // const id = // get the ID of the element you want to update
-      //    await axios.put(`/api/elements/${id}`, { element }, {
-      //      headers: { Authorization: `Bearer ${token}` }
-      //    })
+      try {
+        await this.updateElement({ element, token, objectId })
+        this.showSuccessMessage('Element Updated!')
+        this.$router.push('myProfile')
+      } catch (error) {
+        this.showErrorMessage(error.response.data.message)
+      }
     }
+  },
+  created () {
+    this.element.name = this.$route.params.element.name
+    this.element.am = this.$route.params.element.atomic_mass
+    this.element.an = this.$route.params.element.atomic_number
+    this.element.symbol = this.$route.params.element.symbol
+    this.element.description = this.$route.params.element.description
+    this.position = this.$route.params.element.position
+    this.objectId = this.$route.params.element._id
+    this.element.group = this.$route.params.element.group
   }
 }
 
